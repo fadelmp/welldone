@@ -2,16 +2,16 @@ const DataTypes = require('sequelize');
 const Base = require('./Base');
 const sequelize = require('../config/db.config');
 
-class ProductCategory extends Base {
+class City extends Base {
   static associate(models) {
-    ProductCategory.hasMany(models.Product, {
-      foreignKey: "product_category_id",
-      as: "products",
+    City.belongsTo(models.Province, {
+      foreignKey: "province_id",
+      as: "province",
     });
   }
 }
 
-ProductCategory.init({
+City.init({
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -20,20 +20,24 @@ ProductCategory.init({
     field: 'id',
   },
   name: {
-    type: DataTypes.STRING,
+    type: DataTypes.String,
     allowNull: false,
     field: 'name',
   },
-  description: {
+  province_id: {
     type: DataTypes.STRING,
-    field: 'description',
+    allowNull: false,
+    references: {
+      model: "Province",
+      key: "id",
+    },
   },
 }, {
   sequelize,
-  modelName: 'ProductCategory',
-  tableName: 'product_category',
+  modelName: 'City',
+  tableName: 'location_city',
   paranoid: true,
   timestamps: false,
 });
 
-module.exports = ProductCategory
+module.exports = City

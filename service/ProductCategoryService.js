@@ -1,7 +1,8 @@
-const dropdownMapper = require('../mapper/DropdownMapper');
+const dropdown_mapper = require('../mapper/DropdownMapper');
 const repository = require('../repository/ProductCategoryRepository');
 const comparator = require('../comparator/ProductCategoryComparator');
-const categoryMapper = require('../mapper/ProductCategoryMapper');
+const mapper = require('../mapper/ProductCategoryMapper');
+const base_mapper = require('../mapper/BaseMapper');
 
 class ProductCategoryService {
 
@@ -16,40 +17,48 @@ class ProductCategoryService {
 
     categories = repository.FindActived()
 
-    return dropdownMapper.ToDropdownDtoList(categories)
+    return dropdown_mapper.ToDropdownDtoList(categories)
   }
 
-  async Create(categoryDto) {
+  async Create(category_dto) {
 
-    comparator.CheckName(categoryDto)
+    comparator.CheckName(category_dto)
 
-    category = mapper.ToProductCategory(categoryDto)
-    category.createdBy = categoryDto.createdBy
+    category = mapper.ToProductCategory(category_dto)
+    category = base_mapper.Create(category, category_dto)
 
-    categoryRow = repository.Create(category)
-    return categoryrow
+    category_row = repository.Create(category)
+    return category_row
   }
 
-  async Update(categoryDto) {
+  async Update(category_dto) {
 
-    comparator.CheckId(categoryDto.id)
-    comparator.CheckName(categoryDto)
+    comparator.CheckId(category_dto.id)
+    comparator.CheckName(category_dto)
 
-    category = mapper.ToProductCategory(categoryDto)
+    category = mapper.ToProductCategory(category_dto)
+    category = base_mapper.Update(category, category_dto)
 
-    categoryRow = repository.Update(category)
-    return categoryRow
+    category_row = repository.Update(category)
+    return category_row
   }
 
-  async Delete(categoryDto) {
+  async Delete(category_dto) {
 
-    category = comparator.CheckId(categoryDto.id)
-    category.isActived = false
-    category.isDeleted = true
-    category.updatedBy = categoryDto.deletedBy
+    category = comparator.CheckId(category_dto.id)
+    category = base_mapper.Delete(category, category_dto)
 
-    categoryRow = repository.Delete(category)
-    return categoryRow
+    category_row = repository.Delete(category)
+    return category_row
+  }
+
+  async Status(category_dto) {
+
+    category = comparator.CheckId(category_dto.id)
+    category = base_mapper.Update(category, category_dto)
+
+    category_row = repository.Status(category)
+    return category_row
   }
 }
 

@@ -10,7 +10,6 @@ class DropdownDto {
   @IsString
   @Expose({name:'name'})
   name
-
 }
 
 module.exports = DropdownDto

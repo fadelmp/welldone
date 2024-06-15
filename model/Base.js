@@ -4,31 +4,31 @@ const sequelize = require('../config/db.config')
 class Base extends Model {}
 
 Base.init({
-  isActived: {
+  is_actived: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
     field: 'is_actived',
   },
-  isDeleted: {
+  is_deleted: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
     field: 'is_deleted',
   },
-  createdAt: {
+  created_at: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
     field: 'created_at',
   },
-  createdBy: {
+  created_by: {
     type: DataTypes.STRING,
     field: 'created_by',
   },
-  updatedAt: {
+  updated_at: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
     field: 'updated_at',
   },
-  updatedBy: {
+  updated_by: {
     type: DataTypes.STRING,
     field: 'updated_by'
   },

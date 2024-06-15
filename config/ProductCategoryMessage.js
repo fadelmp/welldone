@@ -16,6 +16,9 @@ module.exports = {
     DELETE_SUCCESS: "Delete Product Category Success",
     DELETE_FAILED: "Delete Product Category Failed",
 
+    STATUS_SUCCESS: "Change Status of Product Category Success",
+    STATUS_FAILED: "Change Status of Product Category Failed",
+
     NAME_EXISTS: "Product Category Name Already Exists",
     NOT_FOUND : "Product Category Not Found"
   }

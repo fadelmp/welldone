@@ -1,11 +1,11 @@
 class BaseDto {
   constructor() {
-    this.isActived = true;
-    this.isDeleted = false;
-    this.createdAt = new Date();
-    this.createdBy = '';
-    this.updatedAt = new Date();
-    this.updatedBy = '';
+    this.is_actived = true;
+    this.is_deleted = false;
+    this.created_at = new Date();
+    this.created_by = '';
+    this.updated_at = new Date();
+    this.updated_by = '';
   }
 }
 

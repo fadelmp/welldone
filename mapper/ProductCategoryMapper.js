@@ -1,12 +1,11 @@
 class ProductCategoryMapper {
 
-	async ToCategory(categoryDto) {
+	async ToCategory(category_dto) {
 
 		return {
-			id: categoryDto.id,
-			name: categoryDto.name,
-			description: categoryDto.description,
-			updatedBy: categoryDto.updatedBy
+			id: category_dto.id,
+			name: category_dto.name,
+			description: category_dto.description
 		}
 	}
 	
@@ -21,11 +20,11 @@ class ProductCategoryMapper {
 			id: category.id,
 			name: category.name,
 			description: category.description,
-			isActived: category.isActived,
-			createdAt: category.createdAt,
-			createdBy: category.createdBy,
-			updatedAt: category.updatedAt,
-			updatedBy: category.updatedBy
+			is_actived: category.is_actived,
+			created_at: category.created_at,
+			created_by: category.created_by,
+			updated_at: category.updated_at,
+			updated_by: category.updated_by
 		}
 	}
 }

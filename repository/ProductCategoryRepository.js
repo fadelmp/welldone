@@ -1,85 +1,96 @@
-const Category = require('../model/ProductCategory');
-const QueryFailed = require('../error/QueryFailed');
-const config = require('../config/ProductCategoryMessage')
+const category = require('../model/category');
+const query_failed = require('../error/query_failed');
+const config = require('../config/categoryMessage')
 
-class ProductCategoryRepository {
+class CategoryRepository {
 
   async FindAll() {
     
     try {
-      return await Category.findAll({ where: { isDeleted: false }})
+      return await category.findAll({ where: { is_deleted: false }})
     
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(config.messages.GET_FAILED)
+      throw new query_failed(config.messages.GET_FAILED)
     }
   }
 
   async FindActived() {
 
     try {
-      return await Category.findAll({ where: { isActived: true, isDeleted: false }})
+      return await category.findAll({ where: { is_actived: true, is_deleted: false }})
 
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(config.messages.DROPDOWN_FAILED)
+      throw new query_failed(config.messages.DROPDOWN_FAILED)
     }
   }
 
   async FindById(id) {
 
     try {
-      return await ProductCategory.findOne({ where: { id: id, isDeleted: false }})
+      return await category.findOne({ where: { id: id, is_deleted: false }})
       
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(config.messages.GET_FAILED)
+      throw new query_failed(config.messages.GET_FAILED)
     }
   }
 
   async FindByName(name) {
 
     try {
-      return await ProductCategory.findOne({ where: { name: name, isDeleted: false }})
+      return await category.findOne({ where: { name: name, is_deleted: false }})
 
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(config.messages.GET_FAILED)
+      throw new query_failed(config.messages.GET_FAILED)
     }
   }
 
   async Create(data) {
 
     try {
-      return await Category.create(data)
+      return await category.create(data)
       
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(config.messages.CREATE_FAILED)
+      throw new query_failed(config.messages.CREATE_FAILED)
     }
   }
 
   async Update(data) {
 
     try {
-      return await ProductCategory.update(data, { where: { id: data.id, isDeleted: false }})
+      return await category.update(data, { where: { id: data.id, is_deleted: false }})
       
     } catch(error) {
       // Error Handling
-      throw new QueryFailed(config.messages.UPDATE_FAILED) 
+      throw new query_failed(config.messages.UPDATE_FAILED) 
     }
   }
 
   async Delete(data) {
 
     try {
-      return await Category.update(data, { where: { id: data.id, isDeleted: false }})
+      return await category.update(data, { where: { id: data.id, is_deleted: false }})
       
     } catch(error) {
       // Error Handling
-      throw new QueryFailed(config.messages.DELETE_FAILED) 
+      throw new query_failed(config.messages.DELETE_FAILED) 
+    }
+  }
+
+  async Status(data) {
+
+    try {
+      return await Category.update(data, { where: {id: data.id, is_deleted: false }})
+
+    } catch (error) {
+      // Error Handling
+      throw new query_failed(config.messages.STATUS_FAILED)
     }
   }
 }
 
-module.exports = ProductCategoryRepository
+module.exports = CategoryRepository
