@@ -1,20 +1,15 @@
-const DataTypes = require('sequelize')
-const Base = require('./Base')
+const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/db.config')
 
-class Product extends Base {
+class Product extends Model {
   static associate(models) {
-    Product.belongsTo(models.ProductCategory, {
+    Product.belongsTo(models.Category, {
       foreignKey: "product_category_id",
       as: "category",
     })
-    Product.hasMany(models.ProductImage, {
+    Product.hasMany(models.ProductSize, {
       foreignKey: "product_id",
-      as: "images",
-    })
-    Product.hasMany(models.ProductVariant, {
-      foreignKey: "product_id",
-      as: "variants"
+      as: "sizes"
     })
   }
 }
@@ -36,37 +31,37 @@ Product.init({
     type: DataTypes.STRING,
     field: 'description',
   },
-  product_category_id: {
+  category_id: {
     type: DataTypes.STRING,
     allowNull: false,
     references: {
-      model: "ProductCategory",
+      model: "Category",
       key: "id",
     },
+  },
+  image1: {
+    type: DataTypes.STRING,
+    field: 'image_path_1',
+  },
+  image2: {
+    type: DataTypes.STRING,
+    field: 'image_path_2',
+  },
+  image3: {
+    type: DataTypes.STRING,
+    field: 'image_path_3',
   },
   unit: {
     type: DataTypes.STRING,
     allowNull: false,
     field: 'unit'
   },
-  unit_price: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    field: 'unit_price'
-  },
-  sale_price: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    field: 'sale_price'
-  },
   tags: {
     type: DataTypes.STRING,
     field: 'tags'
   }
-  
 }, {
   sequelize,
-  modelName: 'Product',
   tableName: 'product',
   paranoid: true,
   timestamps: false,

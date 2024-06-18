@@ -1,16 +1,21 @@
-const DataTypes = require('sequelize')
-const Base = require('./Base')
+const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/db.config')
 
-class Store extends Base {
+class Store extends Model {
   static associate(models) {
-    Store.hasMany(models.Stock, {
-      foreignKey: "store_id",
-      as: "stocks",
-    })
     Store.belongsTo(models.City, {
       foreignKey: "city_id",
       as: "city",
+    })
+    Store.hasMany(models.ProductStock, {
+      foreignKey: "store_id",
+      as: "stocks",
+    })
+    Store.belongsToMany(models.ProductSize, {
+      through: models.ProductStock,
+      foreignKey: 'store_id',
+      otherKey: 'product_size_id',
+      as: 'product_sizes'
     })
   }
 }
@@ -54,7 +59,7 @@ Store.init({
 }, {
   sequelize,
   modelName: 'Store',
-  tableName: 'product_Store',
+  tableName: 'store',
   paranoid: true,
   timestamps: false,
 })

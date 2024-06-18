@@ -2,7 +2,7 @@ const dto = require('../dto/CategoryDto')
 const response = require('./ResponseController')
 const service = require('../service/CategoryService')
 const message = require('../config/CategoryMessage')
-const get_user = require('../middleware/GetUser')
+const getUser = require('../middleware/GetUser')
 
 class CategoryController {
   
@@ -40,11 +40,11 @@ class CategoryController {
 
     try {
       let { name, description } = req.body
-      let username = await get_user.getUsername(req)
-      let category_dto = new dto("", name, description, username)
+      let username = await getUser.getUsername(req)
+      let categoryDto = new dto("", name, description, username)
 
-      category_dto = await service.Create(category_dto)
-      return response.Success(res, message.CREATE_SUCCESS, category_dto)
+      categoryDto = await service.Create(categoryDto)
+      return response.Success(res, message.CREATE_SUCCESS, categoryDto)
     
     } catch (error) {
       // Error Handling
@@ -57,11 +57,11 @@ class CategoryController {
     try {
       let { id } = req.params
       let { name, description } = req.body
-      let username = await get_user.getUsername(req)
-      let category_dto = new dto(id, name, description, username)
+      let username = await getUser.getUsername(req)
+      let categoryDto = new dto(id, name, description, username)
 
-      category_dto = await service.Update(category_dto)
-      return response.Success(res, message.UPDATE_SUCCESS, category_dto)
+      categoryDto = await service.Update(categoryDto)
+      return response.Success(res, message.UPDATE_SUCCESS, categoryDto)
 
     } catch (error) {
       // Error Handling
@@ -73,10 +73,10 @@ class CategoryController {
 
     try {
       let { id } = req.params
-      let username = await get_user.getUsername(req)
-      let category_dto = new dto(id, "", "", username)
+      let username = await getUser.getUsername(req)
+      let categoryDto = new dto(id, "", "", username)
 
-      await service.Delete(category_dto)
+      await service.Delete(categoryDto)
       return response.Success(res, message.DELETE_SUCCESS, {})
 
     } catch (error) {

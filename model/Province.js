@@ -1,8 +1,7 @@
-const DataTypes = require('sequelize')
-const Base = require('./Base')
+const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/db.config')
 
-class Province extends Base {}
+class Province extends Model {}
 
 Province.init({
   id: {

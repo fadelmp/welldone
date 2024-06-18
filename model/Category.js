@@ -1,14 +1,8 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/db.config')
+const Product = require('./Product')
 
-class Category extends Model {
-  static associate(models) {
-    Category.hasMany(models.Product, {
-      foreignKey: "product_category_id",
-      as: "products",
-    })
-  }
-}
+class Category extends Model {}
 
 Category.init({
   id: {
@@ -16,52 +10,55 @@ Category.init({
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull:false,
-    field: 'id',
+    field: 'id'
   },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'name',
+    field: 'name'
   },
   description: {
     type: DataTypes.STRING,
-    field: 'description',
+    field: 'description'
   },
-  is_actived: {
+  isActived: {
     type: DataTypes.BOOLEAN,
     field: 'is_actived',
+    defaultValue: true 
   },
-  is_deleted: {
+  isDeleted: {
     type: DataTypes.BOOLEAN,
     field: 'is_deleted',
+    defaultValue: false
   },
-  created_at: {
+  createdAt: {
     type: DataTypes.DATE,
     field: 'created_at',
+    defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
   },
-  created_by: {
+  createdBy: {
     type: DataTypes.STRING,
     field: 'created_by',
   },
-  updated_at: {
+  updatedAt: {
     type: DataTypes.DATE,
     field: 'updated_at',
+    defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
   },
-  updated_by: {
+  updatedBy: {
     type: DataTypes.STRING,
-    field: 'updated_by'
+    field: 'updated_by',
   },
 }, {
   sequelize,
-  modelName: 'Category',
   tableName: 'category',
-  paranoid: true,
-  timestamps: false,  
-  defaultScope: {
-    attributes: {
-      include: ['is_actived', 'is_deleted', 'created_at', 'created_by', 'updated_at', 'updated_by']
-    }
-  },
+  paranoid: false,
+  timestamps: true,  
+})
+
+Category.hasMany(Product, {
+  foreignKey: "category_id",
+  as: "products",
 })
 
 module.exports = Category

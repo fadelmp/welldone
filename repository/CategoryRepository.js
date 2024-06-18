@@ -1,4 +1,5 @@
 const category = require('../model/Category')
+const product = require('../model/Product')
 const QueryFailed = require('../error/QueryFailed')
 const message = require('../config/CategoryMessage')
 
@@ -7,32 +8,26 @@ class CategoryRepository {
   async FindAll() {
     
     try {
-      return await category.findAll({ where: { is_deleted: false }})
+      return await category.findAll({ 
+        where: { isDeleted: false }, 
+        include: { model: product, as: 'products' }
+      })
     
     } catch (error) {
       // Error Handling
+      console.log(error)
       throw new QueryFailed(message.GET_FAILED)
-    }
-  }
-
-  async FindActived() {
-
-    try {
-      return await category.findAll({ where: { is_actived: true, is_deleted: false }})
-
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(message.DROPDOWN_FAILED)
     }
   }
 
   async FindById(id) {
 
     try {
-      return await category.findOne({ where: { id: id, is_deleted: false }})
+      return await category.findOne({ where: { id: id, isDeleted: false }})
       
     } catch (error) {
       // Error Handling
+      console.log(error)
       throw new QueryFailed(message.GET_FAILED)
     }
   }
@@ -40,7 +35,7 @@ class CategoryRepository {
   async FindByName(name) {
 
     try {
-      return await category.findOne({ where: { name: name, is_deleted: false }})
+      return await category.findOne({ where: { name: name, isDeleted: false }})
 
     } catch (error) {
       // Error Handling
@@ -62,7 +57,7 @@ class CategoryRepository {
   async Update(data) {
 
     try {
-      return await category.update(data, { where: { id: data.id, is_deleted: false }})
+      return await category.update(data, { where: { id: data.id, isDeleted: false }})
       
     } catch(error) {
       // Error Handling
@@ -71,12 +66,13 @@ class CategoryRepository {
   }
 
   async Delete(data) {
-
-    console.log("data")
-    console.log(data)
-
+    
     try {
-      return await category.update(data, { where: { id: data.id, is_deleted: false }})
+      return await category.update({ 
+        isActived: false, isDeleted: true, updatedBy: data.updatedBy
+      }, { 
+        where: { id: data.id, isDeleted: false }
+      })
       
     } catch(error) {
       // Error Handling

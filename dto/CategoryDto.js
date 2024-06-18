@@ -1,12 +1,6 @@
 const BaseDto = require('./BaseDto')
 
 class CategoryDto extends BaseDto {
-    /**
-   * @param {string} id - The unique identifier for the product.
-   * @param {string} name - The name of the product.
-   * @param {string} description - The description of the product.
-   * @param {number} total_product - The unit price of the product.
-   */
 
   constructor(id, name, description, username) {
     super()
@@ -14,6 +8,15 @@ class CategoryDto extends BaseDto {
     this.name = name
     this.description = description
     this.username = username
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      name: this.name,
+      description: this.description,
+      total_product: 0
+    };
   }
 }
 

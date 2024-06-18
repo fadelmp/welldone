@@ -1,21 +1,20 @@
-const DataTypes = require('sequelize')
-const Base = require('./Base')
+const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/db.config')
 
-class Stock extends Base {
+class ProductStock extends Model {
   static associate(models) {
-    Stock.belongsTo(models.ProductVariant, {
-      foreignKey: "product_variant_id",
-      as: "product_variant",
+    ProductStock.belongsTo(models.ProductSize, {
+      foreignKey: "product_size_id",
+      as: "product_size",
     })
-    Stock.belongsTo(models.Store, {
+    ProductStock.belongsTo(models.Store, {
       foreignKey: "store_id",
       as: "store",
     })
   }
 }
 
-Stock.init({
+ProductStock.init({
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -23,11 +22,11 @@ Stock.init({
     allowNull:false,
     field: 'id',
   },
-  product_variant_id: {
+  product_size_id: {
     type: DataTypes.STRING,
     allowNull: false,
     references: {
-      model: "ProductVariant",
+      model: "ProductSize",
       key: "id",
     },
   },
@@ -46,10 +45,10 @@ Stock.init({
   },
 }, {
   sequelize,
-  modelName: 'Stock',
+  modelName: 'ProductStock',
   tableName: 'product_stock',
   paranoid: true,
   timestamps: false,
 })
 
-module.exports = Stock
+module.exports = ProductStock

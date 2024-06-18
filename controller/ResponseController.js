@@ -22,11 +22,11 @@ class ResponseController {
     return this.response(res, 400, "Bad Request", {})
   }
 
-  async response(res, http_code, message, data) {
+  async response(res, httpCode, message, data) {
 
     let response = new ResponseDto(message, data)
 
-    return res.status(http_code).json(response)
+    return res.status(httpCode).json(response)
   }
 }
 

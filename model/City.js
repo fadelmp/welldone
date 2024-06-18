@@ -1,15 +1,8 @@
-const DataTypes = require('sequelize')
-const Base = require('./Base')
+const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/db.config')
+const Province = require('./Province')
 
-class City extends Base {
-  static associate(models) {
-    City.belongsTo(models.Province, {
-      foreignKey: "province_id",
-      as: "province",
-    })
-  }
-}
+class City extends Model {}
 
 City.init({
   id: {
@@ -24,9 +17,10 @@ City.init({
     allowNull: false,
     field: 'name',
   },
-  province_id: {
+  provinceId: {
     type: DataTypes.STRING,
     allowNull: false,
+    field: 'province_id',
     references: {
       model: "Province",
       key: "id",
@@ -38,6 +32,11 @@ City.init({
   tableName: 'location_city',
   paranoid: true,
   timestamps: false,
+})
+
+City.belongsTo(Province, {
+  foreignKey: "province_id",
+  as: "province",
 })
 
 module.exports = City

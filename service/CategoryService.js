@@ -1,8 +1,8 @@
-const dropdown_mapper = require('../mapper/DropdownMapper')
+const dropdownMapper = require('../mapper/DropdownMapper')
 const repository = require('../repository/CategoryRepository')
 const comparator = require('../comparator/CategoryComparator')
 const mapper = require('../mapper/CategoryMapper')
-const base_mapper = require('../mapper/BaseMapper')
+const baseMapper = require('../mapper/BaseMapper')
 
 class CategoryService {
 
@@ -15,38 +15,39 @@ class CategoryService {
 
   async FindDropdown() {
 
-    let categories = await repository.FindActived()
+    let categories = await repository.FindAll()
 
-    return dropdown_mapper.ToDropdownDtoList(categories)
+    return dropdownMapper.ToDropdownDtoList(categories)
   }
 
-  async Create(category_dto) {
+  async Create(categoryDto) {
 
-    await comparator.CheckName(category_dto)
+    await comparator.CheckName(categoryDto)
 
-    let category = await mapper.ToCategory(category_dto)
-    await base_mapper.Create(category, category_dto)
+    let category = await mapper.ToCategory(categoryDto)
+    category.updatedBy = categoryDto.username
+    category.updatedBy = categoryDto.username
 
     await repository.Create(category)
-    return mapper.toCategoryDto(category)
+    return categoryDto
   }
 
-  async Update(category_dto) {
+  async Update(categoryDto) {
 
-    await comparator.CheckId(category_dto.id)
-    await comparator.CheckName(category_dto)
+    await comparator.CheckId(categoryDto.id)
+    await comparator.CheckName(categoryDto)
 
-    let category = await mapper.ToCategory(category_dto)
-    await base_mapper.Update(category, category_dto)
+    let category = await mapper.ToCategory(categoryDto)
+    category.updatedBy = categoryDto.username
 
     await repository.Update(category)
-    return mapper.toCategoryDto(category) 
+    return categoryDto 
   }
 
-  async Delete(category_dto) {
+  async Delete(categoryDto) {
 
-    let category = await comparator.CheckId(category_dto.id)
-    await base_mapper.Delete(category, category_dto)
+    let category = await comparator.CheckId(categoryDto.id)
+    category.updatedBy = categoryDto.username
 
     await repository.Delete(category)
     return ""
