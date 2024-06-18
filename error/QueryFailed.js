@@ -2,12 +2,12 @@ class QueryFailed extends Error {
 
   constructor(message) {
     
-    super(message);
+    super(message)
     
-    this.name = this.constructor.name;
-    this.statusCode = 500;
+    this.name = this.constructor.name
+    this.statusCode = 500
 
-    Error.captureStackTrace(this, this.constructor);
+    Error.captureStackTrace(this, this.constructor)
   }
 }
 

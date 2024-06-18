@@ -1,4 +1,4 @@
-class ProductCategoryMapper {
+class CategoryMapper {
 
 	async ToCategory(category_dto) {
 
@@ -11,7 +11,7 @@ class ProductCategoryMapper {
 	
 	async ToCategoryDtoList(categories) {
 	
-		return Promise.all(categories.map(toCategoryDto));
+		return Promise.all(categories.map(category => this.toCategoryDto(category)))
 	}
 	
 	async toCategoryDto(category) {
@@ -20,7 +20,7 @@ class ProductCategoryMapper {
 			id: category.id,
 			name: category.name,
 			description: category.description,
-			is_actived: category.is_actived,
+      total_product: 0,
 			created_at: category.created_at,
 			created_by: category.created_by,
 			updated_at: category.updated_at,
@@ -29,4 +29,4 @@ class ProductCategoryMapper {
 	}
 }
 
-module.exports = ProductCategoryMapper
+module.exports = new CategoryMapper()

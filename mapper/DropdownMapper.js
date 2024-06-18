@@ -1,11 +1,11 @@
-class ProductCategoryMapper {
+class DropdownMapper {
 
   async ToDropdownDtoList(arrays) {
 	
-		return Promise.all(arrays.map(toDropdown));
+		return Promise.all(arrays.map(data => this.toDropdownDto(data)))
 	}
 
-	async toDropdown(data) {
+	async toDropdownDto(data) {
 
 		return {
 			id: data.id,
@@ -14,4 +14,4 @@ class ProductCategoryMapper {
 	}
 }
 
-module.exports = ProductCategoryMapper
+module.exports = new DropdownMapper()

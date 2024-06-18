@@ -1,17 +1,17 @@
-const DataTypes = require('sequelize');
-const Base = require('./Base');
-const sequelize = require('../config/db.config');
+const DataTypes = require('sequelize')
+const Base = require('./Base')
+const sequelize = require('../config/db.config')
 
 class Store extends Base {
   static associate(models) {
     Store.hasMany(models.Stock, {
       foreignKey: "store_id",
       as: "stocks",
-    });
+    })
     Store.belongsTo(models.City, {
       foreignKey: "city_id",
       as: "city",
-    });
+    })
   }
 }
 
@@ -57,6 +57,6 @@ Store.init({
   tableName: 'product_Store',
   paranoid: true,
   timestamps: false,
-});
+})
 
 module.exports = Store

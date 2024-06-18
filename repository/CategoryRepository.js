@@ -1,6 +1,6 @@
-const category = require('../model/category');
-const query_failed = require('../error/query_failed');
-const config = require('../config/categoryMessage')
+const category = require('../model/Category')
+const QueryFailed = require('../error/QueryFailed')
+const message = require('../config/CategoryMessage')
 
 class CategoryRepository {
 
@@ -11,7 +11,7 @@ class CategoryRepository {
     
     } catch (error) {
       // Error Handling
-      throw new query_failed(config.messages.GET_FAILED)
+      throw new QueryFailed(message.GET_FAILED)
     }
   }
 
@@ -22,7 +22,7 @@ class CategoryRepository {
 
     } catch (error) {
       // Error Handling
-      throw new query_failed(config.messages.DROPDOWN_FAILED)
+      throw new QueryFailed(message.DROPDOWN_FAILED)
     }
   }
 
@@ -33,7 +33,7 @@ class CategoryRepository {
       
     } catch (error) {
       // Error Handling
-      throw new query_failed(config.messages.GET_FAILED)
+      throw new QueryFailed(message.GET_FAILED)
     }
   }
 
@@ -44,7 +44,7 @@ class CategoryRepository {
 
     } catch (error) {
       // Error Handling
-      throw new query_failed(config.messages.GET_FAILED)
+      throw new QueryFailed(message.GET_FAILED)
     }
   }
 
@@ -55,7 +55,7 @@ class CategoryRepository {
       
     } catch (error) {
       // Error Handling
-      throw new query_failed(config.messages.CREATE_FAILED)
+      throw new QueryFailed(message.CREATE_FAILED)
     }
   }
 
@@ -66,31 +66,23 @@ class CategoryRepository {
       
     } catch(error) {
       // Error Handling
-      throw new query_failed(config.messages.UPDATE_FAILED) 
+      throw new QueryFailed(message.UPDATE_FAILED) 
     }
   }
 
   async Delete(data) {
+
+    console.log("data")
+    console.log(data)
 
     try {
       return await category.update(data, { where: { id: data.id, is_deleted: false }})
       
     } catch(error) {
       // Error Handling
-      throw new query_failed(config.messages.DELETE_FAILED) 
-    }
-  }
-
-  async Status(data) {
-
-    try {
-      return await Category.update(data, { where: {id: data.id, is_deleted: false }})
-
-    } catch (error) {
-      // Error Handling
-      throw new query_failed(config.messages.STATUS_FAILED)
+      throw new QueryFailed(message.DELETE_FAILED) 
     }
   }
 }
 
-module.exports = CategoryRepository
+module.exports = new CategoryRepository()

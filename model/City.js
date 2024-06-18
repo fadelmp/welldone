@@ -1,13 +1,13 @@
-const DataTypes = require('sequelize');
-const Base = require('./Base');
-const sequelize = require('../config/db.config');
+const DataTypes = require('sequelize')
+const Base = require('./Base')
+const sequelize = require('../config/db.config')
 
 class City extends Base {
   static associate(models) {
     City.belongsTo(models.Province, {
       foreignKey: "province_id",
       as: "province",
-    });
+    })
   }
 }
 
@@ -38,6 +38,6 @@ City.init({
   tableName: 'location_city',
   paranoid: true,
   timestamps: false,
-});
+})
 
 module.exports = City

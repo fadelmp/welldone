@@ -1,13 +1,13 @@
-const DataTypes = require('sequelize');
-const Base = require('./Base');
-const sequelize = require('../config/db.config');
+const DataTypes = require('sequelize')
+const Base = require('./Base')
+const sequelize = require('../config/db.config')
 
 class ProductImage extends Base {
   static associate(models) {
     ProductImage.belongsTo(models.Product, {
       foreignKey: "product_id",
       as: "product",
-    });
+    })
   }
 }
 
@@ -38,6 +38,6 @@ ProductImage.init({
   tableName: 'product_image',
   paranoid: true,
   timestamps: false,
-});
+})
 
 module.exports = ProductImage

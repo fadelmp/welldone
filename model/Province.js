@@ -1,6 +1,6 @@
-const DataTypes = require('sequelize');
-const Base = require('./Base');
-const sequelize = require('../config/db.config');
+const DataTypes = require('sequelize')
+const Base = require('./Base')
+const sequelize = require('../config/db.config')
 
 class Province extends Base {}
 
@@ -23,6 +23,6 @@ Province.init({
   tableName: 'location_province',
   paranoid: true,
   timestamps: false,
-});
+})
 
 module.exports = Province

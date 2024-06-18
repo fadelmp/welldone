@@ -1,6 +1,6 @@
 // ProductDto.js
 
-const BaseDto = require('./BaseDto');
+const BaseDto = require('./BaseDto')
 
 class ProductDto extends BaseDto {
   /**
@@ -16,16 +16,16 @@ class ProductDto extends BaseDto {
    */
 
   constructor(id, name, description, product_category_id, unit_price, sale_price, tags, image, variant) {
-    super(id);
-    this.name = name;
-    this.description = description;
-    this.product_category_id = product_category_id;
-    this.unit_price = unit_price;
-    this.sale_price = sale_price;
-    this.tags = tags;
-    this.image = image;
-    this.variant = variant;
+    super(id)
+    this.name = name
+    this.description = description
+    this.product_category_id = product_category_id
+    this.unit_price = unit_price
+    this.sale_price = sale_price
+    this.tags = tags
+    this.image = image
+    this.variant = variant
   }
 }
 
-module.exports = ProductDto;
+module.exports = ProductDto
