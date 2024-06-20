@@ -21,22 +21,15 @@ City.init({
     type: DataTypes.STRING,
     allowNull: false,
     field: 'province_id',
-    references: {
-      model: "Province",
-      key: "id",
-    },
-  },
+    references: { model: "Province", key: "id" },
+  }
 }, {
   sequelize,
-  modelName: 'City',
   tableName: 'location_city',
-  paranoid: true,
-  timestamps: false,
+  paranoid: false,
+  timestamps: true,
 })
 
-City.belongsTo(Province, {
-  foreignKey: "province_id",
-  as: "province",
-})
+City.belongsTo(Province, { foreignKey: "province_id", as: "province" })
 
 module.exports = City

@@ -2,12 +2,11 @@ const BaseDto = require('./BaseDto')
 
 class CategoryDto extends BaseDto {
 
-  constructor(id, name, description, username) {
+  constructor(req) {
     super()
-    this.id = id
-    this.name = name
-    this.description = description
-    this.username = username
+    this.id = req.paramsid
+    this.name = req.body.name
+    this.description = req.body.description
   }
 
   toJSON() {

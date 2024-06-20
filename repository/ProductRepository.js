@@ -1,29 +1,13 @@
-const category = require('../model/Category')
 const product = require('../model/Product')
 const QueryFailed = require('../error/QueryFailed')
-const message = require('../config/CategoryMessage')
+const message = require('../config/ProductMessage')
 
-class CategoryRepository {
-
-  async FindAll() {
-    
-    try {
-      return await category.findAll({ 
-        where: { isDeleted: false }, 
-        include: { model: product, as: 'products' }
-      })
-    
-    } catch (error) {
-      // Error Handling
-      console.log(error)
-      throw new QueryFailed(message.GET_FAILED)
-    }
-  }
+class ProductRepository {
 
   async FindById(id) {
 
     try {
-      return await category.findOne({ where: { id: id, isDeleted: false }})
+      return await product.findOne({ where: { id: id, isDeleted: false }})
       
     } catch (error) {
       // Error Handling
@@ -35,7 +19,7 @@ class CategoryRepository {
   async FindByName(name) {
 
     try {
-      return await category.findOne({ where: { name: name, isDeleted: false }})
+      return await product.findOne({ where: { name: name, isDeleted: false }})
 
     } catch (error) {
       // Error Handling
@@ -46,7 +30,7 @@ class CategoryRepository {
   async Create(data) {
 
     try {
-      return await category.create(data)
+      return await product.create(data)
       
     } catch (error) {
       // Error Handling
@@ -57,7 +41,7 @@ class CategoryRepository {
   async Update(data) {
 
     try {
-      return await category.update(data, { where: { id: data.id, isDeleted: false }})
+      return await product.update(data, { where: { id: data.id, isDeleted: false }})
       
     } catch(error) {
       // Error Handling
@@ -68,7 +52,7 @@ class CategoryRepository {
   async Delete(data) {
     
     try {
-      return await category.update(
+      return await product.update(
         { isActived: false, isDeleted: true, updatedBy: data.updatedBy }, 
         { where: { id: data.id, isDeleted: false }}
       )
@@ -80,4 +64,4 @@ class CategoryRepository {
   }
 }
 
-module.exports = new CategoryRepository()
+module.exports = new ProductRepository()

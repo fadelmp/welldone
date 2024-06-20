@@ -1,25 +1,44 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/db.config')
-const Product = require('./Product')
+const Role = require('./Role')
+const Store = require('./Store')
 
-class Category extends Model {}
+class User extends Model {}
 
-Category.init({
+User.init({
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull:false,
-    field: 'id'
+    field: 'id',
   },
-  name: {
+  username: {
+    type: DataTypes.String,
+    allowNull: false,
+    field: 'username',
+  },
+  fullname: {
+    type: DataTypes.String,
+    allowNull: false,
+    field: 'fullname',
+  },
+  password: {
+    type: DataTypes.String,
+    allowNull: false,
+    field: 'password',
+  },
+  roleId: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'name'
+    field: 'role_id',
+    references: { model: "Role", key: "id" },
   },
-  description: {
+  storeId: {
     type: DataTypes.STRING,
-    field: 'description'
+    allowNull: false,
+    field: 'store_id',
+    references: { model: "Store", key: "id" },
   },
   isActived: {
     type: DataTypes.BOOLEAN,
@@ -48,14 +67,15 @@ Category.init({
   updatedBy: {
     type: DataTypes.STRING,
     field: 'updated_by',
-  },
+  }
 }, {
   sequelize,
-  tableName: 'category',
+  tableName: 'user',
   paranoid: false,
-  timestamps: true,  
+  timestamps: true,
 })
 
-Category.hasMany(Product, { foreignKey: "category_id", as: "products" })
+User.belongsTo(Role, { foreignKey: "role_id", as: "role" })
+User.belongsTo(Store, { foreignKey: "store_id", as: "store" })
 
-module.exports = Category
+module.exports = User

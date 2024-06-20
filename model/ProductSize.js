@@ -58,7 +58,6 @@ ProductSize.init({
   },
 }, {
   sequelize,
-  modelName: 'ProductSize',
   tableName: 'product_size',
   paranoid: true,
   timestamps: false,

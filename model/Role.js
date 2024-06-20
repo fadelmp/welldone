@@ -1,9 +1,11 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/db.config')
+const Privilege = require('./Privilege')
+const RolePrivilege = require('./RolePrivilege')
 
-class Province extends Model {}
+class Role extends Model {}
 
-Province.init({
+Role.init({
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -18,9 +20,17 @@ Province.init({
   }
 }, {
   sequelize,
-  tableName: 'location_province',
+  tableName: 'role',
   paranoid: false,
   timestamps: true,
 })
 
-module.exports = Province
+Role.hasMany(RolePrivilege, { foreignKey: "role_id", as: "roles" })
+Role.belongsToMany(Privilege, {
+  through: RolePrivilege,
+  foreignKey: 'role_id',
+  otherKey: 'privilege_id',
+  as: 'privileges'
+})
+
+module.exports = Role

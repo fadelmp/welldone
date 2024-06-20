@@ -2,7 +2,6 @@ const dto = require('../dto/CategoryDto')
 const response = require('./ResponseController')
 const service = require('../service/CategoryService')
 const message = require('../config/CategoryMessage')
-const getUser = require('../middleware/GetUser')
 
 class CategoryController {
   
@@ -39,9 +38,8 @@ class CategoryController {
   async Create(req, res, next) {
 
     try {
-      let { name, description } = req.body
-      let username = await getUser.getUsername(req)
-      let categoryDto = new dto("", name, description, username)
+      let categoryDto = new dto(req)
+      categoryDto.username = await getUsername.getUsername(req)
 
       categoryDto = await service.Create(categoryDto)
       return response.Success(res, message.CREATE_SUCCESS, categoryDto)
@@ -55,10 +53,8 @@ class CategoryController {
   async Update(req, res, next) {
 
     try {
-      let { id } = req.params
-      let { name, description } = req.body
-      let username = await getUser.getUsername(req)
-      let categoryDto = new dto(id, name, description, username)
+      let categoryDto = new dto(req)
+      categoryDto.username = await getUsername.getUsername(req)
 
       categoryDto = await service.Update(categoryDto)
       return response.Success(res, message.UPDATE_SUCCESS, categoryDto)
@@ -72,9 +68,8 @@ class CategoryController {
   async Delete(req, res,next) {
 
     try {
-      let { id } = req.params
-      let username = await getUser.getUsername(req)
-      let categoryDto = new dto(id, "", "", username)
+      let categoryDto = new dto(req)
+      categoryDto.username = await getUsername.getUsername(req)
 
       await service.Delete(categoryDto)
       return response.Success(res, message.DELETE_SUCCESS, {})

@@ -51,10 +51,7 @@ Store.init({
   city_id: {
     type: DataTypes.STRING,
     allowNull: false,
-    references: {
-      model: "City",
-      key: "id",
-    },
+    references: { model: "City", key: "id" },
   },
 }, {
   sequelize,

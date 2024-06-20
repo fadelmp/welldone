@@ -2,7 +2,6 @@ const repository = require('../repository/CategoryRepository')
 const message = require('../config/CategoryMessage')
 const DataExists = require('../error/DataExists')
 const NotFound = require('../error/NotFound')
-const InternalServer = require('../error/InternalServer')
 
 class CategoryComparator {
 
