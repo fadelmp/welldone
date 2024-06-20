@@ -14,17 +14,17 @@ User.init({
     field: 'id',
   },
   username: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false,
     field: 'username',
   },
   fullname: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false,
     field: 'fullname',
   },
   password: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false,
     field: 'password',
   },
@@ -36,7 +36,6 @@ User.init({
   },
   storeId: {
     type: DataTypes.STRING,
-    allowNull: false,
     field: 'store_id',
     references: { model: "Store", key: "id" },
   },

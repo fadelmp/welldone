@@ -15,12 +15,6 @@ module.exports = {
   DELETE_SUCCESS: "Delete Category Success",
   DELETE_FAILED: "Delete Category Failed",
 
-  DOWNLOAD_SUCCESS: "Download Category Success",
-  DOWNLOAD_FAILED: "Download Category Failed",
-
-  UPLOAD_SUCCESS: "Upload Category Success",
-  UPLOAD_FAILED: "Upload Category Failed",
-
   NAME_EXISTS: "Category Name Already Exists",
   NOT_FOUND : "Category Not Found"
 }

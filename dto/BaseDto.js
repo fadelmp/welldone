@@ -1,7 +1,7 @@
 class BaseDto {
 
   constructor() {
-    this.username = ''
+    this.activedUser = ''
     this.isActived = true
     this.isDeleted = false
     this.createdAt = new Date()

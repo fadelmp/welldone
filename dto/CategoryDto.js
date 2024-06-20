@@ -4,7 +4,7 @@ class CategoryDto extends BaseDto {
 
   constructor(req) {
     super()
-    this.id = req.paramsid
+    this.id = req.params.id
     this.name = req.body.name
     this.description = req.body.description
   }

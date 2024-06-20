@@ -25,4 +25,4 @@ class ProductComparator {
   }
 }
 
-module.exports = new CategoryComparator()
+module.exports = new ProductComparator()

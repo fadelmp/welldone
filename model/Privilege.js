@@ -1,7 +1,5 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/db.config')
-const Role = require('./Role')
-const RolePrivilege = require('./RolePrivilege')
 
 class Privilege extends Model {}
 
@@ -14,28 +12,21 @@ Privilege.init({
     field: 'id',
   },
   name: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false,
     field: 'name',
   },
   url: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false,
     field: 'url',
   }
 }, {
   sequelize,
   tableName: 'privilege',
+  modelName: 'Privilege',
   paranoid: false,
   timestamps: true,
-})
-
-Privilege.hasMany(RolePrivilege, { foreignKey: "privilege_id", as: "privileges" })
-Privilege.belongsToMany(Role, {
-  through: RolePrivilege,
-  foreignKey: 'privilege_id',
-  otherKey: 'role_id',
-  as: 'roles'
 })
 
 module.exports = Privilege

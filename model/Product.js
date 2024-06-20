@@ -86,13 +86,7 @@ Product.init({
   timestamps: true,
 })
 
-Product.belongsTo(Category, {
-  foreignKey: "product_category_id",
-  as: "category",
-})
-Product.hasMany(ProductSize, {
-  foreignKey: "product_id",
-  as: "sizes"
-})
+//Product.belongsTo(Category, { foreignKey: "product_category_id", as: "category" })
+//Product.hasMany(ProductSize, { foreignKey: "product_id", as: "sizes" })
 
 module.exports = Product

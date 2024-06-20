@@ -5,6 +5,7 @@ const router = express.Router()
 
 const category = require('./CategoryRoute')
 const product = require('./ProductRoute')
+const user = require('./UserRoute')
 
 // Define routes in approute.js
 router.get('/', (req, res) => {
@@ -14,5 +15,6 @@ router.get('/', (req, res) => {
 // Mount other routes
 router.use('/categories', category)
 router.use('/products', product)
+router.use('/users', user)
 
 module.exports = router

@@ -15,12 +15,6 @@ module.exports = {
   DELETE_SUCCESS: "Delete Product Success",
   DELETE_FAILED: "Delete Product Failed",
 
-  DOWNLOAD_SUCCESS: "Download Product Success",
-  DOWNLOAD_FAILED: "Download Product Failed",
-
-  UPLOAD_SUCCESS: "Upload Product Success",
-  UPLOAD_FAILED: "Upload Product Failed",
-
   NAME_EXISTS: "Product Name Already Exists",
   NOT_FOUND : "Product Not Found"
 }

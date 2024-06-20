@@ -1,7 +1,5 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/db.config')
-const Role = require('./Role')
-const Privilege = require('./Privilege')
 
 class RolePrivilege extends Model {}
 
@@ -26,11 +24,9 @@ RolePrivilege.init({
 }, {
   sequelize,
   tableName: 'role_privilege',
+  modelName: 'RolePrivilege',
   paranoid: false,
   timestamps: true,
 })
 
-RolePrivilege.belongsTo(Role, { foreignKey: "role_id", as: "role" })
-RolePrivilege.belongsTo(Privilege, { foreignKey: "privilege_id", as: "privilege" })
-
-module.exports = Privilege
+module.exports = RolePrivilege

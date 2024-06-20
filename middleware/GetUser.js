@@ -1,6 +1,6 @@
 class GetUser {
 
-  async getUsername(req) {
+  async getActiveUser(req) {
     
     return "Fadel"
   }

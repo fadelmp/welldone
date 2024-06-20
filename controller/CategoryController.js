@@ -1,4 +1,4 @@
-const dto = require('../dto/CategoryDto')
+const CategoryDto = require('../dto/CategoryDto')
 const response = require('./ResponseController')
 const service = require('../service/CategoryService')
 const message = require('../config/CategoryMessage')
@@ -38,10 +38,10 @@ class CategoryController {
   async Create(req, res, next) {
 
     try {
-      let categoryDto = new dto(req)
-      categoryDto.username = await getUsername.getUsername(req)
+      let categoryDto = new CategoryDto(req)
 
       categoryDto = await service.Create(categoryDto)
+
       return response.Success(res, message.CREATE_SUCCESS, categoryDto)
     
     } catch (error) {
@@ -53,10 +53,10 @@ class CategoryController {
   async Update(req, res, next) {
 
     try {
-      let categoryDto = new dto(req)
-      categoryDto.username = await getUsername.getUsername(req)
+      let categoryDto = new CategoryDto(req)
 
       categoryDto = await service.Update(categoryDto)
+
       return response.Success(res, message.UPDATE_SUCCESS, categoryDto)
 
     } catch (error) {
@@ -68,10 +68,10 @@ class CategoryController {
   async Delete(req, res,next) {
 
     try {
-      let categoryDto = new dto(req)
-      categoryDto.username = await getUsername.getUsername(req)
+      let categoryDto = new CategoryDto(req)
 
       await service.Delete(categoryDto)
+      
       return response.Success(res, message.DELETE_SUCCESS, {})
 
     } catch (error) {

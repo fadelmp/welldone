@@ -5,18 +5,18 @@ class BaseMapper {
 	async Create(data, dto) {
 
     data.id = uuidv4()
-    data.createdBy = dto.username
-    data.updatedBy = dto.username
+    data.createdBy = dto.activedUser
+    data.updatedBy = dto.activedUser
 	}
 
   async Update(data, dto) {
 
-    data.updatedBy = dto.username
+    data.updatedBy = dto.activedUser
   }
 
   async Delete(data, dto) {
 
-    data.updatedBy = dto.username
+    data.updatedBy = dto.activedUser
   }
 	
 }

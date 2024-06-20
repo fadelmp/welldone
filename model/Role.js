@@ -14,18 +14,18 @@ Role.init({
     field: 'id',
   },
   name: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false,
     field: 'name',
   }
 }, {
   sequelize,
   tableName: 'role',
+  modelName: 'Role',
   paranoid: false,
   timestamps: true,
 })
 
-Role.hasMany(RolePrivilege, { foreignKey: "role_id", as: "roles" })
 Role.belongsToMany(Privilege, {
   through: RolePrivilege,
   foreignKey: 'role_id',
