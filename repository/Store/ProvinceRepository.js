@@ -1,6 +1,6 @@
 const province = require('../../model/Store/Province')
-const QueryFailed = require('../error/QueryFailed')
-const message = require('../message/UserMessage')
+const QueryFailed = require('../../error/QueryFailed')
+const message = require('../../message/LocationMessage')
 
 class ProvinceRepository {
 
@@ -11,7 +11,7 @@ class ProvinceRepository {
     
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
+      throw new QueryFailed(error, message.GET_PROVINCE_FAILED)
     }
   }
 }

@@ -1,6 +1,6 @@
 const BaseMapper = require("./BaseMapper")
 
-class UserMapper extends BaseMapper {
+class UserMapper {
 
   async ToUser(userDto) {
 

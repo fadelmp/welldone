@@ -1,6 +1,6 @@
 const BaseMapper = require("./BaseMapper")
 
-class CategoryMapper extends BaseMapper {
+class CategoryMapper {
 
   async ToCategory(categoryDto) {
 
