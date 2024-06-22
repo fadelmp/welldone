@@ -1,8 +1,7 @@
 const dropdownMapper = require('../mapper/DropdownMapper')
-const repository = require('../repository/StoreRepository')
+const repository = require('../repository/Store/StoreRepository')
 const comparator = require('../comparator/StoreComparator')
 const mapper = require('../mapper/StoreMapper')
-const baseMapper = require('../mapper/BaseMapper')
 
 class StoreService {
 
@@ -25,7 +24,7 @@ class StoreService {
     await comparator.CheckName(storeDto)
 
     let store = await mapper.ToStore(storeDto)
-    await baseMapper.Create(store, storeDto)
+    await mapper.Create(store, storeDto)
 
     await repository.Create(store)
     return storeDto
@@ -37,7 +36,7 @@ class StoreService {
     await comparator.CheckName(storeDto)
 
     let store = await mapper.ToStore(storeDto)
-    await baseMapper.Update(store, storeDto)
+    await mapper.Update(store, storeDto)
 
     await repository.Update(store)
     return storeDto 
@@ -46,7 +45,7 @@ class StoreService {
   async Delete(storeDto) {
 
     let store = await comparator.CheckId(storeDto.id)
-    await baseMapper.Delete(store, storeDto)
+    await mapper.Delete(store, storeDto)
 
     await repository.Delete(store)
     return ""

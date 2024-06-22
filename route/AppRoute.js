@@ -15,10 +15,20 @@ router.get('/', (req, res) => {
 })
 
 // Mount other routes
+
+// Location API
 router.use('/location', location)
+
+// Store Management
 router.use('/store-management/stores', store)
+
+// User Management
+router.use('/user-management/users', user)
+
+// Product Management
 router.use('/product-management/categories', category)
 router.use('/product-management/products', product)
-router.use('/user-management/users', user)
+
+// Inventory Management
 
 module.exports = router

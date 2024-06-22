@@ -25,4 +25,4 @@ class BaseMapper {
 	
 }
 
-module.exports = new BaseMapper()
+module.exports = BaseMapper

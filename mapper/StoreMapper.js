@@ -1,6 +1,6 @@
 const BaseMapper = require("./BaseMapper")
 
-class StoreMapper {
+class StoreMapper extends BaseMapper {
 
   async ToStore(storeDto) {
 

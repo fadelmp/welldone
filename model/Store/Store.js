@@ -1,18 +1,10 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../../config/db.config')
+const City = require('./City')
+const Stock = require('../Inventory/Stock')
+const Variant = require('../Product/Variant')
 
-class Store extends Model {
-  static associate(models) {
-    Store.belongsTo(models.City, { foreignKey: "city_id", as: "city" })
-    Store.hasMany(models.Stock, { foreignKey: "store_id", as: "stocks" })
-    Store.belongsToMany(models.Variant, {
-      through: models.Stock,
-      foreignKey: 'store_id',
-      otherKey: 'variant_id',
-      as: 'variants'
-    })
-  }
-}
+class Store extends Model {}
 
 Store.init({
   id: {
@@ -35,6 +27,7 @@ Store.init({
   cityId: {
     type: DataTypes.STRING,
     allowNull: false,
+    field: 'city_id',
     references: { model: "City", key: "id" }
   },
   isActived: {
@@ -70,5 +63,14 @@ Store.init({
   paranoid: true,
   timestamps: false,
 })
+
+Store.belongsTo(City, { foreignKey: "city_id", as: "city" })
+Store.hasMany(Stock, { foreignKey: "store_id", as: "stocks" })
+Store.belongsToMany(Variant, {
+      through: Stock,
+      foreignKey: 'store_id',
+      otherKey: 'variant_id',
+      as: 'variants'
+    })
 
 module.exports = Store

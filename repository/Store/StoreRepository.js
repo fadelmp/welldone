@@ -1,17 +1,17 @@
-const store = require('../../model/Store/Store')
-const city = require('../../model/Store/City')
-const province = require('../../model/Store/Province')
-const QueryFailed = require('../error/QueryFailed')
-const message = require('../message/StoreMessage')
+const Store = require('../../model/Store/Store')
+const City = require('../../model/Store/City')
+const Province = require('../../model/Store/Province')
+const QueryFailed = require('../../error/QueryFailed')
+const message = require('../../message/StoreMessage')
 
 class StoreRepository {
 
   async FindAll() {
     
     try {
-      return await store.findAll({ 
+      return await Store.findAll({ 
         where: { isDeleted: false },
-        include: [{ model: city, as: 'city', include: [{ model: province, as: 'province' }]}]
+        include: [{ model: City, as: 'city', include: [{ model: Province, as: 'province' }]}]
       })
     
     } catch (error) {
@@ -23,7 +23,7 @@ class StoreRepository {
   async FindById(id) {
 
     try {
-      return await store.findOne({ where: { id: id, isDeleted: false }})
+      return await Store.findOne({ where: { id: id, isDeleted: false }})
       
     } catch (error) {
       // Error Handling
@@ -34,7 +34,7 @@ class StoreRepository {
   async FindByName(name) {
 
     try {
-      return await store.findOne({ where: { name: name, isDeleted: false }})
+      return await Store.findOne({ where: { name: name, isDeleted: false }})
 
     } catch (error) {
       // Error Handling
@@ -45,7 +45,7 @@ class StoreRepository {
   async Create(data) {
 
     try {
-      return await store.create(data)
+      return await Store.create(data)
       
     } catch (error) {
       // Error Handling
@@ -56,7 +56,7 @@ class StoreRepository {
   async Update(data) {
 
     try {
-      return await store.update(data, { where: { id: data.id, isDeleted: false }})
+      return await Store.update(data, { where: { id: data.id, isDeleted: false }})
       
     } catch(error) {
       // Error Handling
@@ -67,7 +67,7 @@ class StoreRepository {
   async Delete(data) {
     
     try {
-      return await store.update(
+      return await Store.update(
         { isActived: false, isDeleted: true, updatedBy: data.updatedBy }, 
         { where: { id: data.id, isDeleted: false }}
       )
