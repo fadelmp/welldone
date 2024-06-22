@@ -1,6 +1,6 @@
-const product = require('../model/Product/Product')
-const QueryFailed = require('../error/QueryFailed')
-const message = require('../message/ProductMessage')
+const product = require('../../model/Product/Product')
+const QueryFailed = require('../../error/QueryFailed')
+const message = require('../../message/ProductMessage')
 
 class ProductRepository {
 

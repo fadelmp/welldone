@@ -1,7 +1,7 @@
-const category = require('../model/Product/Category')
-const product = require('../model/Product/Product')
-const QueryFailed = require('../error/QueryFailed')
-const message = require('../message/CategoryMessage')
+const category = require('../../model/Product/Category')
+const product = require('../../model/Product/Product')
+const QueryFailed = require('../../error/QueryFailed')
+const message = require('../../message/CategoryMessage')
 
 class CategoryRepository {
 

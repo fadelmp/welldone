@@ -1,6 +1,6 @@
-const user = require('../model/User/User')
-const QueryFailed = require('../error/QueryFailed')
-const message = require('../message/UserMessage')
+const user = require('../../model/User/User')
+const QueryFailed = require('../../error/QueryFailed')
+const message = require('../../message/UserMessage')
 
 class UserRepository {
 
