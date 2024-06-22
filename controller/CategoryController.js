@@ -1,7 +1,7 @@
 const CategoryDto = require('../dto/CategoryDto')
-const response = require('./ResponseController')
+const response = require('../helper/Response')
 const service = require('../service/CategoryService')
-const message = require('../config/CategoryMessage')
+const message = require('../message/CategoryMessage')
 
 class CategoryController {
   

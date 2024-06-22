@@ -1,6 +1,6 @@
-const user = require('../model/User')
+const user = require('../model/User/User')
 const QueryFailed = require('../error/QueryFailed')
-const message = require('../config/UserMessage')
+const message = require('../message/UserMessage')
 
 class UserRepository {
 
@@ -11,8 +11,7 @@ class UserRepository {
     
     } catch (error) {
       // Error Handling
-      console.log(error)
-      throw new QueryFailed(message.GET_FAILED)
+      throw new QueryFailed(error, message.GET_FAILED)
     }
   }
 
@@ -23,8 +22,7 @@ class UserRepository {
       
     } catch (error) {
       // Error Handling
-      console.log(error)
-      throw new QueryFailed(message.GET_FAILED)
+      throw new QueryFailed(error, message.GET_FAILED)
     }
   }
 
@@ -35,7 +33,7 @@ class UserRepository {
 
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(message.GET_FAILED)
+      throw new QueryFailed(error, message.GET_FAILED)
     }
   }
 
@@ -46,7 +44,7 @@ class UserRepository {
 
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(message.GET_FAILED)
+      throw new QueryFailed(error, message.GET_FAILED)
     }
   }
 
@@ -57,7 +55,7 @@ class UserRepository {
       
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(message.CREATE_FAILED)
+      throw new QueryFailed(error, message.CREATE_FAILED)
     }
   }
 
@@ -68,7 +66,7 @@ class UserRepository {
       
     } catch(error) {
       // Error Handling
-      throw new QueryFailed(message.UPDATE_FAILED) 
+      throw new QueryFailed(error, message.UPDATE_FAILED) 
     }
   }
 
@@ -82,7 +80,7 @@ class UserRepository {
       
     } catch(error) {
       // Error Handling
-      throw new QueryFailed(message.DELETE_FAILED) 
+      throw new QueryFailed(error, message.DELETE_FAILED) 
     }
   }
 }

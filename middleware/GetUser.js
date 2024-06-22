@@ -1,9 +1,6 @@
-class GetUser {
-
-  async getActiveUser(req) {
+function GetActivedUser(req) {
     
-    return "Fadel"
-  }
+  return req.headers['username']
 }
 
-module.exports = new GetUser()
+module.exports = GetActivedUser

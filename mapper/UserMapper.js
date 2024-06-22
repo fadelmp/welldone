@@ -1,10 +1,12 @@
-class UserMapper {
+const BaseMapper = require("./BaseMapper")
+
+class UserMapper extends BaseMapper {
 
   async ToUser(userDto) {
 
     return {
       id: userDto.id,
-      username: userDto.name,
+      username: userDto.username,
       fullname: userDto.fullname,
       password: userDto.password,
       roleId: userDto.roleId,

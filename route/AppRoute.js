@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
 })
 
 // Mount other routes
-router.use('/categories', category)
-router.use('/products', product)
+router.use('/product-management/categories', category)
+router.use('/product-management/products', product)
 router.use('/users', user)
 
 module.exports = router

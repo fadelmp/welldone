@@ -1,4 +1,6 @@
-class SizeMapper {
+const BaseMapper = require("./BaseMapper")
+
+class SizeMapper extends BaseMapper {
 
   async ToSize(sizeDto) {
 

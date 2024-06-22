@@ -1,6 +1,8 @@
 const repository = require('../repository/UserRepository')
 const comparator = require('../comparator/UserComparator')
 const mapper = require('../mapper/UserMapper')
+const crypt = require('../helper/Crypt')
+const baseMapper = require('../mapper/BaseMapper')
 
 class UserService {
 
@@ -13,12 +15,15 @@ class UserService {
 
   async Create(userDto) {
 
-    await comparator.CheckUserame(userDto)
+    let key = "welldone123456789012345678901234"
+    let password = await crypt.DecryptPass(userDto.password, key)
+
+    await comparator.CheckUsername(userDto)
     await comparator.CheckFullname(userDto)
 
     let user = await mapper.ToUser(userDto)
-    user.createdBy = userDto.activedUser
-    user.updatedBy = userDto.activedUser
+    await baseMapper.Create(user, userDto)
+    user.password = await crypt.HashPass(password)
 
     await repository.Create(user)
     return userDto
@@ -31,7 +36,7 @@ class UserService {
     await comparator.CheckFullname(userDto)
 
     let user = await mapper.ToUser(userDto)
-    user.updatedBy = userDto.activedUser
+    await baseMapper.Update(user, userDto)
 
     await repository.Update(user)
     return userDto 
@@ -40,7 +45,7 @@ class UserService {
   async Delete(userDto) {
 
     let user = await comparator.CheckId(userDto.id)
-    user.updatedBy = userDto.activedUser
+    await baseMapper.Delete(user, userDto)
 
     await repository.Delete(user)
     return ""

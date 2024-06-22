@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize')
-const sequelize = require('../config/db.config')
+const sequelize = require('../../config/db.config')
 
 class Privilege extends Model {}
 
@@ -9,17 +9,17 @@ Privilege.init({
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull:false,
-    field: 'id',
+    field: 'id'
   },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'name',
+    field: 'name'
   },
   url: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'url',
+    field: 'url'
   }
 }, {
   sequelize,

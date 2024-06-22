@@ -3,7 +3,7 @@ const BaseDto = require('./BaseDto')
 class UserDto extends BaseDto {
 
   constructor(req) {
-    super()
+    super(req)
     this.id = req.params.id
     this.username = req.body.username
     this.fullname = req.body.fullname

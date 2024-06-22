@@ -1,7 +1,7 @@
-const category = require('../model/Category')
-const product = require('../model/Product')
+const category = require('../model/Product/Category')
+const product = require('../model/Product/Product')
 const QueryFailed = require('../error/QueryFailed')
-const message = require('../config/CategoryMessage')
+const message = require('../message/CategoryMessage')
 
 class CategoryRepository {
 
@@ -16,7 +16,7 @@ class CategoryRepository {
     } catch (error) {
       // Error Handling
       console.log(error)
-      throw new QueryFailed(message.GET_FAILED)
+      throw new QueryFailed(error, message.GET_FAILED)
     }
   }
 
@@ -28,7 +28,7 @@ class CategoryRepository {
     } catch (error) {
       // Error Handling
       console.log(error)
-      throw new QueryFailed(message.GET_FAILED)
+      throw new QueryFailed(error, message.GET_FAILED)
     }
   }
 
@@ -39,7 +39,7 @@ class CategoryRepository {
 
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(message.GET_FAILED)
+      throw new QueryFailed(error, message.GET_FAILED)
     }
   }
 
@@ -50,7 +50,7 @@ class CategoryRepository {
       
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(message.CREATE_FAILED)
+      throw new QueryFailed(error, message.CREATE_FAILED)
     }
   }
 
@@ -61,7 +61,7 @@ class CategoryRepository {
       
     } catch(error) {
       // Error Handling
-      throw new QueryFailed(message.UPDATE_FAILED) 
+      throw new QueryFailed(error, message.UPDATE_FAILED) 
     }
   }
 
@@ -75,7 +75,7 @@ class CategoryRepository {
       
     } catch(error) {
       // Error Handling
-      throw new QueryFailed(message.DELETE_FAILED) 
+      throw new QueryFailed(error, message.DELETE_FAILED) 
     }
   }
 }

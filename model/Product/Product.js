@@ -1,9 +1,12 @@
 const { Model, DataTypes } = require('sequelize')
-const sequelize = require('../config/db.config')
-const Category = require('./Category')
-const ProductSize = require('./ProductSize')
+const sequelize = require('../../config/db.config')
 
-class Product extends Model {}
+class Product extends Model {
+  static associate(models) {
+    Product.belongsTo(models.Category, { foreignKey: "product_category_id", as: "category" })
+    Product.hasMany(models.Variant, { foreignKey: "product_id", as: "variants" })
+  }
+}
 
 Product.init({
   id: {
@@ -11,36 +14,33 @@ Product.init({
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull:false,
-    field: 'id',
+    field: 'id'
   },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'name',
+    field: 'name'
   },
   description: {
     type: DataTypes.STRING,
-    field: 'description',
+    field: 'description'
   },
   categoryId: {
     type: DataTypes.STRING,
     allowNull: false,
-    references: {
-      model: "Category",
-      key: "id",
-    },
+    references: { model: "Category", key: "id" }
   },
   image1: {
     type: DataTypes.STRING,
-    field: 'image_path_1',
+    field: 'image_path_1'
   },
   image2: {
     type: DataTypes.STRING,
-    field: 'image_path_2',
+    field: 'image_path_2'
   },
   image3: {
     type: DataTypes.STRING,
-    field: 'image_path_3',
+    field: 'image_path_3'
   },
   unit: {
     type: DataTypes.STRING,
@@ -63,30 +63,26 @@ Product.init({
   },
   createdAt: {
     type: DataTypes.DATE,
-    field: 'created_at',
-    defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    field: 'created_at'
   },
   createdBy: {
     type: DataTypes.STRING,
-    field: 'created_by',
+    field: 'created_by'
   },
   updatedAt: {
     type: DataTypes.DATE,
-    field: 'updated_at',
-    defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    field: 'updated_at'
   },
   updatedBy: {
     type: DataTypes.STRING,
-    field: 'updated_by',
-  },
+    field: 'updated_by'
+  }
 }, {
   sequelize,
+  modelName: 'Product',
   tableName: 'product',
   paranoid: false,
   timestamps: true,
 })
-
-//Product.belongsTo(Category, { foreignKey: "product_category_id", as: "category" })
-//Product.hasMany(ProductSize, { foreignKey: "product_id", as: "sizes" })
 
 module.exports = Product

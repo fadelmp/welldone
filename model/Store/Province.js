@@ -1,23 +1,23 @@
 const { Model, DataTypes } = require('sequelize')
-const sequelize = require('../config/db.config')
+const sequelize = require('../../config/db.config')
 
 class Province extends Model {}
 
 Province.init({
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull:false,
-    field: 'id',
+    field: 'id'
   },
   name: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false,
-    field: 'name',
+    field: 'name'
   }
 }, {
   sequelize,
+  modelName: 'Province',
   tableName: 'location_province',
   paranoid: false,
   timestamps: true,

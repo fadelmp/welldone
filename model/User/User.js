@@ -1,9 +1,12 @@
 const { Model, DataTypes } = require('sequelize')
-const sequelize = require('../config/db.config')
-const Role = require('./Role')
-const Store = require('./Store')
+const sequelize = require('../../config/db.config')
 
-class User extends Model {}
+class User extends Model {
+  static associate(models) { 
+    User.belongsTo(Role, { foreignKey: "role_id", as: "role" })
+    User.belongsTo(Store, { foreignKey: "store_id", as: "store" })
+  }
+}
 
 User.init({
   id: {
@@ -11,33 +14,33 @@ User.init({
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull:false,
-    field: 'id',
+    field: 'id'
   },
   username: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'username',
+    field: 'username'
   },
   fullname: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'fullname',
+    field: 'fullname'
   },
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'password',
+    field: 'password'
   },
   roleId: {
     type: DataTypes.STRING,
     allowNull: false,
     field: 'role_id',
-    references: { model: "Role", key: "id" },
+    references: { model: "Role", key: "id" }
   },
   storeId: {
     type: DataTypes.STRING,
     field: 'store_id',
-    references: { model: "Store", key: "id" },
+    references: { model: "Store", key: "id" }
   },
   isActived: {
     type: DataTypes.BOOLEAN,
@@ -51,30 +54,26 @@ User.init({
   },
   createdAt: {
     type: DataTypes.DATE,
-    field: 'created_at',
-    defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    field: 'created_at'
   },
   createdBy: {
     type: DataTypes.STRING,
-    field: 'created_by',
+    field: 'created_by'
   },
   updatedAt: {
     type: DataTypes.DATE,
-    field: 'updated_at',
-    defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    field: 'updated_at'
   },
   updatedBy: {
     type: DataTypes.STRING,
-    field: 'updated_by',
+    field: 'updated_by'
   }
 }, {
   sequelize,
+  modelName: 'User',
   tableName: 'user',
   paranoid: false,
   timestamps: true,
 })
-
-User.belongsTo(Role, { foreignKey: "role_id", as: "role" })
-User.belongsTo(Store, { foreignKey: "store_id", as: "store" })
 
 module.exports = User

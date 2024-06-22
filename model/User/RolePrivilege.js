@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize')
-const sequelize = require('../config/db.config')
+const sequelize = require('../../config/db.config')
 
 class RolePrivilege extends Model {}
 
@@ -9,17 +9,17 @@ RolePrivilege.init({
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull:false,
-    field: 'id',
+    field: 'id'
   },
   roleId: {
     type: DataTypes.STRING,
     allowNull: false,
-    references: { model: "Role", key: "id" },
+    references: { model: "Role", key: "id" }
   },
   privilegeId: {
     type: DataTypes.STRING,
     allowNull: false,
-    references: { model: "Privilege", key: "id" },
+    references: { model: "Privilege", key: "id" }
   }
 }, {
   sequelize,

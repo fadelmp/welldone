@@ -1,10 +1,14 @@
 const { Model, DataTypes } = require('sequelize')
-const sequelize = require('../config/db.config')
-const Product = require('./Product')
+const sequelize = require('../../config/db.config')
 
-class Category extends Model {}
+class Stock extends Model {
+  static associate(models) {
+    Stock.belongsTo(models.Variant, { foreignKey: "variant_id", as: "variant" })
+    Stock.belongsTo(models.Store, { foreignKey: "store_id", as: "store" })
+  }
+}
 
-Category.init({
+Stock.init({
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -12,14 +16,21 @@ Category.init({
     allowNull:false,
     field: 'id'
   },
-  name: {
+  variantId: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'name'
+    references: { model: "Variant", key: "id" }
   },
-  description: {
+  storeId: {
     type: DataTypes.STRING,
-    field: 'description'
+    allowNull: false,
+    references: { model: "Store", key: "id" }
+  },
+  quantity: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'quantity',
+    defaultValue: 0
   },
   isActived: {
     type: DataTypes.BOOLEAN,
@@ -33,8 +44,7 @@ Category.init({
   },
   createdAt: {
     type: DataTypes.DATE,
-    field: 'created_at',
-    defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    field: 'created_at'
   },
   createdBy: {
     type: DataTypes.STRING,
@@ -42,20 +52,18 @@ Category.init({
   },
   updatedAt: {
     type: DataTypes.DATE,
-    field: 'updated_at',
-    defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    field: 'updated_at'
   },
   updatedBy: {
     type: DataTypes.STRING,
-    field: 'updated_by',
-  },
+    field: 'updated_by'
+  }
 }, {
   sequelize,
-  tableName: 'category',
+  modelName: 'Stock',
+  tableName: 'stock',
   paranoid: false,
-  timestamps: true,  
+  timestamps: true,
 })
 
-Category.hasMany(Product, { foreignKey: "category_id", as: "products" })
-
-module.exports = Category
+module.exports = Stock

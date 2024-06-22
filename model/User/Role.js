@@ -1,9 +1,16 @@
 const { Model, DataTypes } = require('sequelize')
-const sequelize = require('../config/db.config')
-const Privilege = require('./Privilege')
-const RolePrivilege = require('./RolePrivilege')
+const sequelize = require('../../config/db.config')
 
-class Role extends Model {}
+class Role extends Model {
+  static associate(models) {
+    Role.belongsToMany(models.Privilege, {
+      through: models.RolePrivilege,
+      foreignKey: 'role_id',
+      otherKey: 'privilege_id',
+      as: 'privileges'
+    })
+  }
+}
 
 Role.init({
   id: {
@@ -11,12 +18,12 @@ Role.init({
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull:false,
-    field: 'id',
+    field: 'id'
   },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'name',
+    field: 'name'
   }
 }, {
   sequelize,
@@ -24,13 +31,6 @@ Role.init({
   modelName: 'Role',
   paranoid: false,
   timestamps: true,
-})
-
-Role.belongsToMany(Privilege, {
-  through: RolePrivilege,
-  foreignKey: 'role_id',
-  otherKey: 'privilege_id',
-  as: 'privileges'
 })
 
 module.exports = Role

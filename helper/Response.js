@@ -1,6 +1,6 @@
 const ResponseDto = require('../dto/ResponseDto')
 
-class ResponseController {
+class Response {
 
   async Success(res, message, data) {
 
@@ -30,4 +30,4 @@ class ResponseController {
   }
 }
 
-module.exports = new ResponseController()
+module.exports = new Response()

@@ -1,7 +1,7 @@
 const dto = require('../dto/UserDto')
-const response = require('./ResponseController')
+const response = require('../helper/Response')
 const service = require('../service/UserService')
-const message = require('../config/UserMessage')
+const message = require('../message/UserMessage')
 
 class UserController {
   
@@ -55,7 +55,7 @@ class UserController {
     try {
       let userDto = new dto(req)
 
-      await service.Delete(UserDto)
+      await service.Delete(userDto)
       
       return response.Success(res, message.DELETE_SUCCESS, {})
 

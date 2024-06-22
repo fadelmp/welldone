@@ -1,5 +1,5 @@
 const repository = require('../repository/UserRepository')
-const message = require('../config/UserMessage')
+const message = require('../message/UserMessage')
 const DataExists = require('../error/DataExists')
 const NotFound = require('../error/NotFound')
 

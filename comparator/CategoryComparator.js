@@ -1,5 +1,5 @@
 const repository = require('../repository/CategoryRepository')
-const message = require('../config/CategoryMessage')
+const message = require('../message/CategoryMessage')
 const DataExists = require('../error/DataExists')
 const NotFound = require('../error/NotFound')
 

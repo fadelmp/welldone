@@ -3,7 +3,7 @@ const BaseDto = require('./BaseDto')
 class CategoryDto extends BaseDto {
 
   constructor(req) {
-    super()
+    super(req)
     this.id = req.params.id
     this.name = req.body.name
     this.description = req.body.description

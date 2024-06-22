@@ -1,13 +1,9 @@
+const getusername = require('../middleware/GetUser')
+
 class BaseDto {
 
-  constructor() {
-    this.activedUser = ''
-    this.isActived = true
-    this.isDeleted = false
-    this.createdAt = new Date()
-    this.createdBy = ''
-    this.updatedAt = new Date()
-    this.updatedBy = ''
+  constructor(req) {
+    this.activedUser = getusername(req)
   }
 
   toJSON() {

@@ -1,6 +1,7 @@
+const BaseMapper = require('./BaseMapper')
 const sizeMapper = require('./SizeMapper')
 
-class ProductMapper {
+class ProductMapper extends BaseMapper {
 
   async ToProduct(productDto) {
 
