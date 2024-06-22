@@ -1,8 +1,6 @@
-const dropdownMapper = require('../mapper/DropdownMapper')
+const mapper = require('../mapper/CategoryMapper')
 const repository = require('../repository/CategoryRepository')
 const comparator = require('../comparator/CategoryComparator')
-const mapper = require('../mapper/CategoryMapper')
-const baseMapper = require('../mapper/BaseMapper')
 
 class CategoryService {
 
@@ -17,7 +15,7 @@ class CategoryService {
 
     let categories = await repository.FindAll()
 
-    return dropdownMapper.ToDropdownDtoList(categories)
+    return mapper.ToDropdownDtoList(categories)
   }
 
   async Create(categoryDto) {
@@ -25,7 +23,7 @@ class CategoryService {
     await comparator.CheckName(categoryDto)
 
     let category = await mapper.ToCategory(categoryDto)
-    await baseMapper.Create(category, categoryDto)
+    await mapper.Create(category, categoryDto)
 
     await repository.Create(category)
     return categoryDto
@@ -37,7 +35,7 @@ class CategoryService {
     await comparator.CheckName(categoryDto)
 
     let category = await mapper.ToCategory(categoryDto)
-    await baseMapper.Update(category, categoryDto)
+    await mapper.Update(category, categoryDto)
 
     await repository.Update(category)
     return categoryDto 
@@ -46,7 +44,7 @@ class CategoryService {
   async Delete(categoryDto) {
 
     let category = await comparator.CheckId(categoryDto.id)
-    await baseMapper.Delete(category, categoryDto)
+    await mapper.Delete(category, categoryDto)
 
     await repository.Delete(category)
     return ""

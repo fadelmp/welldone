@@ -1,7 +1,6 @@
-const dropdownMapper = require('../mapper/DropdownMapper')
+const mapper = require('../mapper/StoreMapper')
 const repository = require('../repository/Store/StoreRepository')
 const comparator = require('../comparator/StoreComparator')
-const mapper = require('../mapper/StoreMapper')
 
 class StoreService {
 
@@ -16,7 +15,7 @@ class StoreService {
 
     let stores = await repository.FindAll()
 
-    return dropdownMapper.ToDropdownDtoList(stores)
+    return mapper.ToDropdownDtoList(stores)
   }
 
   async Create(storeDto) {

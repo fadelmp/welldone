@@ -50,7 +50,7 @@ Variant.init({
 }, {
   sequelize,
   modelName: 'Variant',
-  tableName: 'variant',
+  tableName: 'product_variant',
   paranoid: false,
   timestamps: true,
 })

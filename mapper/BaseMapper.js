@@ -22,6 +22,19 @@ class BaseMapper {
     data.updatedAt = new Date()
     data.updatedBy = dto.activedUser
   }
+
+  async ToDropdownDtoList(datas) {
+
+    return Promise.all(datas.map(data => this.toDropdownDto(data)))
+  }
+
+  async toDropdownDto(data) {
+
+    return {
+			id: data.id,
+			name: data.name
+    }
+  }
 	
 }
 

@@ -23,7 +23,7 @@ Privilege.init({
   }
 }, {
   sequelize,
-  tableName: 'privilege',
+  tableName: 'user_privilege',
   modelName: 'Privilege',
   paranoid: false,
   timestamps: true,
