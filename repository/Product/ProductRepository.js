@@ -1,4 +1,4 @@
-const product = require('../../model/Product/Product')
+const { Product } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/ProductMessage')
 

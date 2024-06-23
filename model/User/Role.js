@@ -1,16 +1,7 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../../config/db.config')
 
-class Role extends Model {
-  static associate(models) {
-    Role.belongsToMany(models.Privilege, {
-      through: models.RolePrivilege,
-      foreignKey: 'role_id',
-      otherKey: 'privilege_id',
-      as: 'privileges'
-    })
-  }
-}
+class Role extends Model {}
 
 Role.init({
   id: {
@@ -24,7 +15,13 @@ Role.init({
     type: DataTypes.STRING,
     allowNull: false,
     field: 'name'
-  }
+  },
+  isActived: { type: DataTypes.BOOLEAN, field: 'is_actived', defaultValue: true },
+  isDeleted: { type: DataTypes.BOOLEAN, field: 'is_deleted', defaultValue: false },
+  createdAt: { type: DataTypes.DATE, field: 'created_at' },
+  createdBy: { type: DataTypes.STRING, field: 'created_by' },
+  updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
+  updatedBy: { type: DataTypes.STRING, field: 'updated_by' }
 }, {
   sequelize,
   tableName: 'user_role',

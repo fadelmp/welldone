@@ -1,12 +1,7 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../../config/db.config')
 
-class Product extends Model {
-  static associate(models) {
-    Product.belongsTo(models.Category, { foreignKey: "product_category_id", as: "category" })
-    Product.hasMany(models.Variant, { foreignKey: "product_id", as: "variants" })
-  }
-}
+class Product extends Model {}
 
 Product.init({
   id: {
@@ -28,6 +23,7 @@ Product.init({
   categoryId: {
     type: DataTypes.STRING,
     allowNull: false,
+    field: 'category_id',
     references: { model: "Category", key: "id" }
   },
   image1: {
@@ -51,32 +47,12 @@ Product.init({
     type: DataTypes.STRING,
     field: 'tags'
   },
-  isActived: {
-    type: DataTypes.BOOLEAN,
-    field: 'is_actived',
-    defaultValue: true 
-  },
-  isDeleted: {
-    type: DataTypes.BOOLEAN,
-    field: 'is_deleted',
-    defaultValue: false
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    field: 'created_at'
-  },
-  createdBy: {
-    type: DataTypes.STRING,
-    field: 'created_by'
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    field: 'updated_at'
-  },
-  updatedBy: {
-    type: DataTypes.STRING,
-    field: 'updated_by'
-  }
+  isActived: { type: DataTypes.BOOLEAN, field: 'is_actived', defaultValue: true },
+  isDeleted: { type: DataTypes.BOOLEAN, field: 'is_deleted', defaultValue: false },
+  createdAt: { type: DataTypes.DATE, field: 'created_at' },
+  createdBy: { type: DataTypes.STRING, field: 'created_by' },
+  updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
+  updatedBy: { type: DataTypes.STRING, field: 'updated_by' }
 }, {
   sequelize,
   modelName: 'Product',

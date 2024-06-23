@@ -2,25 +2,25 @@ const { v4: uuidv4 } = require('uuid')
 
 class BaseMapper {
 
-	async Create(data, dto) {
+	async CreateData(data, username) {
 
     data.id = uuidv4()
     data.createdAt = new Date()
-    data.createdBy = dto.activedUser
+    data.createdBy = username
     data.updatedAt = new Date()
-    data.updatedBy = dto.activedUser
+    data.updatedBy = username
 	}
 
-  async Update(data, dto) {
+  async UpdateData(data, username) {
 
     data.updatedAt = new Date()
-    data.updatedBy = dto.activedUser
+    data.updatedBy = username
   }
 
-  async Delete(data, dto) {
+  async DeleteData(data, username) {
 
     data.updatedAt = new Date()
-    data.updatedBy = dto.activedUser
+    data.updatedBy = username
   }
 
   async ToDropdownDtoList(datas) {

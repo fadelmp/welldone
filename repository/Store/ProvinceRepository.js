@@ -1,4 +1,4 @@
-const province = require('../../model/Store/Province')
+const { Province } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/LocationMessage')
 
@@ -7,7 +7,7 @@ class ProvinceRepository {
   async FindAll() {
     
     try {
-      return await province.findAll()
+      return await Province.findAll()
     
     } catch (error) {
       // Error Handling

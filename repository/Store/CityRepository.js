@@ -1,4 +1,4 @@
-const city = require('../../model/Store/City')
+const { City } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/LocationMessage')
 
@@ -7,7 +7,7 @@ class CityRepository {
   async FindAll(provinceId) {
     
     try {
-      return await city.findAll({ where: { provinceId: provinceId }})
+      return await City.findAll({ where: { provinceId: provinceId }})
     
     } catch (error) {
       // Error Handling

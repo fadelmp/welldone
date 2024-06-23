@@ -1,5 +1,4 @@
-const category = require('../../model/Product/Category')
-const product = require('../../model/Product/Product')
+const { Category, Product } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/CategoryMessage')
 
@@ -8,9 +7,9 @@ class CategoryRepository {
   async FindAll() {
     
     try {
-      return await category.findAll({ 
+      return await Category.findAll({ 
         where: { isDeleted: false }, 
-        include: { model: product, as: 'products' }
+        include: { model: Product, as: 'products' }
       })
     
     } catch (error) {
@@ -23,7 +22,7 @@ class CategoryRepository {
   async FindById(id) {
 
     try {
-      return await category.findOne({ where: { id: id, isDeleted: false }})
+      return await Category.findOne({ where: { id: id, isDeleted: false }})
       
     } catch (error) {
       // Error Handling
@@ -35,7 +34,7 @@ class CategoryRepository {
   async FindByName(name) {
 
     try {
-      return await category.findOne({ where: { name: name, isDeleted: false }})
+      return await Category.findOne({ where: { name: name, isDeleted: false }})
 
     } catch (error) {
       // Error Handling
@@ -46,7 +45,7 @@ class CategoryRepository {
   async Create(data) {
 
     try {
-      return await category.create(data)
+      return await Category.create(data)
       
     } catch (error) {
       // Error Handling
@@ -57,7 +56,7 @@ class CategoryRepository {
   async Update(data) {
 
     try {
-      return await category.update(data, { where: { id: data.id, isDeleted: false }})
+      return await Category.update(data, { where: { id: data.id, isDeleted: false }})
       
     } catch(error) {
       // Error Handling
@@ -68,7 +67,7 @@ class CategoryRepository {
   async Delete(data) {
     
     try {
-      return await category.update(
+      return await Category.update(
         { isActived: false, isDeleted: true, updatedBy: data.updatedBy }, 
         { where: { id: data.id, isDeleted: false }}
       )

@@ -1,6 +1,4 @@
-const Store = require('../../model/Store/Store')
-const City = require('../../model/Store/City')
-const Province = require('../../model/Store/Province')
+const { Store, City, Province } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/StoreMessage')
 

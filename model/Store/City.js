@@ -1,11 +1,7 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../../config/db.config')
 
-class City extends Model {
-  static associate(models) {
-    City.belongsTo(models.Province, { foreignKey: 'provinceId', as: 'province' })
-  }
-}
+class City extends Model {}
 
 City.init({
   id: {
@@ -25,32 +21,12 @@ City.init({
     allowNull: false,
     field: 'name'
   },
-  isActived: {
-    type: DataTypes.BOOLEAN,
-    field: 'is_actived',
-    defaultValue: true 
-  },
-  isDeleted: {
-    type: DataTypes.BOOLEAN,
-    field: 'is_deleted',
-    defaultValue: false
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    field: 'created_at'
-  },
-  createdBy: {
-    type: DataTypes.STRING,
-    field: 'created_by',
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    field: 'updated_at'
-  },
-  updatedBy: {
-    type: DataTypes.STRING,
-    field: 'updated_by'
-  }
+  isActived: { type: DataTypes.BOOLEAN, field: 'is_actived', defaultValue: true },
+  isDeleted: { type: DataTypes.BOOLEAN, field: 'is_deleted', defaultValue: false },
+  createdAt: { type: DataTypes.DATE, field: 'created_at' },
+  createdBy: { type: DataTypes.STRING, field: 'created_by' },
+  updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
+  updatedBy: { type: DataTypes.STRING, field: 'updated_by' }
 }, {
   sequelize,
   modelName: 'City',

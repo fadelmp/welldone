@@ -1,4 +1,4 @@
-const user = require('../../model/User/User')
+const { User } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/UserMessage')
 
