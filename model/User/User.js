@@ -3,8 +3,8 @@ const sequelize = require('../../config/db.config')
 
 class User extends Model {
   static associate(models) { 
-    User.belongsTo(Role, { foreignKey: "role_id", as: "role" })
-    User.belongsTo(Store, { foreignKey: "store_id", as: "store" })
+    User.belongsTo(models.Role, { foreignKey: "role_id", as: "role" })
+    User.belongsTo(models.Store, { foreignKey: "store_id", as: "store" })
   }
 }
 

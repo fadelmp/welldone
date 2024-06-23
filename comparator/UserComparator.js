@@ -1,4 +1,4 @@
-const repository = require('../repository/UserRepository')
+const repository = require('../repository/User/UserRepository')
 const message = require('../message/UserMessage')
 const DataExists = require('../error/DataExists')
 const NotFound = require('../error/NotFound')

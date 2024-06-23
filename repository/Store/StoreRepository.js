@@ -4,6 +4,7 @@ const Province = require('../../model/Store/Province')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/StoreMessage')
 
+
 class StoreRepository {
 
   async FindAll() {

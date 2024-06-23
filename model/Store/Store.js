@@ -1,17 +1,18 @@
-const { Model, DataTypes } = require('sequelize')
-const sequelize = require('../../config/db.config')
-const City = require('./City')
-const Inventory = require('../Inventory/Inventory')
-const Variant = require('../Product/Variant')
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../../config/db.config');
 
-class Store extends Model {}
+class Store extends Model {
+  static associate(models) {
+    Store.belongsTo(models.City, { foreignKey: 'cityId', as: 'city' })
+  }
+}
 
 Store.init({
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    allowNull:false,
+    allowNull: false,
     field: 'id'
   },
   name: {
@@ -25,10 +26,10 @@ Store.init({
     field: 'address'
   },
   cityId: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
     field: 'city_id',
-    references: { model: "City", key: "id" }
+    references: { model: 'City', key: 'id' }
   },
   isActived: {
     type: DataTypes.BOOLEAN,
@@ -60,17 +61,8 @@ Store.init({
   sequelize,
   modelName: 'Store',
   tableName: 'location_store',
-  paranoid: true,
-  timestamps: false,
-})
+  timestamps: true,
+  paranod: false,
+});
 
-Store.belongsTo(City, { foreignKey: "city_id", as: "city" })
-Store.hasMany(Inventory, { foreignKey: "store_id", as: "inventories" })
-Store.belongsToMany(Variant, {
-  through: Stock,
-  foreignKey: 'store_id',
-  otherKey: 'variant_id',
-  as: 'variants'
-})
-
-module.exports = Store
+module.exports = Store;

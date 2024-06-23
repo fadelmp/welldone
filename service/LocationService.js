@@ -1,4 +1,4 @@
-const dropdownMapper = require('../mapper/DropdownMapper')
+const mapper = require('../mapper/BaseMapper')
 const cityRepo = require('../repository/Store/CityRepository')
 const provinceRepo = require('../repository/Store/ProvinceRepository')
 
@@ -8,14 +8,14 @@ class LocationService {
 
     let provinces = await provinceRepo.FindAll()
 
-    return dropdownMapper.ToDropdownDtoList(provinces)
+    return mapper.ToDropdownDtoList(provinces)
   }
 
   async FindCity(provinceId) {
 
     let cities = await cityRepo.FindAll(provinceId)
 
-    return dropdownMapper.ToDropdownDtoList(cities)
+    return mapper.ToDropdownDtoList(cities)
   }
 }
 

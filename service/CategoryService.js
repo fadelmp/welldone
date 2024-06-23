@@ -1,6 +1,6 @@
 const mapper = require('../mapper/CategoryMapper')
-const repository = require('../repository/CategoryRepository')
 const comparator = require('../comparator/CategoryComparator')
+const repository = require('../repository/Product/CategoryRepository')
 
 class CategoryService {
 

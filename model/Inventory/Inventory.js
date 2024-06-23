@@ -1,9 +1,12 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../../config/db.config')
-const Variant = require('../Product/Variant')
-const Store = require('../Store/Store')
 
-class Inventory extends Model {}
+class Inventory extends Model {
+  static associate(models) {
+    Inventory.belongsTo(models.Variant, { foreignKey: "variant_id", as: "variant" })
+    Inventory.belongsTo(models.Store, { foreignKey: "store_id", as: "store" })
+  }
+}
 
 Inventory.init({
   id: {
@@ -64,8 +67,5 @@ Inventory.init({
   paranoid: false,
   timestamps: true,
 })
-
-Inventory.belongsTo(Variant, { foreignKey: "variant_id", as: "variant" })
-Inventory.belongsTo(Store, { foreignKey: "store_id", as: "store" })
 
 module.exports = Inventory
