@@ -1,4 +1,4 @@
-const mapper = require('../mapper/BaseMapper')
+const mapper = require('../mapper/LocationMapper')
 const cityRepo = require('../repository/Store/CityRepository')
 const provinceRepo = require('../repository/Store/ProvinceRepository')
 
@@ -8,7 +8,7 @@ class LocationService {
 
     let provinces = await provinceRepo.FindAll()
 
-    return mapper.ToDropdownDtoList(provinces)
+    return await mapper.ToDropdownDtoList(provinces)
   }
 
   async FindCity(provinceId) {

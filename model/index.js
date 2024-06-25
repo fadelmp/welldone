@@ -16,6 +16,7 @@ const Inventory = require('./Inventory/Inventory')
 // Store Management
 Store.belongsTo(City, { foreignKey: 'cityId', as: 'city' })
 City.belongsTo(Province, { foreignKey: 'provinceId', as: 'province' })
+Store.hasMany(Inventory, { foreignKey: "store_id", as: "inventories" })
 
 // User Management
 User.belongsTo(Role, { foreignKey: "roleId", as: "role" })

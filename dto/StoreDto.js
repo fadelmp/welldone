@@ -6,6 +6,7 @@ class StoreDto extends BaseDto {
     super(req)
     this.id = req.params.id
     this.name = req.body.name
+    this.code = req.body.code
     this.address = req.body.address
     this.cityId = req.body.city_id
   }
@@ -14,6 +15,7 @@ class StoreDto extends BaseDto {
     return {
       id: this.id,
       name: this.name,
+      code: this.code,
       address: this.address,
       city_id: this.cityId,
       city_name: "",

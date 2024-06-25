@@ -29,6 +29,13 @@ router.use('/user-management/users', user)
 router.use('/product-management/categories', category)
 router.use('/product-management/products', product)
 
+// Discount Management
+
 // Inventory Management
+
+// Order Management
+
+// Report
+
 
 module.exports = router

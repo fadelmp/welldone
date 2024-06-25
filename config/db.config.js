@@ -1,12 +1,12 @@
 const { Sequelize } = require('sequelize')
 
 // Database configuration
-let dbName = "welldone"
-let userName = "root"
+let dbName = "postgres"
+let userName = "postgres"
 let password = "Blackrebel_666"
 let host = "localhost"
-let dialect = "mysql"
-let port = 3306 // Default PostgreSQL port
+let dialect = "postgresql"
+let port = 5432 // Default PostgreSQL port
 let logging = false // Disable logging SQL queries (optional)
 
 const sequelize = new Sequelize(dbName, userName, password, {

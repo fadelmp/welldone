@@ -1,4 +1,5 @@
-const { Store, City, Province } = require('../../model')
+const { Op } = require('sequelize')
+const { Store, City, Province, Inventory } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/StoreMessage')
 
@@ -22,7 +23,10 @@ class StoreRepository {
   async FindById(id) {
 
     try {
-      return await Store.findOne({ where: { id: id, isDeleted: false }})
+      return await Store.findOne({ 
+        where: { id: id, isDeleted: false },
+        include: { model: Inventory, as: 'inventories' }
+      })
       
     } catch (error) {
       // Error Handling
@@ -30,10 +34,15 @@ class StoreRepository {
     }
   }
 
-  async FindByName(name) {
+  async FindByNameOrCode(data) {
 
     try {
-      return await Store.findOne({ where: { name: name, isDeleted: false }})
+      return await Store.findAll({
+        where: { [Op.and]: [
+          { [Op.or]: [{ name: data.name }, { code: data.code }] },
+          { isDeleted: false }
+        ]}
+      })
 
     } catch (error) {
       // Error Handling

@@ -1,6 +1,7 @@
 const repository = require('../repository/Store/StoreRepository')
 const message = require('../message/StoreMessage')
 const DataExists = require('../error/DataExists')
+const InternalServer = require('../error/InternalServer')
 const NotFound = require('../error/NotFound')
 
 class StoreComparator {
@@ -9,19 +10,43 @@ class StoreComparator {
 
     let store = await repository.FindById(id)
 
-    if (!store)
+    if (!store) 
       throw new NotFound(message.NOT_FOUND)
 
     return store
   }
 
-  async CheckName(data) {
+  async CheckData(storeDto) {
 
-    let store = await repository.FindByName(data.name)
+    let stores = await repository.FindByNameOrCode(storeDto)
 
-    if (store)
-      if (store.name == data.name && store.id != data.id)
-        throw new DataExists(message.NAME_EXISTS)
+    for (let store of stores) {
+      await this.checkName(store, storeDto)
+      await this.checkCode(store, storeDto)
+    }
+  }
+
+  async CheckInventory(id) {
+
+    let store = await repository.FindById(id)
+    let inventories = store.inventories
+
+    inventories.forEach(inventory => {
+      if (inventory.total > 0) 
+        throw new InternalServer(message.EXISTING_INVENTORY)
+    });
+  }
+
+  async checkName(store, storeDto) {
+
+    if (store && store.name == storeDto.name && store.id != storeDto.id)
+      throw new DataExists(message.NAME_EXISTS)
+  }
+
+  async checkCode(store, storeDto) {
+
+    if (store && store.code == storeDto.code && storeDto.id != store.id)
+      throw new DataExists(message.CODE_EXISTS)
   }
 }
 

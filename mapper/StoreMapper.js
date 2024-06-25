@@ -7,6 +7,7 @@ class StoreMapper extends BaseMapper {
     return {
       id: storeDto.id,
       name: storeDto.name,
+      code: storeDto.code,
       address: storeDto.address,
       cityId: storeDto.cityId
     }
@@ -22,6 +23,7 @@ class StoreMapper extends BaseMapper {
     return {
 			id: store.id,
 			name: store.name,
+      store: store.code,
 			address: store.address,
       cityId: store.city.id,
       cityName: store.city.name,

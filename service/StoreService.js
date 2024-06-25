@@ -21,7 +21,7 @@ class StoreService {
 
   async Create(storeDto) {
 
-    await comparator.CheckName(storeDto)
+    await comparator.CheckData(storeDto)
 
     let store = await mapper.ToStore(storeDto)
     await mapper.CreateData(store, storeDto.activedUser)
@@ -35,7 +35,7 @@ class StoreService {
   async Update(storeDto) {
 
     await comparator.CheckId(storeDto.id)
-    await comparator.CheckName(storeDto)
+    await comparator.CheckData(storeDto)
 
     let store = await mapper.ToStore(storeDto)
     await mapper.UpdateData(store, storeDto.activedUser)
@@ -45,6 +45,8 @@ class StoreService {
   }
 
   async Delete(storeDto) {
+
+    await comparator.CheckInventory(storeDto.id)
 
     let store = await comparator.CheckId(storeDto.id)
     await mapper.DeleteData(store, storeDto.activedUser)

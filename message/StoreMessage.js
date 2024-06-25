@@ -16,5 +16,7 @@ module.exports = {
   DELETE_FAILED: "Delete Store Failed",
 
   NAME_EXISTS: "Store Name Already Exists",
-  NOT_FOUND : "Store Not Found"
+  CODE_EXISTS: "Store Code Already Exists",
+  NOT_FOUND : "Store Not Found",
+  EXISTING_INVENTORY: "There is Still Inventory in this Store. Cannot Be Deleted"
 }

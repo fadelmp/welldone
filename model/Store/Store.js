@@ -16,6 +16,10 @@ Store.init({
     allowNull: false,
     field: 'name'
   },
+  code: {
+    type: DataTypes.STRING,
+    field: 'code'
+  },
   address: {
     type: DataTypes.STRING,
     allowNull: false,
