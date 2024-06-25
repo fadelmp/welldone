@@ -31,10 +31,9 @@ class StoreComparator {
     let store = await repository.FindById(id)
     let inventories = store.inventories
 
-    inventories.forEach(inventory => {
-      if (inventory.total > 0) 
+    for (let inventory of inventories)
+      if (inventory.total > 0)
         throw new InternalServer(message.INVENTORY_EXISTS)
-    });
   }
 
   async checkName(store, storeDto) {
