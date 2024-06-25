@@ -33,7 +33,7 @@ class StoreComparator {
 
     inventories.forEach(inventory => {
       if (inventory.total > 0) 
-        throw new InternalServer(message.EXISTING_INVENTORY)
+        throw new InternalServer(message.INVENTORY_EXISTS)
     });
   }
 
