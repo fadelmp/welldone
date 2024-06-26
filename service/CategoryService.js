@@ -43,6 +43,8 @@ class CategoryService {
 
   async Delete(categoryDto) {
 
+    await comparator.CheckProduct(categoryDto)
+
     let category = await comparator.CheckId(categoryDto.id)
     await mapper.Delete(category, categoryDto)
 

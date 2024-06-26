@@ -1,4 +1,5 @@
 const repository = require('../repository/Product/CategoryRepository')
+const InternalServer = require('../error/InternalServer')
 const message = require('../message/CategoryMessage')
 const DataExists = require('../error/DataExists')
 const NotFound = require('../error/NotFound')
@@ -22,6 +23,16 @@ class CategoryComparator {
     if (category)
       if (category.name == data.name && category.id != data.id)
         throw new DataExists(message.NAME_EXISTS)
+  }
+
+  async CheckProduct(data) {
+
+    let category = await repository.FindById(data.id)
+    let products = category.products
+
+    for (let product of products)
+      if (!products.isDeleted)
+        throw new InternalServer(message.PRODUCT_EXISTS)
   }
 }
 

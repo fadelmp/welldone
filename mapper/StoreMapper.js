@@ -15,7 +15,9 @@ class StoreMapper extends BaseMapper {
 
   async ToStoreDtoList(stores) {
 
-    return Promise.all(stores.map(store => this.toStoreDto(store)))
+    return Promise.all(
+      stores.map(
+        store => this.toStoreDto(store)))
   }
 
   async toStoreDto(store) {

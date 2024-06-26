@@ -27,7 +27,9 @@ class BaseMapper {
 
   async ToDropdownDtoList(datas) {
 
-    return Promise.all(datas.map(data => this.toDropdownDto(data)))
+    return Promise.all(
+      datas.map(
+        data => this.toDropdownDto(data)))
   }
 
   async toDropdownDto(data) {

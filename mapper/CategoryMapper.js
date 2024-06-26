@@ -13,7 +13,9 @@ class CategoryMapper extends BaseMapper {
 
   async ToCategoryDtoList(categories) {
 
-    return Promise.all(categories.map(category => this.toCategoryDto(category)))
+    return Promise.all(
+      categories.map(
+        category => this.toCategoryDto(category)))
   }
 
   async toCategoryDto(category) {

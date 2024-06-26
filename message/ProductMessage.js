@@ -16,5 +16,6 @@ module.exports = {
   DELETE_FAILED: "Delete Product Failed",
 
   NAME_EXISTS: "Product Name Already Exists",
-  NOT_FOUND : "Product Not Found"
+  NOT_FOUND : "Product Not Found",
+  VARIANT_EXISTS: "There Are Still Variant in this Product. Cannot Be Deleted"
 }
