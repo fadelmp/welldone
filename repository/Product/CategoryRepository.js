@@ -14,7 +14,6 @@ class CategoryRepository {
     
     } catch (error) {
       // Error Handling
-      console.log(error)
       throw new QueryFailed(error, message.GET_FAILED)
     }
   }
@@ -29,7 +28,6 @@ class CategoryRepository {
       
     } catch (error) {
       // Error Handling
-      console.log(error)
       throw new QueryFailed(error, message.GET_FAILED)
     }
   }

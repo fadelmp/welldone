@@ -31,7 +31,7 @@ class InventoryService {
 
   async create(storeId, variantId) {
 
-    let inventory = await mapper.CreateInventory(storeId, variantId)
+    let inventory = await mapper.Create(storeId, variantId)
     await mapper.CreateData(inventory, "SYSTEM")
 
     await inventoryRepo.Create(inventory)

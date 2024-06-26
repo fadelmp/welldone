@@ -1,4 +1,4 @@
-const { Product } = require('../../model')
+const { Product, Variant } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/ProductMessage')
 
@@ -7,11 +7,10 @@ class ProductRepository {
   async FindById(id) {
 
     try {
-      return await product.findOne({ where: { id: id, isDeleted: false }})
+      return await Product.findOne({ where: { id: id, isDeleted: false }})
       
     } catch (error) {
       // Error Handling
-      console.log(error)
       throw new QueryFailed(message.GET_FAILED)
     }
   }
@@ -19,7 +18,7 @@ class ProductRepository {
   async FindByName(name) {
 
     try {
-      return await product.findOne({ where: { name: name, isDeleted: false }})
+      return await Product.findOne({ where: { name: name, isDeleted: false }})
 
     } catch (error) {
       // Error Handling
@@ -30,7 +29,7 @@ class ProductRepository {
   async Create(data) {
 
     try {
-      return await product.create(data)
+      return await Product.create(data)
       
     } catch (error) {
       // Error Handling
@@ -41,7 +40,7 @@ class ProductRepository {
   async Update(data) {
 
     try {
-      return await product.update(data, { where: { id: data.id, isDeleted: false }})
+      return await Product.update(data, { where: { id: data.id, isDeleted: false }})
       
     } catch(error) {
       // Error Handling
@@ -52,7 +51,7 @@ class ProductRepository {
   async Delete(data) {
     
     try {
-      return await product.update(
+      return await Product.update(
         { isActived: false, isDeleted: true, updatedBy: data.updatedBy }, 
         { where: { id: data.id, isDeleted: false }}
       )

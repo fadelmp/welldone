@@ -21,7 +21,7 @@ class StoreDto extends BaseDto {
       city_name: "",
       province_id: "",
       province_name: ""
-    };
+    }
   }
 }
 

@@ -5,6 +5,7 @@ const router = express.Router()
 
 const category = require('./CategoryRoute')
 const product = require('./ProductRoute')
+const variant = require('./VariantRoute')
 const user = require('./UserRoute')
 const location = require('./LocationRoute')
 const store = require('./StoreRoute')
@@ -28,6 +29,7 @@ router.use('/user-management/users', user)
 // Product Management
 router.use('/product-management/categories', category)
 router.use('/product-management/products', product)
+router.use('/product-management/variants', variant)
 
 // Discount Management
 

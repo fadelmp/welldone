@@ -1,7 +1,7 @@
 const mapper = require('../mapper/StoreMapper')
-const repository = require('../repository/Store/StoreRepository')
-const comparator = require('../comparator/StoreComparator')
 const inventoryService = require('./InventoryService')
+const comparator = require('../comparator/StoreComparator')
+const repository = require('../repository/Store/StoreRepository')
 
 class StoreService {
 
@@ -19,40 +19,40 @@ class StoreService {
     return mapper.ToDropdownDtoList(stores)
   }
 
-  async Create(storeDto) {
+  async Create(dto) {
 
-    await comparator.CheckData(storeDto)
+    await comparator.CheckData(dto)
 
-    let store = await mapper.ToStore(storeDto)
-    await mapper.CreateData(store, storeDto.activedUser)
+    let store = await mapper.ToStore(dto)
+    await mapper.CreateData(store, dto.activedUser)
 
     await repository.Create(store)
     inventoryService.CreateByStore(store.id)
 
-    return storeDto
+    return dto
   }
 
-  async Update(storeDto) {
+  async Update(dto) {
 
-    await comparator.CheckId(storeDto.id)
-    await comparator.CheckData(storeDto)
+    await comparator.CheckId(dto.id)
+    await comparator.CheckData(dto)
 
-    let store = await mapper.ToStore(storeDto)
-    await mapper.UpdateData(store, storeDto.activedUser)
+    let store = await mapper.ToStore(dto)
+    await mapper.UpdateData(store, dto.activedUser)
 
     await repository.Update(store)
-    return storeDto 
+    return dto 
   }
 
-  async Delete(storeDto) {
+  async Delete(dto) {
 
-    await comparator.CheckInventory(storeDto.id)
+    await comparator.CheckInventory(dto.id)
 
-    let store = await comparator.CheckId(storeDto.id)
-    await mapper.DeleteData(store, storeDto.activedUser)
+    let store = await comparator.CheckId(dto.id)
+    await mapper.DeleteData(store, dto.activedUser)
 
     await repository.Delete(store)
-    inventoryService.DeleteByStore(storeDto.id)
+    inventoryService.DeleteByStore(dto.id)
 
     return ""
   }

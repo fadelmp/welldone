@@ -15,7 +15,7 @@ class CategoryDto extends BaseDto {
       name: this.name,
       description: this.description,
       total_product: 0
-    };
+    }
   }
 }
 

@@ -7,9 +7,9 @@ const Role = require('./User/Role')
 const Privilege = require('./User/Privilege')
 const RolePrivilege = require('./User/RolePrivilege')
 
-const Variant = require('./Product/Variant')
 const Category = require('./Product/Category')
 const Product = require('./Product/Product')
+const Variant = require('./Product/Variant')
 
 const Inventory = require('./Inventory/Inventory')
 

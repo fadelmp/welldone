@@ -12,7 +12,7 @@ class BaseDto {
       created_by: this.createdBy,
       updated_at: this.updatedAt,
       updated_by: this.updatedBy
-    };
+    }
   }
 }
 

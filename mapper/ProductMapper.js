@@ -1,5 +1,5 @@
 const BaseMapper = require('./BaseMapper')
-const sizeMapper = require('./SizeMapper')
+//const sizeMapper = require('./SizeMapper')
 
 class ProductMapper {
 
@@ -35,7 +35,7 @@ class ProductMapper {
       image_3: product.image_3,
       unit: productDto.unit,
       tags: productDto.tags,
-      sizes: sizeMapper.ToSizeDtoList(product.sizes),
+      //sizes: sizeMapper.ToSizeDtoList(product.sizes),
 			createdAt: category.createdAt,
 			createdBy: category.createdBy,
 			updatedAt: category.updatedAt,

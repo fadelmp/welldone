@@ -22,7 +22,7 @@ class UserDto extends BaseDto {
       role_name: "",
       store_id: this.storeId,
       store_name: "",
-    };
+    }
   }
 }
 

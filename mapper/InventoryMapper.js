@@ -2,7 +2,7 @@ const BaseMapper = require("./BaseMapper")
 
 class InventoryMapper extends BaseMapper {
 
-  async CreateInventory(storeId, variantId) {
+  async Create(storeId, variantId) {
 
     return {
       storeId: storeId,

@@ -18,35 +18,35 @@ class CategoryService {
     return mapper.ToDropdownDtoList(categories)
   }
 
-  async Create(categoryDto) {
+  async Create(dto) {
 
-    await comparator.CheckName(categoryDto)
+    await comparator.CheckName(dto)
 
-    let category = await mapper.ToCategory(categoryDto)
-    await mapper.CreateData(category, categoryDto.activedUser)
+    let category = await mapper.ToCategory(dto)
+    await mapper.CreateData(category, dto.activedUser)
 
     await repository.Create(category)
-    return categoryDto
+    return dto
   }
 
-  async Update(categoryDto) {
+  async Update(dto) {
 
-    await comparator.CheckId(categoryDto.id)
-    await comparator.CheckName(categoryDto)
+    await comparator.CheckId(dto.id)
+    await comparator.CheckName(dto)
 
-    let category = await mapper.ToCategory(categoryDto)
-    await mapper.UpdateData(category, categoryDto.activedUser)
+    let category = await mapper.ToCategory(dto)
+    await mapper.UpdateData(category, dto.activedUser)
 
     await repository.Update(category)
-    return categoryDto 
+    return dto 
   }
 
-  async Delete(categoryDto) {
+  async Delete(dto) {
 
-    await comparator.CheckProduct(categoryDto)
+    await comparator.CheckProduct(dto)
 
-    let category = await comparator.CheckId(categoryDto.id)
-    await mapper.DeleteData(category, categoryDto.activedUser)
+    let category = await comparator.CheckId(dto.id)
+    await mapper.DeleteData(category, dto.activedUser)
 
     await repository.Delete(category)
     return ""
