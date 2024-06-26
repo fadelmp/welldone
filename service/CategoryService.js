@@ -23,7 +23,7 @@ class CategoryService {
     await comparator.CheckName(categoryDto)
 
     let category = await mapper.ToCategory(categoryDto)
-    await mapper.Create(category, categoryDto)
+    await mapper.CreateData(category, categoryDto.activedUser)
 
     await repository.Create(category)
     return categoryDto
@@ -35,7 +35,7 @@ class CategoryService {
     await comparator.CheckName(categoryDto)
 
     let category = await mapper.ToCategory(categoryDto)
-    await mapper.Update(category, categoryDto)
+    await mapper.UpdateData(category, categoryDto.activedUser)
 
     await repository.Update(category)
     return categoryDto 
@@ -46,7 +46,7 @@ class CategoryService {
     await comparator.CheckProduct(categoryDto)
 
     let category = await comparator.CheckId(categoryDto.id)
-    await mapper.Delete(category, categoryDto)
+    await mapper.DeleteData(category, categoryDto.activedUser)
 
     await repository.Delete(category)
     return ""

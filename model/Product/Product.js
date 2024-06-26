@@ -28,15 +28,15 @@ Product.init({
   },
   image1: {
     type: DataTypes.STRING,
-    field: 'image_path_1'
+    field: 'path_image_1'
   },
   image2: {
     type: DataTypes.STRING,
-    field: 'image_path_2'
+    field: 'path_image_2'
   },
   image3: {
     type: DataTypes.STRING,
-    field: 'image_path_3'
+    field: 'path_image_3'
   },
   unit: {
     type: DataTypes.STRING,

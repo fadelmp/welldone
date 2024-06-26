@@ -22,7 +22,10 @@ class CategoryRepository {
   async FindById(id) {
 
     try {
-      return await Category.findOne({ where: { id: id, isDeleted: false }})
+      return await Category.findOne({ 
+        where: { id: id, isDeleted: false },
+        include: { model: Product, as: 'products' }
+      })
       
     } catch (error) {
       // Error Handling

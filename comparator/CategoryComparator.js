@@ -31,7 +31,7 @@ class CategoryComparator {
     let products = category.products
 
     for (let product of products)
-      if (!products.isDeleted)
+      if (!product.isDeleted)
         throw new InternalServer(message.PRODUCT_EXISTS)
   }
 }
