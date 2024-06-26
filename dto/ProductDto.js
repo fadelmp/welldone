@@ -1,6 +1,7 @@
 // ProductDto.js
 
 const BaseDto = require('./BaseDto')
+const VariantDto = require('./VariantDto')
 
 class ProductDto extends BaseDto {
 
@@ -10,12 +11,12 @@ class ProductDto extends BaseDto {
     this.name = req.body.name
     this.description = req.body.description
     this.categoryId = req.body.category_id
-    this.image_1 = image_1
-    this.image_2 = image_2
-    this.image_3 = image_3
-    this.unit = unit
-    this.tags = tags
-    this.sizes = sizes.map(size => new SizeDto(size.name, size.sku, size.unit_price, size.capital_price))
+    this.pathImage1 = req.body.path_image_1
+    this.pathImage2 = req.body.path_image_2
+    this.pathImage3 = req.body.path_image_3
+    this.unit = req.body.unit
+    this.tags = req.body.tags
+    this.variants = req.body.variants
   }
 }
 

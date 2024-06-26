@@ -10,8 +10,7 @@ class CategoryComparator {
 
     let category = await repository.FindById(id)
 
-    if (!category)
-      throw new NotFound(message.NOT_FOUND)
+    if (!category) throw new NotFound(message.NOT_FOUND)
 
     return category
   }
@@ -20,9 +19,8 @@ class CategoryComparator {
 
     let category = await repository.FindByName(data.name)
 
-    if (category)
-      if (category.name == data.name && category.id != data.id)
-        throw new DataExists(message.NAME_EXISTS)
+    if (category && category.name == data.name && category.id != data.id) 
+      throw new DataExists(message.NAME_EXISTS)
   }
 
   async CheckProduct(data) {
@@ -31,8 +29,7 @@ class CategoryComparator {
     let products = category.products
 
     for (let product of products)
-      if (!product.isDeleted)
-        throw new InternalServer(message.PRODUCT_EXISTS)
+      if (!product.isDeleted) throw new InternalServer(message.PRODUCT_EXISTS)
   }
 }
 

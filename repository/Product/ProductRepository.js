@@ -1,8 +1,24 @@
-const { Product, Variant } = require('../../model')
+const { Category, Product, Variant } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/ProductMessage')
 
 class ProductRepository {
+
+  async FindAll() {
+    
+    try {
+      return await Product.findAll({ 
+        where: { isDeleted: false },
+        include: [
+          { model: Category, as: 'category'},
+          { model: Variant, as: 'variants' }]
+      })
+    
+    } catch (error) {
+      // Error Handling
+      throw new QueryFailed(error, message.GET_FAILED)
+    }
+  }
 
   async FindById(id) {
 

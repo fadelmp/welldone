@@ -10,8 +10,7 @@ class StoreComparator {
 
     let store = await repository.FindById(id)
 
-    if (!store) 
-      throw new NotFound(message.NOT_FOUND)
+    if (!store) throw new NotFound(message.NOT_FOUND)
 
     return store
   }

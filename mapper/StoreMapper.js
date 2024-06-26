@@ -2,14 +2,14 @@ const BaseMapper = require("./BaseMapper")
 
 class StoreMapper extends BaseMapper {
 
-  async ToStore(storeDto) {
+  async ToStore(dto) {
 
     return {
-      id: storeDto.id,
-      name: storeDto.name,
-      code: storeDto.code,
-      address: storeDto.address,
-      cityId: storeDto.cityId
+      id: dto.id,
+      name: dto.name,
+      code: dto.code,
+      address: dto.address,
+      cityId: dto.cityId
     }
   }
 

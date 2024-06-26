@@ -27,7 +27,7 @@ class StoreService {
     await mapper.CreateData(store, dto.activedUser)
 
     await repository.Create(store)
-    inventoryService.CreateByStore(store.id)
+    await inventoryService.CreateByStore(store.id)
 
     return dto
   }
@@ -52,7 +52,7 @@ class StoreService {
     await mapper.DeleteData(store, dto.activedUser)
 
     await repository.Delete(store)
-    inventoryService.DeleteByStore(dto.id)
+    await inventoryService.DeleteByStore(dto.id)
 
     return ""
   }

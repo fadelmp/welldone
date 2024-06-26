@@ -10,8 +10,7 @@ class VariantComparator {
 
     let variant = await repository.FindById(id)
 
-    if (!variant)
-      throw new NotFound(message.NOT_FOUND)
+    if (!variant) throw new NotFound(message.NOT_FOUND)
 
     return variant
   }
@@ -21,7 +20,7 @@ class VariantComparator {
     let variant = await repository.FindBySku(data.sku)
 
     if (variant)
-      if (variant.sku == data.sku && variant.id != data.id)
+      if (variant.sku == data.sku && variant.id != data.id) 
         throw new DataExists(message.SKU_EXISTS)
   }
 
@@ -31,8 +30,7 @@ class VariantComparator {
     let inventories = variant.inventories
 
     for (let inventory of inventories)
-      if (inventory.total > 0)
-        throw new InternalServer(message.INVENTORY_EXISTS)
+      if (inventory.total > 0) throw new InternalServer(message.INVENTORY_EXISTS)
   }
 }
 

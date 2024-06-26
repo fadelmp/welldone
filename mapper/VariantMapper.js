@@ -2,15 +2,15 @@ const BaseMapper = require("./BaseMapper")
 
 class VariantMapper extends BaseMapper {
 
-  async ToVariant(variantDto) {
+  async ToVariant(dto) {
 
     return {
-      id: variantDto.id,
-      sku: variantDto.sku,
-      size: variantDto.size,
-      productId: variantDto.productId,
-      capitalPrice: variantDto.capitalPrice,
-      unitPrice: variantDto.unitPrice,
+      id: dto.id,
+      sku: dto.sku,
+      size: dto.size,
+      productId: dto.productId,
+      capitalPrice: dto.capitalPrice,
+      unitPrice: dto.unitPrice,
     }
   }
 

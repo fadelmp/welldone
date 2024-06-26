@@ -8,46 +8,47 @@ class ProductService {
 
     let products = await repository.FindAll()
 
-    return mapper.ToProductDtoList(products)
+    return mapper.TodtoList(products)
   }
 
-  async FindDropdown() {
+  async FindDropdown(categoryId) {
 
-    let products = await repository.FindAll()
+    let products = await repository.FindAll(categoryId)
 
     return mapper.ToDropdownDtoList(products)
   }
 
-  async Create(ProductDto) {
+  async Create(dto) {
 
-    await comparator.CheckName(ProductDto)
+    await comparator.CheckName(dto)
 
-    let Product = await mapper.ToProduct(ProductDto)
-    Product.updatedBy = ProductDto.username
-    Product.updatedBy = ProductDto.username
+    let product = await mapper.ToProduct(dto)
+    await mapper.CreateData(product, dto)
 
-    await repository.Create(Product)
-    return ProductDto
+    await repository.Create(product)
+    return dto
   }
 
-  async Update(ProductDto) {
+  async Update(dto) {
 
-    await comparator.CheckId(ProductDto.id)
-    await comparator.CheckName(ProductDto)
+    await comparator.CheckId(dto.id)
+    await comparator.CheckName(dto)
 
-    let Product = await mapper.ToProduct(ProductDto)
-    Product.updatedBy = ProductDto.username
+    let product = await mapper.ToProduct(dto)
+    await mapper.UpdateData(product, dto)
 
-    await repository.Update(Product)
-    return ProductDto 
+    await repository.Update(product)
+    return dto 
   }
 
-  async Delete(ProductDto) {
+  async Delete(dto) {
 
-    let Product = await comparator.CheckId(ProductDto.id)
-    Product.updatedBy = ProductDto.username
+    await comparator.CheckVariant(dto)
 
-    await repository.Delete(Product)
+    let product = await comparator.CheckId(dto.id)
+    await mapper.DeleteData(product, dto)
+
+    await repository.Delete(product)
     return ""
   }
 }

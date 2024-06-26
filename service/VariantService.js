@@ -52,7 +52,7 @@ class VariantService {
     await mapper.DeleteData(variant, dto.activedUser)
 
     await repository.Delete(variant)
-    inventoryService.DeleteByVariant(dto.id)
+    await inventoryService.DeleteByVariant(dto.id)
 
     return ""
   }

@@ -2,12 +2,12 @@ const BaseMapper = require("./BaseMapper")
 
 class CategoryMapper extends BaseMapper {
 
-  async ToCategory(categoryDto) {
+  async ToCategory(dto) {
 
     return {
-      id: categoryDto.id,
-      name: categoryDto.name,
-      description: categoryDto.description
+      id: dto.id,
+      name: dto.name,
+      description: dto.description
     }
   }
 
