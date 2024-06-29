@@ -38,11 +38,11 @@ class CategoryController {
   async Create(req, res, next) {
 
     try {
-      let categoryDto = new CategoryDto(req)
+      let dto = new CategoryDto(req)
 
-      categoryDto = await service.Create(categoryDto)
+      dto = await service.Create(dto)
 
-      return response.Success(res, message.CREATE_SUCCESS, categoryDto)
+      return response.Success(res, message.CREATE_SUCCESS, dto)
     
     } catch (error) {
       // Error Handling
@@ -53,11 +53,11 @@ class CategoryController {
   async Update(req, res, next) {
 
     try {
-      let categoryDto = new CategoryDto(req)
+      let dto = new CategoryDto(req)
 
-      categoryDto = await service.Update(categoryDto)
+      dto = await service.Update(dto)
 
-      return response.Success(res, message.UPDATE_SUCCESS, categoryDto)
+      return response.Success(res, message.UPDATE_SUCCESS, dto)
 
     } catch (error) {
       // Error Handling
@@ -68,9 +68,9 @@ class CategoryController {
   async Delete(req, res,next) {
 
     try {
-      let categoryDto = new CategoryDto(req)
+      let dto = new CategoryDto(req)
 
-      await service.Delete(categoryDto)
+      await service.Delete(dto)
       
       return response.Success(res, message.DELETE_SUCCESS, {})
 

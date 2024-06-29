@@ -38,11 +38,11 @@ class StoreController {
   async Create(req, res, next) {
 
     try {
-      let storeDto = new StoreDto(req)
+      let dto = new StoreDto(req)
 
-      storeDto = await service.Create(storeDto)
+      dto = await service.Create(dto)
 
-      return response.Success(res, message.CREATE_SUCCESS, storeDto)
+      return response.Success(res, message.CREATE_SUCCESS, dto)
     
     } catch (error) {
       // Error Handling
@@ -53,11 +53,11 @@ class StoreController {
   async Update(req, res, next) {
 
     try {
-      let storeDto = new StoreDto(req)
+      let dto = new StoreDto(req)
 
-      storeDto = await service.Update(storeDto)
+      dto = await service.Update(storeDto)
 
-      return response.Success(res, message.UPDATE_SUCCESS, storeDto)
+      return response.Success(res, message.UPDATE_SUCCESS, dto)
 
     } catch (error) {
       // Error Handling
@@ -68,9 +68,9 @@ class StoreController {
   async Delete(req, res,next) {
 
     try {
-      let storeDto = new StoreDto(req)
+      let dto = new StoreDto(req)
 
-      await service.Delete(storeDto)
+      await service.Delete(dto)
       
       return response.Success(res, message.DELETE_SUCCESS, {})
 

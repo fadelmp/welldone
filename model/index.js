@@ -11,6 +11,10 @@ const Category = require('./Product/Category')
 const Product = require('./Product/Product')
 const Variant = require('./Product/Variant')
 
+const Discount = require('./Discount/Discount')
+const DiscountStore = require('./Discount/DiscountStore')
+const DiscountProduct = require('./Discount/DiscountProduct')
+
 const Inventory = require('./Inventory/Inventory')
 
 // Store Management
@@ -35,6 +39,20 @@ Product.hasMany(Variant, { foreignKey: "productId", as: "variants" })
 Variant.belongsTo(Product, { foreignKey: "productId", as: "product" })
 Variant.hasMany(Inventory, { foreignKey: "variantId", as: "inventories" })
 
+// Discount Management
+Discount.belongsToMany(Store, {
+  through: DiscountStore,
+  foreignKey: 'discountId',
+  otherKey: 'storeId',
+  as: 'stores'
+})
+Discount.belongsToMany(Product, {
+  through: DiscountProduct,
+  foreignKey: 'discountId',
+  otherKey: 'productId',
+  as: 'products'
+})
+
 // Inventory Management
 Inventory.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
 Inventory.belongsTo(Store, { foreignKey: "storeId", as: "store" })
@@ -43,5 +61,5 @@ module.exports = {
   Store, City, Province,
   User, Role, RolePrivilege,
   Category, Product, Variant,
-  Inventory
+  Discount, Inventory
 }

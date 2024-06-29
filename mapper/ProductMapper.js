@@ -1,5 +1,4 @@
 const BaseMapper = require('./BaseMapper')
-//const sizeMapper = require('./SizeMapper')
 
 class ProductMapper extends BaseMapper {
 
@@ -9,10 +8,10 @@ class ProductMapper extends BaseMapper {
       id: dto.id,
       name: dto.name,
       description: dto.description,
-      category_id: dto.categoryId,
-      image_1: dto.image_1,
-      image_2: dto.image_2,
-      image_3: dto.image_3,
+      categoryId: dto.categoryId,
+      pathImage1: dto.pathImage1,
+      pathImage2: dto.pathImage2,
+      pathImage3: dto.pathImage3,
       unit: dto.unit,
       tags: dto.tags
     }
@@ -31,17 +30,36 @@ class ProductMapper extends BaseMapper {
 			id: product.id,
       name: product.name,
       description: product.description,
-      category_id: product.category_id,
-      image_1: product.image_1,
-      image_2: product.image_2,
-      image_3: product.image_3,
-      unit: productDto.unit,
-      tags: productDto.tags,
-      //sizes: sizeMapper.ToSizeDtoList(product.sizes),
-			createdAt: category.createdAt,
-			createdBy: category.createdBy,
-			updatedAt: category.updatedAt,
-			updatedBy: category.updatedBy
+      categoryId: product.categoryId,
+      pathImage1: product.pathImage1,
+      pathImage2: product.pathImage2,
+      pathImage3: product.pathImage3,
+      unit: product.unit,
+      tags: product.tags,
+      totalVariant: product.variants.map(variant => variant.toJSON()).length,
+      variants: await this.toVariantDtoList(product.variants),
+			createdAt: product.createdAt,
+			createdBy: product.createdBy,
+			updatedAt: product.updatedAt,
+			updatedBy: product.updatedBy
+    }
+  }
+
+  async toVariantDtoList(variants) {
+
+    return Promise.all(
+      variants.map(
+        variant => this.toVariantDto(variant)))
+  }
+
+  async toVariantDto(variant) {
+
+    return {
+      id: variant.id,
+      sku: variant.sku,
+      size: variant.size,
+      capitalPrice: variant.capitalPrice,
+      unitPrice: variant.unitPrice
     }
   }
 	

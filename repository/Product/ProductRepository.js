@@ -20,14 +20,28 @@ class ProductRepository {
     }
   }
 
+  async FindByCategoryId(categoryId) {
+
+    try {
+      return await Product.findAll({ where: { categoryId: categoryId, isDeleted: false }})
+
+    } catch (error) {
+      // Error Handling
+      throw new QueryFailed(error, message.GET_FAILED)
+    }
+  }
+
   async FindById(id) {
 
     try {
-      return await Product.findOne({ where: { id: id, isDeleted: false }})
+      return await Product.findOne({ 
+        where: { id: id, isDeleted: false },
+        include: { model: Variant, as: 'variants'} 
+      })
       
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(message.GET_FAILED)
+      throw new QueryFailed(error, message.GET_FAILED)
     }
   }
 
@@ -38,7 +52,7 @@ class ProductRepository {
 
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(message.GET_FAILED)
+      throw new QueryFailed(error, message.GET_FAILED)
     }
   }
 
@@ -49,7 +63,7 @@ class ProductRepository {
       
     } catch (error) {
       // Error Handling
-      throw new QueryFailed(message.CREATE_FAILED)
+      throw new QueryFailed(error, message.CREATE_FAILED)
     }
   }
 
@@ -60,7 +74,7 @@ class ProductRepository {
       
     } catch(error) {
       // Error Handling
-      throw new QueryFailed(message.UPDATE_FAILED) 
+      throw new QueryFailed(error, message.UPDATE_FAILED) 
     }
   }
 
@@ -74,7 +88,7 @@ class ProductRepository {
       
     } catch(error) {
       // Error Handling
-      throw new QueryFailed(message.DELETE_FAILED) 
+      throw new QueryFailed(error, message.DELETE_FAILED) 
     }
   }
 }

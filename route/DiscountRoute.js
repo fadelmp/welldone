@@ -1,10 +1,10 @@
 const express = require('express')
-const controller = require('../controller/ProductController')
+const controller = require('../controller/DiscountController')
 
 const router = express.Router()
 
 router.get('/', controller.FindAll)
-router.get('/dropdown/:categoryId', controller.FindDropdown)
+router.get('/dropdown/:productId', controller.FindDropdown)
 
 router.post('/', controller.Create)
 router.put('/:id', controller.Update)
