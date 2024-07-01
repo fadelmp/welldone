@@ -1,6 +1,6 @@
 const StoreDto = require('../dto/StoreDto')
 const response = require('../helper/Response')
-const service = require('../service/StoreService')
+const service = require('../service/Store/StoreService')
 const message = require('../message/StoreMessage')
 
 class StoreController {

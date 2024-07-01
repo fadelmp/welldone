@@ -1,7 +1,7 @@
-const mapper = require('../mapper/VariantMapper')
-const inventoryService = require('./InventoryService')
-const comparator = require('../comparator/VariantComparator')
-const repository = require('../repository/Product/VariantRepository')
+const mapper = require('../../mapper/VariantMapper')
+const inventoryService = require('../Inventory/InventoryService')
+const comparator = require('../../comparator/VariantComparator')
+const repository = require('../../repository/Product/VariantRepository')
 
 class VariantService {
 

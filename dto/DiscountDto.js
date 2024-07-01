@@ -10,8 +10,10 @@ class DiscountDto extends BaseDto {
     this.description = req.body.description
     this.startDate = req.body.start_date
     this.endDate = req.body.end_date
-    this.isNominal = req.body.isNominal
+    this.isNominal = req.body.is_nominal
     this.value = req.body.value
+    this.maximum = req.body.maximum
+    this.minimum = req.body.minimum
     this.stores = req.body.stores
     this.products = req.body.products
   }
@@ -26,10 +28,12 @@ class DiscountDto extends BaseDto {
       end_date: this.endDate,
       is_nominal: this.isNominal,
       value: this.value,
+      maximum: this.maximum,
+      minimum: this.minimum,
       stores: this.stores,
       products: this.products
     }
   }
 }
 
-module.exports = CategoryDto
+module.exports = DiscountDto

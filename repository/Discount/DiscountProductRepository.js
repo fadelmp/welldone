@@ -18,7 +18,7 @@ class DiscountProductRepository {
   async Delete(discountId) {
 
     try {
-      return await Inventory.destroy({ where: { discountId: discountId }})
+      return await DiscountProduct.destroy({ where: { discountId: discountId }})
     
     } catch (error) {
       // Error Handling

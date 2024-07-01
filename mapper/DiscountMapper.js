@@ -13,7 +13,9 @@ class DiscountMapper extends BaseMapper {
       endDate: dto.endDate,
       isVoucher: isVoucher,
       isNominal: dto.isNominal,
-      value: dto.value
+      value: dto.value,
+      maximum: dto.maximum,
+      minimum: dto.minimum
     }
   }
 
@@ -22,6 +24,22 @@ class DiscountMapper extends BaseMapper {
     return Promise.all(
       discounts.map(
         discount => this.toDiscountDto(discount)))
+  }
+
+  async ToDiscountStore(discountId, storeId) {
+
+    return {
+      discountId: discountId,
+      storeId: storeId
+    }
+  }
+
+  async ToDiscountProduct(discountId, productId) {
+
+    return {
+      discountId: discountId,
+      productId: productId
+    }
   }
 
   async toDiscountDto(discount) {
@@ -35,6 +53,8 @@ class DiscountMapper extends BaseMapper {
       endDate: discount.endDate,
       isNominal: discount.isNominal,
       value: discount.value,
+      maximum: discount.maximum,
+      minimum: discount.minimum,
       stores: discount.stores,
       products: discount.products,
 			createdAt: discount.createdAt,

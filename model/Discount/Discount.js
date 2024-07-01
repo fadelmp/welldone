@@ -49,9 +49,13 @@ Discount.init({
     allowNull: false,
     field: 'value'
   },
-  uptoValue: {
+  maximum: {
     type: DataTypes.INTEGER,
-    field: 'upto_value'
+    field: 'maximum'
+  },
+  minimum: {
+    type: DataTypes.INTEGER,
+    field: 'minimum'
   },
   isActived: { type: DataTypes.BOOLEAN, field: 'is_actived', defaultValue: true },
   isDeleted: { type: DataTypes.BOOLEAN, field: 'is_deleted', defaultValue: false },

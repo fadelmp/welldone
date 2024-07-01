@@ -22,7 +22,9 @@ DiscountStore.init({
     allowNull: false,
     field: 'store_id',
     references: { model: "Store", key: "id" }
-  }
+  },
+  createdAt: { type: DataTypes.DATE, field: 'created_at' },
+  updatedAt: { type: DataTypes.DATE, field: 'updated_at' }
 }, {
   sequelize,
   modelName: 'DiscountStore',

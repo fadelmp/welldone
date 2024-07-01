@@ -1,7 +1,7 @@
-const mapper = require('../mapper/StoreMapper')
-const inventoryService = require('./InventoryService')
-const comparator = require('../comparator/StoreComparator')
-const repository = require('../repository/Store/StoreRepository')
+const mapper = require('../../mapper/StoreMapper')
+const inventoryService = require('../Inventory/InventoryService')
+const comparator = require('../../comparator/StoreComparator')
+const repository = require('../../repository/Store/StoreRepository')
 
 class StoreService {
 

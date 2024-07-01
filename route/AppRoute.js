@@ -9,6 +9,8 @@ const variant = require('./VariantRoute')
 const user = require('./UserRoute')
 const location = require('./LocationRoute')
 const store = require('./StoreRoute')
+const voucher = require('./VoucherRoute')
+const discount = require('./DiscountRoute')
 
 // Define routes in approute.js
 router.get('/', (req, res) => {
@@ -32,6 +34,8 @@ router.use('/product-management/products', product)
 router.use('/product-management/variants', variant)
 
 // Discount Management
+router.use('/discount-management/vouchers', voucher)
+router.use('/discount-management/discounts', discount)
 
 // Inventory Management
 

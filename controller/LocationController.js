@@ -1,5 +1,5 @@
 const response = require('../helper/Response')
-const service = require('../service/LocationService')
+const service = require('../service/Store/LocationService')
 const message = require('../message/LocationMessage')
 
 class LocationController {

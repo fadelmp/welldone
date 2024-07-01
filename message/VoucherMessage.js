@@ -16,5 +16,6 @@ module.exports = {
   DELETE_FAILED: "Delete Voucher Failed",
 
   NAME_EXISTS: "Voucher Name Already Exists",
+  CODE_EXISTS: "Voucher Code ALready Exists",
   NOT_FOUND : "Voucher Not Found"
 }

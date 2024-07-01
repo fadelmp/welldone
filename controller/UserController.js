@@ -1,6 +1,6 @@
 const dto = require('../dto/UserDto')
 const response = require('../helper/Response')
-const service = require('../service/UserService')
+const service = require('../service/User/UserService')
 const message = require('../message/UserMessage')
 
 class UserController {

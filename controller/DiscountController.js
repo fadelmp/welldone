@@ -1,6 +1,6 @@
 const DiscountDto = require('../dto/DiscountDto')
 const response = require('../helper/Response')
-const service = require('../service/DiscountService')
+const service = require('../service/Discount/DiscountService')
 const message = require('../message/DiscountMessage')
 
 class DiscountController {

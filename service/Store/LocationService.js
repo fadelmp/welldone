@@ -1,6 +1,6 @@
-const mapper = require('../mapper/LocationMapper')
-const cityRepo = require('../repository/Store/CityRepository')
-const provinceRepo = require('../repository/Store/ProvinceRepository')
+const mapper = require('../../mapper/LocationMapper')
+const cityRepo = require('../../repository/Store/CityRepository')
+const provinceRepo = require('../../repository/Store/ProvinceRepository')
 
 class LocationService {
 

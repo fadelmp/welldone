@@ -61,5 +61,6 @@ module.exports = {
   Store, City, Province,
   User, Role, RolePrivilege,
   Category, Product, Variant,
-  Discount, Inventory
+  Discount, DiscountStore, DiscountProduct,
+  Inventory
 }
