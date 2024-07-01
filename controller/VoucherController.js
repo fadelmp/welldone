@@ -1,4 +1,4 @@
-const DiscountDto = require('../dto/DiscountDto')
+const VoucherDto = require('../dto/VoucherDto')
 const response = require('../helper/Response')
 const service = require('../service/Discount/VoucherService')
 const message = require('../message/VoucherMessage')
@@ -38,7 +38,7 @@ class VoucherController {
   async Create(req, res, next) {
 
     try {
-      let dto = new DiscountDto(req)
+      let dto = new VoucherDto(req)
 
       dto = await service.Create(dto)
 
@@ -53,7 +53,7 @@ class VoucherController {
   async Update(req, res, next) {
 
     try {
-      let dto = new DiscountDto(req)
+      let dto = new VoucherDto(req)
 
       dto = await service.Update(dto)
 
@@ -68,7 +68,7 @@ class VoucherController {
   async Delete(req, res,next) {
 
     try {
-      let dto = new DiscountDto(req)
+      let dto = new VoucherDto(req)
 
       await service.Delete(dto)
       

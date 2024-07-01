@@ -40,6 +40,8 @@ Variant.belongsTo(Product, { foreignKey: "productId", as: "product" })
 Variant.hasMany(Inventory, { foreignKey: "variantId", as: "inventories" })
 
 // Discount Management
+Discount.hasMany(DiscountStore, { foreignKey: "discountId", as: "discount_stores" })
+Discount.hasMany(DiscountProduct, { foreignKey: "discountId", as: "discount_products" })
 Discount.belongsToMany(Store, {
   through: DiscountStore,
   foreignKey: 'discountId',

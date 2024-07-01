@@ -8,14 +8,14 @@ class DiscountService {
 
   async FindAll() {
 
-    let discounts = await repository.FindAll()
+    let discounts = await repository.FindAllDiscount()
 
     return mapper.ToDiscountDtoList(discounts)
   }
 
-  async FindDropdown() {
+  async FindDropdown(productId) {
 
-    let discounts = await repository.FindAll()
+    let discounts = await repository.FindActivedDiscount(productId)
 
     return mapper.ToDropdownDtoList(discounts)
   }
@@ -51,14 +51,12 @@ class DiscountService {
 
   async Delete(dto) {
 
-    await comparator.CheckProduct(dto)
-
     let discount = await comparator.CheckId(dto.id)
     await mapper.DeleteData(discount, dto.activedUser)
 
     await repository.Delete(discount)
-    await storeService.Delete(discount, dto)
-    await productService.Delete(discount, dto)
+    await storeService.Delete(discount.id)
+    await productService.Delete(discount.id)
 
     return ""
   }

@@ -45,10 +45,10 @@ class DiscountMapper extends BaseMapper {
   async toDiscountDto(discount) {
 
     return {
-			id: discount.id,
+      id: discount.id,
       code: discount.code,
-			name: discount.name,
-			description: discount.description,
+      name: discount.name,
+      description: discount.description,
       startDate: discount.startDate,
       endDate: discount.endDate,
       isNominal: discount.isNominal,
@@ -57,10 +57,10 @@ class DiscountMapper extends BaseMapper {
       minimum: discount.minimum,
       stores: discount.stores,
       products: discount.products,
-			createdAt: discount.createdAt,
-			createdBy: discount.createdBy,
-			updatedAt: discount.updatedAt,
-			updatedBy: discount.updatedBy
+      createdAt: discount.createdAt,
+      createdBy: discount.createdBy,
+      updatedAt: discount.updatedAt,
+      updatedBy: discount.updatedBy
     }
   }
 	

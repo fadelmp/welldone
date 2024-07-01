@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Discount, Product, Store } = require('../../model')
+const { Discount, Product, Store, DiscountProduct } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/DiscountMessage')
 
@@ -41,6 +41,25 @@ class DiscountRepository {
       return await Discount.findAll({ 
         where: { isVoucher: false, isDeleted: false }, 
         include: [{ model: Store, as: 'stores' }, { model: Product, as: 'products' }]
+      })
+    
+    } catch (error) {
+      // Error Handling
+      throw new QueryFailed(error, message.GET_FAILED)
+    }
+  }
+
+  async FindActivedDiscount(productId) {
+    
+    try {
+      return await Discount.findAll({ 
+        where: { 
+          isVoucher: false, 
+          isDeleted: false,
+          startDate: { [Op.lte]: new Date() },
+          endDate: { [Op.gte]: new Date() }
+        }, 
+        include: [{ model: DiscountProduct, as: 'discount_products', where: { productId: productId } }]
       })
     
     } catch (error) {
