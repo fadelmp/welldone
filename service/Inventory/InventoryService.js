@@ -5,6 +5,13 @@ const inventoryRepo = require('../../repository/Inventory/InventoryRepository')
 
 class InventoryService {
 
+  async FindAll() {
+
+    let inventories = await inventoryRepo.FindAll()
+
+    return mapper.ToInventoryDtoList(inventories)
+  }
+
   async CreateByStore(storeId) {
 
     let variants = await variantRepo.FindAll()

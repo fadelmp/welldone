@@ -1,8 +1,31 @@
-const { Inventory } = require('../../model')
+const { fn, col } = require('sequelize')
+const { Inventory, InventoryTrack, Store, Variant, Product, Category } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/InventoryMessage')
 
 class InventoryRepository {
+
+  async FindAll() {
+    
+    try {
+      return await Inventory.findAll({ 
+        where: { isDeleted: false }, 
+        include: [
+          { model: InventoryTrack, as: 'tracks' },
+          { model: Store, as: 'store' }, 
+          { model: Variant, as: 'variant', include: [
+            { model: Product, as: 'product', include: [
+              { model: Category, as: 'category'}
+            ]}
+          ]}
+        ]
+      })
+    
+    } catch (error) {
+      // Error Handling
+      throw new QueryFailed(error, message.GET_FAILED)
+    }
+  }
 
   async Create(data) {
 
