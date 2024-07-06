@@ -1,7 +1,7 @@
-const repository = require('../repository/Discount/DiscountRepository')
-const message = require('../message/Discount/VoucherMessage')
-const DataExists = require('../error/DataExists')
-const NotFound = require('../error/NotFound')
+const repository = require('../../repository/Discount/DiscountRepository')
+const message = require('../../message/Discount/VoucherMessage')
+const DataExists = require('../../error/DataExists')
+const NotFound = require('../../error/NotFound')
 
 class voucherComparator {
 

@@ -1,7 +1,7 @@
-const repository = require('../repository/User/UserRepository')
-const message = require('../message/User/UserMessage')
-const DataExists = require('../error/DataExists')
-const NotFound = require('../error/NotFound')
+const repository = require('../../repository/User/UserRepository')
+const message = require('../../message/User/UserMessage')
+const DataExists = require('../../error/DataExists')
+const NotFound = require('../../error/NotFound')
 
 class UserComparator {
 

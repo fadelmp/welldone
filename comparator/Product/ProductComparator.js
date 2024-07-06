@@ -1,8 +1,8 @@
-const repository = require('../repository/Product/ProductRepository')
-const message = require('../message/Product/ProductMessage')
-const DataExists = require('../error/DataExists')
-const NotFound = require('../error/NotFound')
-const InternalServer = require('../error/InternalServer')
+const repository = require('../../repository/Product/ProductRepository')
+const message = require('../../message/Product/ProductMessage')
+const DataExists = require('../../error/DataExists')
+const NotFound = require('../../error/NotFound')
+const InternalServer = require('../../error/InternalServer')
 
 class ProductComparator {
 

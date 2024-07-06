@@ -1,8 +1,8 @@
-const repository = require('../repository/Product/VariantRepository')
-const InternalServer = require('../error/InternalServer')
-const message = require('../message/Product/VariantMessage')
-const DataExists = require('../error/DataExists')
-const NotFound = require('../error/NotFound')
+const repository = require('../../repository/Product/VariantRepository')
+const InternalServer = require('../../error/InternalServer')
+const message = require('../../message/Product/VariantMessage')
+const DataExists = require('../../error/DataExists')
+const NotFound = require('../../error/NotFound')
 
 class VariantComparator {
 
