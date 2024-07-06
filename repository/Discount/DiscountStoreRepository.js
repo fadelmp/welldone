@@ -1,6 +1,6 @@
 const { DiscountStore } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
-const message = require('../../message/DiscountMessage')
+const message = require('../../message/Discount/DiscountMessage')
 
 class DiscountStoreRepository {
 

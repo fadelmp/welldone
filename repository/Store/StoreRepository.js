@@ -1,7 +1,7 @@
 const { Op } = require('sequelize')
 const { Store, City, Province, Inventory } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
-const message = require('../../message/StoreMessage')
+const message = require('../../message/Store/StoreMessage')
 
 
 class StoreRepository {

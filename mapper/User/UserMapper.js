@@ -1,4 +1,4 @@
-const BaseMapper = require("./BaseMapper")
+const BaseMapper = require("../BaseMapper")
 
 class UserMapper {
 

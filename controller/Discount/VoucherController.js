@@ -1,7 +1,7 @@
 const VoucherDto = require('../../dto/VoucherDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Discount/VoucherService')
-const message = require('../../message/VoucherMessage')
+const message = require('../../message/Discount/VoucherMessage')
 
 class VoucherController {
   

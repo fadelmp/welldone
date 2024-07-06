@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 const { Discount, Product, Store, DiscountProduct } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
-const message = require('../../message/DiscountMessage')
+const message = require('../../message/Discount/DiscountMessage')
 
 class DiscountRepository {
 

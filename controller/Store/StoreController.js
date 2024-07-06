@@ -1,7 +1,7 @@
 const StoreDto = require('../../dto/StoreDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Store/StoreService')
-const message = require('../../message/StoreMessage')
+const message = require('../../message/Store/StoreMessage')
 
 class StoreController {
   

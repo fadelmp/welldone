@@ -1,7 +1,7 @@
 const ProductDto = require('../../dto/ProductDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Product/ProductService')
-const message = require('../../message/ProductMessage')
+const message = require('../../message/Product/ProductMessage')
 
 class ProductController {
   

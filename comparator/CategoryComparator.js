@@ -1,6 +1,6 @@
 const repository = require('../repository/Product/CategoryRepository')
 const InternalServer = require('../error/InternalServer')
-const message = require('../message/CategoryMessage')
+const message = require('../message/Product/CategoryMessage')
 const DataExists = require('../error/DataExists')
 const NotFound = require('../error/NotFound')
 

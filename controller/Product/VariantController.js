@@ -1,7 +1,7 @@
 const VariantDto = require('../../dto/VariantDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Product/VariantService')
-const message = require('../../message/VariantMessage')
+const message = require('../../message/Product/VariantMessage')
 
 class VariantController {
   

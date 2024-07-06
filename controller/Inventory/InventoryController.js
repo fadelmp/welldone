@@ -1,6 +1,6 @@
 const response = require('../../helper/Response')
 const service = require('../../service/Inventory/InventoryService')
-const message = require('../../message/InventoryMessage')
+const message = require('../../message/Inventory/InventoryMessage')
 
 class InventoryController {
   

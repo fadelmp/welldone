@@ -1,5 +1,5 @@
 const repository = require('../repository/Store/StoreRepository')
-const message = require('../message/StoreMessage')
+const message = require('../message/Store/StoreMessage')
 const DataExists = require('../error/DataExists')
 const InternalServer = require('../error/InternalServer')
 const NotFound = require('../error/NotFound')

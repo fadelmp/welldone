@@ -6,11 +6,15 @@ const router = express.Router()
 const category = require('./Product/CategoryRoute')
 const product = require('./Product/ProductRoute')
 const variant = require('./Product/VariantRoute')
+
 const user = require('./User/UserRoute')
+
 const location = require('./Store/LocationRoute')
 const store = require('./Store/StoreRoute')
+
 const voucher = require('./Discount/VoucherRoute')
 const discount = require('./Discount/DiscountRoute')
+
 const inventory = require('./Inventory/InventoryRoute')
 
 // Define routes in approute.js

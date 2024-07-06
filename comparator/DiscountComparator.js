@@ -1,5 +1,5 @@
 const repository = require('../repository/Discount/DiscountRepository')
-const message = require('../message/DiscountMessage')
+const message = require('../message/Discount/DiscountMessage')
 const DataExists = require('../error/DataExists')
 const NotFound = require('../error/NotFound')
 

@@ -1,7 +1,7 @@
 const { fn, col } = require('sequelize')
 const { Inventory, InventoryTrack, Store, Variant, Product, Category } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
-const message = require('../../message/InventoryMessage')
+const message = require('../../message/Inventory/InventoryMessage')
 
 class InventoryRepository {
 

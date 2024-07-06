@@ -1,6 +1,6 @@
 const { City } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
-const message = require('../../message/LocationMessage')
+const message = require('../../message/Store/LocationMessage')
 
 class CityRepository {
 
