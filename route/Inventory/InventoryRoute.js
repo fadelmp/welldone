@@ -1,5 +1,5 @@
 const express = require('express')
-const controller = require('../controller/Inventory/InventoryController')
+const controller = require('../../controller/Inventory/InventoryController')
 
 const router = express.Router()
 
