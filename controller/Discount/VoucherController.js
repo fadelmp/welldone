@@ -1,18 +1,18 @@
-const StoreDto = require('../dto/StoreDto')
-const response = require('../helper/Response')
-const service = require('../service/Store/StoreService')
-const message = require('../message/StoreMessage')
+const VoucherDto = require('../../dto/VoucherDto')
+const response = require('../../helper/Response')
+const service = require('../../service/Discount/VoucherService')
+const message = require('../../message/VoucherMessage')
 
-class StoreController {
+class VoucherController {
   
   async FindAll(req, res, next) {
 
     try {
-      let stores = await service.FindAll()
+      let vouchers = await service.FindAll()
 
-      return (stores.length === 0)
+      return (vouchers.length === 0)
         ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_SUCCESS, stores)
+        : response.Success(res, message.GET_SUCCESS, vouchers)
 
     } catch(error) {
       // Error Handling
@@ -38,7 +38,7 @@ class StoreController {
   async Create(req, res, next) {
 
     try {
-      let dto = new StoreDto(req)
+      let dto = new VoucherDto(req)
 
       dto = await service.Create(dto)
 
@@ -53,9 +53,9 @@ class StoreController {
   async Update(req, res, next) {
 
     try {
-      let dto = new StoreDto(req)
+      let dto = new VoucherDto(req)
 
-      dto = await service.Update(storeDto)
+      dto = await service.Update(dto)
 
       return response.Success(res, message.UPDATE_SUCCESS, dto)
 
@@ -68,7 +68,7 @@ class StoreController {
   async Delete(req, res,next) {
 
     try {
-      let dto = new StoreDto(req)
+      let dto = new VoucherDto(req)
 
       await service.Delete(dto)
       
@@ -82,4 +82,4 @@ class StoreController {
 
 }
 
-module.exports = new StoreController()
+module.exports = new VoucherController()

@@ -1,18 +1,18 @@
-const VariantDto = require('../dto/VariantDto')
-const response = require('../helper/Response')
-const service = require('../service/Product/VariantService')
-const message = require('../message/VariantMessage')
+const DiscountDto = require('../../dto/DiscountDto')
+const response = require('../../helper/Response')
+const service = require('../../service/Discount/DiscountService')
+const message = require('../../message/DiscountMessage')
 
-class VariantController {
+class DiscountController {
   
   async FindAll(req, res, next) {
 
     try {
-      let variants = await service.FindAll()
+      let discounts = await service.FindAll()
 
-      return (variants.length === 0)
+      return (discounts.length === 0)
         ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_SUCCESS, variants)
+        : response.Success(res, message.GET_SUCCESS, discounts)
 
     } catch(error) {
       // Error Handling
@@ -39,7 +39,7 @@ class VariantController {
   async Create(req, res, next) {
 
     try {
-      let dto = new VariantDto(req)
+      let dto = new DiscountDto(req)
 
       dto = await service.Create(dto)
 
@@ -54,7 +54,7 @@ class VariantController {
   async Update(req, res, next) {
 
     try {
-      let dto = new VariantDto(req)
+      let dto = new DiscountDto(req)
 
       dto = await service.Update(dto)
 
@@ -69,7 +69,7 @@ class VariantController {
   async Delete(req, res,next) {
 
     try {
-      let dto = new VariantDto(req)
+      let dto = new DiscountDto(req)
 
       await service.Delete(dto)
       
@@ -83,4 +83,4 @@ class VariantController {
 
 }
 
-module.exports = new VariantController()
+module.exports = new DiscountController()

@@ -1,18 +1,18 @@
-const VoucherDto = require('../dto/VoucherDto')
-const response = require('../helper/Response')
-const service = require('../service/Discount/VoucherService')
-const message = require('../message/VoucherMessage')
+const ProductDto = require('../../dto/ProductDto')
+const response = require('../../helper/Response')
+const service = require('../../service/Product/ProductService')
+const message = require('../../message/ProductMessage')
 
-class VoucherController {
+class ProductController {
   
   async FindAll(req, res, next) {
 
     try {
-      let vouchers = await service.FindAll()
+      let products = await service.FindAll()
 
-      return (vouchers.length === 0)
+      return (products.length === 0)
         ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_SUCCESS, vouchers)
+        : response.Success(res, message.GET_SUCCESS, products)
 
     } catch(error) {
       // Error Handling
@@ -23,7 +23,8 @@ class VoucherController {
   async FindDropdown(req, res, next) {
 
     try {
-      let dropdowns = await service.FindDropdown()
+      let categoryId = req.params.categoryId
+      let dropdowns = await service.FindDropdown(categoryId)
 
       return (dropdowns.length == 0)
           ? response.NotFound(res, message.NOT_FOUND)
@@ -38,10 +39,10 @@ class VoucherController {
   async Create(req, res, next) {
 
     try {
-      let dto = new VoucherDto(req)
+      let dto = new ProductDto(req)
 
       dto = await service.Create(dto)
-
+      
       return response.Success(res, message.CREATE_SUCCESS, dto)
     
     } catch (error) {
@@ -53,7 +54,7 @@ class VoucherController {
   async Update(req, res, next) {
 
     try {
-      let dto = new VoucherDto(req)
+      let dto = new ProductDto(req)
 
       dto = await service.Update(dto)
 
@@ -68,10 +69,10 @@ class VoucherController {
   async Delete(req, res,next) {
 
     try {
-      let dto = new VoucherDto(req)
+      let dto = new ProductDto(req)
 
       await service.Delete(dto)
-      
+
       return response.Success(res, message.DELETE_SUCCESS, {})
 
     } catch (error) {
@@ -82,4 +83,4 @@ class VoucherController {
 
 }
 
-module.exports = new VoucherController()
+module.exports = new ProductController()
