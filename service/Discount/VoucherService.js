@@ -1,7 +1,7 @@
-const mapper = require('../../mapper/DiscountMapper')
+const mapper = require('../../mapper/Discount/DiscountMapper')
 const storeService = require('./DiscountStoreService')
 const productService = require('./DiscountProductService')
-const comparator = require('../../comparator/VoucherComparator')
+const comparator = require('../../comparator/Discount/VoucherComparator')
 const repository = require('../../repository/Discount/DiscountRepository')
 
 class VoucherService {
@@ -26,7 +26,7 @@ class VoucherService {
     await comparator.CheckCode(dto)
 
     let voucher = await mapper.ToDiscount(dto, true)
-    await mapper.CreateData(voucher, dto.activedUser)
+    await mapper.Create(voucher, dto.activedUser)
 
     await repository.Create(voucher)
     await storeService.CreateAll(dto, voucher)
@@ -42,7 +42,7 @@ class VoucherService {
     await comparator.CheckCode(dto)
 
     let voucher = await mapper.ToDiscount(dto, true)
-    await mapper.UpdateData(voucher, dto.activedUser)
+    await mapper.Update(voucher, dto.activedUser)
 
     await repository.Update(voucher)
     await storeService.Update(dto, voucher)
@@ -54,7 +54,7 @@ class VoucherService {
   async Delete(dto) {
 
     let voucher = await comparator.CheckId(dto.id)
-    await mapper.DeleteData(voucher, dto.activedUser)
+    await mapper.Delete(voucher, dto.activedUser)
 
     await repository.Delete(voucher)
     await storeService.Delete(voucher.id)

@@ -1,6 +1,6 @@
 const { Inventory, InventoryTrack } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
-const message = require('../../message/InventoryMessage')
+const message = require('../../message/Inventory/InventoryMessage')
 
 class InventoryTrackRepository {
 

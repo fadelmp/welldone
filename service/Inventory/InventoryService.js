@@ -1,13 +1,15 @@
-const mapper = require('../../mapper/InventoryMapper')
+const trackService = require('./InventoryTrackService')
+const mapper = require('../../mapper/Inventory/InventoryMapper')
 const storeRepo = require('../../repository/Store/StoreRepository')
 const variantRepo = require('../../repository/Product/VariantRepository')
-const inventoryRepo = require('../../repository/Inventory/InventoryRepository')
+const repository = require('../../repository/Inventory/InventoryRepository')
+const comparator = require('../../comparator/Inventory/InventoryComparator')
 
 class InventoryService {
 
   async FindAll() {
 
-    let inventories = await inventoryRepo.FindAll()
+    let inventories = await repository.FindAll()
 
     return mapper.ToInventoryDtoList(inventories)
   }
@@ -28,20 +30,39 @@ class InventoryService {
 
   async DeleteByStore(storeId) {
 
-    inventoryRepo.DeleteByStore(storeId)
+    repository.DeleteByStore(storeId)
   }
 
   async DeleteByVariant(variantId) {
 
-    inventoryRepo.DeleteByVariant(variantId)
+    repository.DeleteByVariant(variantId)
+  }
+
+  async Purchase(dto, stock) {
+
+    let action = "ADD"
+
+    let inventory = await this.update(dto, stock, action)
+    
+    await trackService.Entry(inventory, dto, stock.total)
   }
 
   async create(storeId, variantId) {
 
-    let inventory = await mapper.Create(storeId, variantId)
-    await mapper.CreateData(inventory, "SYSTEM")
+    let inventory = await mapper.ToInventory(storeId, variantId)
+    await mapper.Create(inventory, "SYSTEM")
 
-    await inventoryRepo.Create(inventory)
+    await repository.Create(inventory)
+  }
+
+  async update(dto, stock, action) {
+
+    let inventory = await comparator.CheckStoreVariant(dto.storeId, stock.variant_id)
+    await mapper.Update(inventory, "SYSTEM")
+    inventory.total += (action === "ADD") ? stock.total : -stock.total
+
+    await repository.Update(inventory)
+    return inventory
   }
 }
 

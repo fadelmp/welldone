@@ -1,7 +1,7 @@
-const mapper = require('../../mapper/DiscountMapper')
+const mapper = require('../../mapper/Discount/DiscountMapper')
 const storeService = require('./DiscountStoreService')
 const productService = require('./DiscountProductService')
-const comparator = require('../../comparator/DiscountComparator')
+const comparator = require('../../comparator/Discount/DiscountComparator')
 const repository = require('../../repository/Discount/DiscountRepository')
 
 class DiscountService {
@@ -25,7 +25,7 @@ class DiscountService {
     await comparator.CheckName(dto)
 
     let discount = await mapper.ToDiscount(dto, false)
-    await mapper.CreateData(discount, dto.activedUser)
+    await mapper.Create(discount, dto.activedUser)
 
     await repository.Create(discount)
     await storeService.CreateAll(dto, discount)
@@ -40,7 +40,7 @@ class DiscountService {
     await comparator.CheckName(dto)
 
     let discount = await mapper.ToDiscount(dto, false)
-    await mapper.UpdateData(discount, dto.activedUser)
+    await mapper.Update(discount, dto.activedUser)
 
     await repository.Update(discount)
     await storeService.Update(dto, discount)
@@ -52,7 +52,7 @@ class DiscountService {
   async Delete(dto) {
 
     let discount = await comparator.CheckId(dto.id)
-    await mapper.DeleteData(discount, dto.activedUser)
+    await mapper.Delete(discount, dto.activedUser)
 
     await repository.Delete(discount)
     await storeService.Delete(discount.id)

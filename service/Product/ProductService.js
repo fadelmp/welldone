@@ -1,6 +1,6 @@
-const mapper = require('../../mapper/ProductMapper')
+const mapper = require('../../mapper/Product/ProductMapper')
 const variantService = require('./VariantService')
-const comparator = require('../../comparator/ProductComparator')
+const comparator = require('../../comparator/Product/ProductComparator')
 const repository = require('../../repository/Product/ProductRepository')
 
 class ProductService {
@@ -24,7 +24,7 @@ class ProductService {
     await comparator.CheckName(dto)
 
     let product = await mapper.ToProduct(dto)
-    await mapper.CreateData(product, dto.activedUser)
+    await mapper.Create(product, dto.activedUser)
 
     await repository.Create(product)
     
@@ -42,7 +42,7 @@ class ProductService {
     await comparator.CheckName(dto)
 
     let product = await mapper.ToProduct(dto)
-    await mapper.UpdateData(product, dto.activedUser)
+    await mapper.Update(product, dto.activedUser)
 
     await repository.Update(product)
     return dto 
@@ -53,7 +53,7 @@ class ProductService {
     await comparator.CheckVariant(dto)
 
     let product = await comparator.CheckId(dto.id)
-    await mapper.DeleteData(product, dto.activedUser)
+    await mapper.Delete(product, dto.activedUser)
 
     await repository.Delete(product)
     return ""

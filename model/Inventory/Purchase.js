@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../../config/db.config')
 
-class InventoryTrack extends Model {}
+class Purchase extends Model {}
 
-InventoryTrack.init({
+Purchase.init({
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -11,24 +11,19 @@ InventoryTrack.init({
     allowNull:false,
     field: 'id'
   },
-  inventoryId: {
+  deliveryNote: {
+    type: DataTypes.STRING,
+    field: 'delivery_note',
+  },
+  supplier: {
+    type: DataTypes.STRING,
+    field: 'supplier',
+  },
+  storeId: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'inventory_id',
-    references: { model: "Inventory", key: "id" }
-  },
-  type: {
-    type: DataTypes.STRING,
-    field: 'type'
-  },
-  total: {
-    type: DataTypes.INTEGER,
-    field: 'total',
-    defaultValue: 0
-  },
-  notes: {
-    type: DataTypes.STRING,
-    field: 'notes',
+    field: 'store_id',
+    references: { model: "Store", key: "id" }
   },
   isActived: { type: DataTypes.BOOLEAN, field: 'is_actived', defaultValue: true },
   isDeleted: { type: DataTypes.BOOLEAN, field: 'is_deleted', defaultValue: false },
@@ -38,10 +33,10 @@ InventoryTrack.init({
   updatedBy: { type: DataTypes.STRING, field: 'updated_by' }
 }, {
   sequelize,
-  modelName: 'InventoryTrack',
-  tableName: 'inventory_track',
+  modelName: 'Purchase',
+  tableName: 'inventory_purchase',
   paranoid: false,
   timestamps: true,
 })
 
-module.exports = InventoryTrack
+module.exports = Purchase

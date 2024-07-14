@@ -1,4 +1,4 @@
-const mapper = require('../../mapper/LocationMapper')
+const mapper = require('../../mapper/Store/LocationMapper')
 const cityRepo = require('../../repository/Store/CityRepository')
 const provinceRepo = require('../../repository/Store/ProvinceRepository')
 

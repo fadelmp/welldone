@@ -1,6 +1,6 @@
 const repository = require('../../repository/User/UserRepository')
-const comparator = require('../../comparator/UserComparator')
-const mapper = require('../../mapper/UserMapper')
+const comparator = require('../../comparator/User/UserComparator')
+const mapper = require('../../mapper/User/UserMapper')
 const crypt = require('../../helper/Crypt')
 
 class UserService {

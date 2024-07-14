@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../../config/db.config')
 
-class InventoryTrack extends Model {}
+class PurchaseVariant extends Model {}
 
-InventoryTrack.init({
+PurchaseVariant.init({
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -11,24 +11,23 @@ InventoryTrack.init({
     allowNull:false,
     field: 'id'
   },
-  inventoryId: {
+  purchaseId: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'inventory_id',
-    references: { model: "Inventory", key: "id" }
+    field: 'purchase_id',
+    references: { model: "Purchase", key: "id" }
   },
-  type: {
+  variantId: {
     type: DataTypes.STRING,
-    field: 'type'
+    allowNull: false,
+    field: 'variant_id',
+    references: { model: "Variant", key: "id" }
   },
-  total: {
+  stock: {
     type: DataTypes.INTEGER,
-    field: 'total',
+    allowNull: false,
+    field: 'stock',
     defaultValue: 0
-  },
-  notes: {
-    type: DataTypes.STRING,
-    field: 'notes',
   },
   isActived: { type: DataTypes.BOOLEAN, field: 'is_actived', defaultValue: true },
   isDeleted: { type: DataTypes.BOOLEAN, field: 'is_deleted', defaultValue: false },
@@ -38,10 +37,10 @@ InventoryTrack.init({
   updatedBy: { type: DataTypes.STRING, field: 'updated_by' }
 }, {
   sequelize,
-  modelName: 'InventoryTrack',
-  tableName: 'inventory_track',
+  modelName: 'PurchaseVariant',
+  tableName: 'inventory_purchase_variant',
   paranoid: false,
   timestamps: true,
 })
 
-module.exports = InventoryTrack
+module.exports = PurchaseVariant

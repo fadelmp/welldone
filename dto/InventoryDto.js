@@ -2,13 +2,6 @@ const BaseDto = require('./BaseDto')
 
 class InventoryDto extends BaseDto {
 
-  constructor(req) {
-    super(req)
-    this.id = req.params.id
-    this.name = req.body.name
-    this.description = req.body.description
-  }
-
   toJSON() {
     return {
       id: this.id,
@@ -28,4 +21,4 @@ class InventoryDto extends BaseDto {
   }
 }
 
-module.exports = CategoryDto
+module.exports = InventoryDto

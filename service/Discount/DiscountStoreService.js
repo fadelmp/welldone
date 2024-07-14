@@ -1,4 +1,4 @@
-const mapper = require('../../mapper/DiscountMapper')
+const mapper = require('../../mapper/Discount/DiscountMapper')
 const repository = require('../../repository/Discount/DiscountStoreRepository')
 
 class DiscountStoreService {
@@ -25,7 +25,7 @@ class DiscountStoreService {
   async create(data, storeId) {
 
     let discountStore = await mapper.ToDiscountStore(data.id, storeId)
-    await mapper.CreateData(discountStore, "")
+    await mapper.Create(discountStore, "")
 
     await repository.Create(discountStore)
   }

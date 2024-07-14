@@ -2,7 +2,7 @@ const BaseMapper = require("../BaseMapper")
 
 class InventoryMapper extends BaseMapper {
 
-  async Create(storeId, variantId) {
+  async ToInventory(storeId, variantId) {
 
     return {
       storeId: storeId,
@@ -30,8 +30,8 @@ class InventoryMapper extends BaseMapper {
       beginning: track.beginning,
       entry: track.entry,
       sales: track.sales,
-      transferIn: track.transferIn,
-      transferOut: track.transferOut,
+      transferIn: track.in,
+      transferOut: track.out,
       adjustment: track.adjustment,
       ending: inventory.total,
       unit: inventory.variant.product.unit
@@ -41,29 +41,22 @@ class InventoryMapper extends BaseMapper {
 
   async countInventoryTrack(total, tracks) {
 
-    let entry = 0
-    let sales = 0
-    let adjustment = 0
-    let transferIn = 0
-    let transferOut = 0
+    const totals = {
+      in: 0,
+      out: 0,
+      sales: 0,
+      entry: 0,
+      adjustment: 0
+    }
 
-    tracks.forEach(item => {
-      entry += item.entry
-      sales += item.sales
-      adjustment += item.adjustment
-      transferIn += item.transferIn
-      transferOut += item.transferOut
-    })
+    for (const { type, total: itemTotal } of tracks)
+      if (totals.hasOwnProperty(type))
+        totals[type] += itemTotal
 
     return {
-      beginning: total - entry + sales + adjustment - transferIn + transferOut,
-      entry: entry,
-      sales: sales,
-      adjustment: adjustment,
-      transferIn: transferIn,
-      transferOut: transferOut
+      beginning: total - totals.entry + totals.sales + totals.adjustment - totals.in + totals.out,
+      ...totals
     }
-    
   }
 
 }

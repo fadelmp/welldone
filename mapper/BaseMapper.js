@@ -4,7 +4,7 @@ class BaseMapper {
 
   constructor() {}
 
-	async CreateData(data, username) {
+	async Create(data, username) {
 
     data.id = uuidv4()
     data.createdAt = new Date()
@@ -13,13 +13,13 @@ class BaseMapper {
     data.updatedBy = username
 	}
 
-  async UpdateData(data, username) {
+  async Update(data, username) {
 
     data.updatedAt = new Date()
     data.updatedBy = username
   }
 
-  async DeleteData(data, username) {
+  async Delete(data, username) {
 
     data.updatedAt = new Date()
     data.updatedBy = username

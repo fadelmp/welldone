@@ -1,5 +1,5 @@
-const mapper = require('../../mapper/CategoryMapper')
-const comparator = require('../../comparator/CategoryComparator')
+const mapper = require('../../mapper/Product/CategoryMapper')
+const comparator = require('../../comparator/Product/CategoryComparator')
 const repository = require('../../repository/Product/CategoryRepository')
 
 class CategoryService {
@@ -23,7 +23,7 @@ class CategoryService {
     await comparator.CheckName(dto)
 
     let category = await mapper.ToCategory(dto)
-    await mapper.CreateData(category, dto.activedUser)
+    await mapper.Create(category, dto.activedUser)
 
     await repository.Create(category)
     return dto
@@ -35,7 +35,7 @@ class CategoryService {
     await comparator.CheckName(dto)
 
     let category = await mapper.ToCategory(dto)
-    await mapper.UpdateData(category, dto.activedUser)
+    await mapper.Update(category, dto.activedUser)
 
     await repository.Update(category)
     return dto 
@@ -46,7 +46,7 @@ class CategoryService {
     await comparator.CheckProduct(dto)
 
     let category = await comparator.CheckId(dto.id)
-    await mapper.DeleteData(category, dto.activedUser)
+    await mapper.Delete(category, dto.activedUser)
 
     await repository.Delete(category)
     return ""

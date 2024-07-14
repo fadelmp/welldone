@@ -15,8 +15,10 @@ const Discount = require('./Discount/Discount')
 const DiscountStore = require('./Discount/DiscountStore')
 const DiscountProduct = require('./Discount/DiscountProduct')
 
+const Purchase = require('./Inventory/Purchase')
 const Inventory = require('./Inventory/Inventory')
 const InventoryTrack = require('./Inventory/InventoryTrack')
+const PurchaseVariant = require('./Inventory/PurchaseVariant')
 
 // Store Management
 Store.belongsTo(City, { foreignKey: 'cityId', as: 'city' })
@@ -61,10 +63,16 @@ Inventory.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
 Inventory.belongsTo(Store, { foreignKey: "storeId", as: "store" })
 Inventory.hasMany(InventoryTrack, { foreignKey: "inventoryId", as: "tracks" })
 
+Purchase.belongsTo(Store, { foreignKey: "storeId", as: "store" })
+Purchase.hasMany(PurchaseVariant, { foreignKey: "purchaseId", as: "variants" })
+PurchaseVariant.belongsTo(Purchase, { foreignKey: "purchaseId", as: "purchase" })
+PurchaseVariant.belongsTo(Variant, { foreignKey: "variantId", as: "variants" })
+
 module.exports = {
   Store, City, Province,
   User, Role, RolePrivilege,
   Category, Product, Variant,
   Discount, DiscountStore, DiscountProduct,
-  Inventory, InventoryTrack
+  Inventory, InventoryTrack,
+  Purchase, PurchaseVariant
 }

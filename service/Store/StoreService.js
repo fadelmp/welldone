@@ -1,6 +1,6 @@
-const mapper = require('../../mapper/StoreMapper')
+const mapper = require('../../mapper/Store/StoreMapper')
 const inventoryService = require('../Inventory/InventoryService')
-const comparator = require('../../comparator/StoreComparator')
+const comparator = require('../../comparator/Store/StoreComparator')
 const repository = require('../../repository/Store/StoreRepository')
 
 class StoreService {
@@ -24,7 +24,7 @@ class StoreService {
     await comparator.CheckData(dto)
 
     let store = await mapper.ToStore(dto)
-    await mapper.CreateData(store, dto.activedUser)
+    await mapper.Create(store, dto.activedUser)
 
     await repository.Create(store)
     await inventoryService.CreateByStore(store.id)
@@ -38,7 +38,7 @@ class StoreService {
     await comparator.CheckData(dto)
 
     let store = await mapper.ToStore(dto)
-    await mapper.UpdateData(store, dto.activedUser)
+    await mapper.Update(store, dto.activedUser)
 
     await repository.Update(store)
     return dto 
@@ -49,7 +49,7 @@ class StoreService {
     await comparator.CheckInventory(dto.id)
 
     let store = await comparator.CheckId(dto.id)
-    await mapper.DeleteData(store, dto.activedUser)
+    await mapper.Delete(store, dto.activedUser)
 
     await repository.Delete(store)
     await inventoryService.DeleteByStore(dto.id)

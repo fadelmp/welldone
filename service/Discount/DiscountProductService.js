@@ -1,4 +1,4 @@
-const mapper = require('../../mapper/DiscountMapper')
+const mapper = require('../../mapper/Discount/DiscountMapper')
 const repository = require('../../repository/Discount/DiscountProductRepository')
 
 class DiscountProductService {
