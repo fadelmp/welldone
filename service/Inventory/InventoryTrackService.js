@@ -12,6 +12,14 @@ class InventoryTrackService {
     await this.create(inventory, total, type, notes)
   }
 
+  async Adjustment(inventory, dto, total) {
+
+    let type = "adjustment"
+    let notes = "Adjustment Stock"
+
+    await this.create(inventory, total, type, notes)
+  }
+
   async create(inventory, total, type, notes) {
 
     let track = await mapper.ToInventoryTrack(inventory, type, total, notes)

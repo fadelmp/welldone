@@ -47,6 +47,15 @@ class InventoryService {
     await trackService.Entry(inventory, dto, stock.total)
   }
 
+  async Adjustment(dto, stock) {
+
+    let action = "SUBSTRACT"
+
+    let inventory = await this.update(dto, stock, action)
+
+    await trackService.Adjustment(inventory, dto, stock.total)
+  }
+
   async create(storeId, variantId) {
 
     let inventory = await mapper.ToInventory(storeId, variantId)

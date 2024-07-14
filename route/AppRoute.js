@@ -17,6 +17,7 @@ const discount = require('./Discount/DiscountRoute')
 
 const inventory = require('./Inventory/InventoryRoute')
 const purchase = require('./Inventory/PurchaseRoute')
+const adjustment = require('./Inventory/AdjustmentRoute')
 
 // Define routes in approute.js
 router.get('/', (req, res) => {
@@ -46,6 +47,7 @@ router.use('/discount-management/discounts', discount)
 // Inventory Management
 router.use('/inventory-management/inventories', inventory)
 router.use('/inventory-management/purchases', purchase)
+router.use('/inventory-management/adjustments', adjustment)
 
 // Order Management
 

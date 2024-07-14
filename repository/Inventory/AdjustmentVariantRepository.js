@@ -1,16 +1,16 @@
-const { Purchase, PurchaseVariant, Store, Variant, Product, Category } = require('../../model')
+const { Adjustment, AdjustmentVariant, Store, Variant, Product, Category } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
-const message = require('../../message/Inventory/PurchaseMessage')
+const message = require('../../message/Inventory/AdjustmentMessage')
 
-class PurchaseVariantRepository {
+class AdjustmentVariantRepository {
 
   async FindAll() {
     
     try {
-      return await PurchaseVariant.findAll({ 
+      return await AdjustmentVariant.findAll({ 
         where: { isDeleted: false }, 
         include: [
-          { model: Purchase, as: 'purchase', include: [{model: Store, as: 'store'}]},
+          { model: Adjustment, as: 'adjustment', include: [{model: Store, as: 'store'}]},
           { model: Variant, as: 'variant', include: [
             { model: Product, as: 'product', include: [
               { model: Category, as: 'category'}
@@ -28,7 +28,7 @@ class PurchaseVariantRepository {
   async Create(data) {
 
     try {
-      return await PurchaseVariant.create(data)
+      return await AdjustmentVariant.create(data)
       
     } catch (error) {
       // Error Handling
@@ -37,4 +37,4 @@ class PurchaseVariantRepository {
   }
 }
 
-module.exports = new PurchaseVariantRepository()
+module.exports = new AdjustmentVariantRepository()
