@@ -1,9 +1,23 @@
 const inventoryService = require('./InventoryService')
 const mapper = require('../../mapper/Inventory/PurchaseMapper')
-const purchaseRepo = require('../../repository/Inventory/PurchaseRepository')
+const repository = require('../../repository/Inventory/PurchaseRepository')
 const variantRepo = require('../../repository/Inventory/PurchaseVariantRepository')
 
 class PurchaseService {
+
+  async FindAll() {
+
+    let purchases = await repository.FindAll()
+
+    return mapper.ToPurchaseDtoList(purchases)
+  }
+
+  async FindAllVariant() {
+
+    let variants = await variantRepo.FindAll()
+
+    return mapper.ToPurchaseVariantDtoList(variants)
+  }
 
   async Create(dto) {
 
@@ -11,7 +25,7 @@ class PurchaseService {
     await mapper.Create(purchase, dto.activedUser)
     purchase.createdAt = dto.date
 
-    await purchaseRepo.Create(purchase)
+    await repository.Create(purchase)
 
     dto.stocks.forEach(stock => this.createVariant(dto, purchase, stock))
   }

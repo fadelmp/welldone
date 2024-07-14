@@ -1,18 +1,18 @@
 const PurchaseDto = require('../../dto/PurchaseDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Inventory/PurchaseService')
-const message = require('../../message/Inventory/InventoryMessage')
+const message = require('../../message/Inventory/PurchaseMessage')
 
 class PurchaseController {
   
   async FindAll(req, res, next) {
 
     try {
-      let categories = await service.FindAll()
+      let purchases = await service.FindAll()
 
-      return (categories.length === 0)
+      return (purchases.length === 0)
         ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_SUCCESS, categories)
+        : response.Success(res, message.GET_SUCCESS, purchases)
 
     } catch(error) {
       // Error Handling
@@ -20,14 +20,14 @@ class PurchaseController {
     }
   }
 
-  async FindByVariant(req, res, next) {
+  async FindAllVariant(req, res, next) {
 
     try {
-      let dropdowns = await service.FindDropdown()
+      let purchases = await service.FindAllVariant()
 
-      return (dropdowns.length == 0)
+      return (purchases.length == 0)
           ? response.NotFound(res, message.NOT_FOUND)
-          : response.Success(res, message.DROPDOWN_SUCCESS, dropdowns)
+          : response.Success(res, message.GET_SUCCESS, purchases)
 
     } catch (error) {
       // Error Handling

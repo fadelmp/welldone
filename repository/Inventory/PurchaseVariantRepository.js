@@ -11,7 +11,7 @@ class PurchaseVariantRepository {
       return await PurchaseVariant.findAll({ 
         where: { isDeleted: false }, 
         include: [
-          { model: Purchase, as: 'tracks', include: [{model: Store, as: 'store'}]},
+          { model: Purchase, as: 'purchase', include: [{model: Store, as: 'store'}]},
           { model: Variant, as: 'variant', include: [
             { model: Product, as: 'product', include: [
               { model: Category, as: 'category'}

@@ -4,7 +4,7 @@ const controller = require('../../controller/Inventory/PurchaseController')
 const router = express.Router()
 
 router.get('/', controller.FindAll)
-router.get('/variants', controller.FindByVariant)
+router.get('/variants', controller.FindAllVariant)
 
 router.post('/', controller.Create)
 

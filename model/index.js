@@ -66,7 +66,7 @@ Inventory.hasMany(InventoryTrack, { foreignKey: "inventoryId", as: "tracks" })
 Purchase.belongsTo(Store, { foreignKey: "storeId", as: "store" })
 Purchase.hasMany(PurchaseVariant, { foreignKey: "purchaseId", as: "variants" })
 PurchaseVariant.belongsTo(Purchase, { foreignKey: "purchaseId", as: "purchase" })
-PurchaseVariant.belongsTo(Variant, { foreignKey: "variantId", as: "variants" })
+PurchaseVariant.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
 
 module.exports = {
   Store, City, Province,

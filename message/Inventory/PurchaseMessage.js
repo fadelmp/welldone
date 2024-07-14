@@ -1,7 +1,7 @@
 module.exports = {
 
-  GET_SUCCESS: "Get Inventories Success",
-  GET_FAILED: "Get Inventories Failed",
+  GET_SUCCESS: "Get Purchases Success",
+  GET_FAILED: "Get Purchases Failed",
 
   ENTRY_SUCCESS: "Entry New Stock Success",
   ENTRY_FAILED: "Entry New Stock Failed",
