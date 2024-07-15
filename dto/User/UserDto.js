@@ -1,4 +1,4 @@
-const BaseDto = require('./BaseDto')
+const BaseDto = require('../BaseDto')
 
 class UserDto extends BaseDto {
 
