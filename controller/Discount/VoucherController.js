@@ -1,4 +1,4 @@
-const VoucherDto = require('../../dto/VoucherDto')
+const VoucherDto = require('../../dto/Discount/VoucherDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Discount/VoucherService')
 const message = require('../../message/Discount/VoucherMessage')

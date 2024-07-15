@@ -1,17 +1,18 @@
-const { Purchase, PurchaseVariant, Store } = require('../../model')
+const { Mutation, MutationVariant, Store } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
-const message = require('../../message/Inventory/PurchaseMessage')
+const message = require('../../message/Inventory/MutationMessage')
 
-class PurchaseRepository {
+class MutationRepository {
 
   async FindAll() {
     
     try {
-      return await Purchase.findAll({ 
+      return await Mutation.findAll({ 
         where: { isDeleted: false }, 
         include: [
-          { model: Store, as: 'store' },
-          { model: PurchaseVariant, as: 'variants' }
+          { model: Store, as: 'fromStore' },
+          { model: Store, as: 'toStore' },
+          { model: MutationVariant, as: 'variants' }
         ]
       })
     
@@ -24,7 +25,7 @@ class PurchaseRepository {
   async Create(data) {
 
     try {
-      return await Purchase.create(data)
+      return await Mutation.create(data)
       
     } catch (error) {
       // Error Handling
@@ -33,4 +34,4 @@ class PurchaseRepository {
   }
 }
 
-module.exports = new PurchaseRepository()
+module.exports = new MutationRepository()

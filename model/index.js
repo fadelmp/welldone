@@ -21,6 +21,9 @@ const PurchaseVariant = require('./Inventory/PurchaseVariant')
 const Adjustment = require('./Inventory/Adjustment')
 const AdjustmentVariant = require('./Inventory/AdjustmentVariant')
 
+const Mutation = require('./Inventory/Mutation')
+const MutationVariant = require('./Inventory/MutationVariant')
+
 const Inventory = require('./Inventory/Inventory')
 const InventoryTrack = require('./Inventory/InventoryTrack')
 
@@ -77,11 +80,17 @@ Adjustment.hasMany(AdjustmentVariant, { foreignKey: "adjustmentId", as: "variant
 AdjustmentVariant.belongsTo(Adjustment, { foreignKey: "adjustmentId", as: "adjustment" })
 AdjustmentVariant.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
 
+Mutation.belongsTo(Store, { foreignKey: "fromStoreId", as: "fromStore" })
+Mutation.belongsTo(Store, { foreignKey: "toStoreId", as: 'toStore' })
+Mutation.hasMany(MutationVariant, { foreignKey: "mutationId", as: "mutations" })
+MutationVariant.belongsTo(Mutation, { foreignKey: "mutationId", as: "mutation" })
+MutationVariant.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
+
 module.exports = {
   Store, City, Province,
   User, Role, RolePrivilege,
   Category, Product, Variant,
   Discount, DiscountStore, DiscountProduct,
   Inventory, InventoryTrack,
-  Purchase, PurchaseVariant, Adjustment, AdjustmentVariant
+  Purchase, PurchaseVariant, Adjustment, AdjustmentVariant, Mutation, MutationVariant
 }

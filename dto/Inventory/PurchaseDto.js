@@ -1,27 +1,28 @@
 const BaseDto = require('../BaseDto')
 
-class PurchaseDto extends BaseDto {
+class MutationDto extends BaseDto {
 
   constructor(req) {
     super(req)
-    this.deliveryNote = req.body.delivery_note
+    this.number = req.body.number
     this.date = req.body.date
-    this.supplier = req.body.supplier
-    this.storeId = req.body.store_id
+    this.fromStoreId = req.body.from_store_id
+    this.toStoreId = req.body.to_store_id
     this.stocks = req.body.stocks
   }
 
   toJSON() {
     return {
       id: this.id,
+      number: this.number,
       date: this.date,
-      delivery_note: this.deliveryNote,
-      supplier: this.supplier,
-      store_name: this.storeName,
+      approve_date: this.approveDate,
+      from_store_name: this.fromStoreName,
+      to_store_name: this.toStoreName,
       total_variant: this.totalVariant,
       total_stock: this.totalStock
     }
   }
 }
 
-module.exports = PurchaseDto
+module.exports = MutationDto

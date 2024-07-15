@@ -42,7 +42,7 @@ class InventoryService {
 
     let action = "ADD"
 
-    let inventory = await this.update(dto, stock, action)
+    let inventory = await this.update(dto.storeId, stock, action)
     
     await trackService.Entry(inventory, dto, stock.total)
   }
@@ -51,9 +51,36 @@ class InventoryService {
 
     let action = "SUBSTRACT"
 
-    let inventory = await this.update(dto, stock, action)
+    let inventory = await this.update(dto.storeId, stock, action)
 
     await trackService.Adjustment(inventory, dto, stock.total)
+  }
+
+  async TransferOut(dto, stock) {
+
+    let action = "SUBSTRACT"
+
+    let inventory = await this.update(dto.fromStoreId, stock, action)
+
+    await trackService.Transfer(inventory, dto, stock.total)
+  }
+
+  async TransferIn(dto, stock) {
+
+    let action = "ADD"
+
+    let inventory = await this.update(dto.toStoreId, stock, action)
+
+    await trackService.Transfer(inventory, dto, stock.total)
+  }
+
+  async Sales(dto, stock) {
+
+    let action = "SUBSTRACT"
+
+    let inventory = await this.update(dto.storeId, stock, action)
+
+    await trackService.Sales(inventory, dto, stock.total)
   }
 
   async create(storeId, variantId) {
@@ -64,9 +91,9 @@ class InventoryService {
     await repository.Create(inventory)
   }
 
-  async update(dto, stock, action) {
+  async update(storeId, stock, action) {
 
-    let inventory = await comparator.CheckStoreVariant(dto.storeId, stock.variant_id)
+    let inventory = await comparator.CheckStoreVariant(storeId, stock.variant_id)
     await mapper.Update(inventory, "SYSTEM")
     inventory.total += (action === "ADD") ? stock.total : -stock.total
 

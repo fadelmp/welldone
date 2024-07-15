@@ -6,16 +6,31 @@ class InventoryTrackService {
   async Entry(inventory, dto, total) {
 
     let type = "entry"
-    let supplier = dto.supplier
-    let notes = "Purchase Stock From " + supplier
+    let notes = "Purchase Stock From " + dto.supplier
 
     await this.create(inventory, total, type, notes)
   }
 
-  async Adjustment(inventory, dto, total) {
+  async Adjustment(inventory, total) {
 
     let type = "adjustment"
     let notes = "Adjustment Stock"
+
+    await this.create(inventory, total, type, notes)
+  }
+
+  async Transfer(inventory, dto, total) {
+
+    let type = "transfer_out"
+    let notes = "Mutation From " + dto.fromStoreName + " To Store " + dto.toStoreName
+
+    await this.create(inventory, total, type, notes)
+  }
+
+  async Sales(inventory, dto, total) {
+
+    let type = "sales"
+    let notes = "Sold at " + dto.date
 
     await this.create(inventory, total, type, notes)
   }
