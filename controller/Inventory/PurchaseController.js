@@ -1,4 +1,4 @@
-const PurchaseDto = require('../../dto/PurchaseDto')
+const PurchaseDto = require('../../dto/Inventory/PurchaseDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Inventory/PurchaseService')
 const message = require('../../message/Inventory/PurchaseMessage')

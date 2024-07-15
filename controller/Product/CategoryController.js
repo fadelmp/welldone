@@ -1,4 +1,4 @@
-const CategoryDto = require('../../dto/CategoryDto')
+const CategoryDto = require('../../dto/Product/CategoryDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Product/CategoryService')
 const message = require('../../message/Product/CategoryMessage')

@@ -1,4 +1,4 @@
-const MutationDto = require('../../dto/MutationDto')
+const MutationDto = require('../../dto/Inventory/MutationDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Inventory/MutationService')
 const message = require('../../message/Inventory/MutationMessage')

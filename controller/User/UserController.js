@@ -1,4 +1,4 @@
-const dto = require('../../dto/UserDto')
+const dto = require('../../dto/User/UserDto')
 const response = require('../../helper/Response')
 const service = require('../../service/User/UserService')
 const message = require('../../message/User/UserMessage')

@@ -1,4 +1,4 @@
-const AdjustmentDto = require('../../dto/AdjustmentDto')
+const AdjustmentDto = require('../../dto/Inventory/AdjustmentDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Inventory/AdjustmentService')
 const message = require('../../message/Inventory/AdjustmentMessage')

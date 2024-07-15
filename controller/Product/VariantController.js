@@ -1,4 +1,4 @@
-const VariantDto = require('../../dto/VariantDto')
+const VariantDto = require('../../dto/Product/VariantDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Product/VariantService')
 const message = require('../../message/Product/VariantMessage')

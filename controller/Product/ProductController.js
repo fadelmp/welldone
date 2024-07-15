@@ -1,4 +1,4 @@
-const ProductDto = require('../../dto/ProductDto')
+const ProductDto = require('../../dto/Product/ProductDto')
 const response = require('../../helper/Response')
 const service = require('../../service/Product/ProductService')
 const message = require('../../message/Product/ProductMessage')
