@@ -4,7 +4,7 @@ const controller = require('../../controller/Inventory/MutationController')
 const router = express.Router()
 
 router.get('/', controller.FindAll)
-router.get('/', controller.FindAllVariant)
+router.get('/variants', controller.FindAllVariant)
 
 router.post('/', controller.Create)
 

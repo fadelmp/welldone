@@ -85,7 +85,7 @@ AdjustmentVariant.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
 // Inventory - Mutation Management
 Mutation.belongsTo(Store, { foreignKey: "fromStoreId", as: "fromStore" })
 Mutation.belongsTo(Store, { foreignKey: "toStoreId", as: 'toStore' })
-Mutation.hasMany(MutationVariant, { foreignKey: "mutationId", as: "mutations" })
+Mutation.hasMany(MutationVariant, { foreignKey: "mutationId", as: "variants" })
 MutationVariant.belongsTo(Mutation, { foreignKey: "mutationId", as: "mutation" })
 MutationVariant.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
 
