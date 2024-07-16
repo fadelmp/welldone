@@ -27,6 +27,10 @@ Mutation.init({
     field: 'to_store_id',
     references: { model: "Store", key: "id" }
   },
+  status: {
+    type: DataTypes.BOOLEAN,
+    field: 'status'
+  },
   isActived: { type: DataTypes.BOOLEAN, field: 'is_actived', defaultValue: true },
   isDeleted: { type: DataTypes.BOOLEAN, field: 'is_deleted', defaultValue: false },
   createdAt: { type: DataTypes.DATE, field: 'created_at' },

@@ -22,7 +22,7 @@ class InventoryTrackService {
   async Transfer(inventory, dto, total) {
 
     let type = "transfer_out"
-    let notes = "Mutation From " + dto.fromStoreName + " To Store " + dto.toStoreName
+    let notes = "Mutation From Store " + dto.fromStoreName + " To Store " + dto.toStoreName
 
     await this.create(inventory, total, type, notes)
   }

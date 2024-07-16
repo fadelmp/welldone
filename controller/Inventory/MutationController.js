@@ -42,7 +42,7 @@ class MutationController {
 
       dto = await service.Create(dto)
 
-      return response.Success(res, message.CREATE_MUTATION_SUCCESS, dto)
+      return response.Success(res, message.CREATE_SUCCESS, dto)
     
     } catch (error) {
       // Error Handling

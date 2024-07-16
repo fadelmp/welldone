@@ -23,8 +23,6 @@ class MutationService {
 
     let mutation = await mapper.ToMutation(dto)
     await mapper.Create(mutation, dto.activedUser)
-    mutation.createdAt = dto.date
-    mutation.status = false
 
     await repository.Create(mutation)
 
@@ -37,7 +35,7 @@ class MutationService {
     await mapper.Create(mutationVariant, dto.activedUser)
 
     await variantRepo.Create(mutationVariant)
-    await inventoryService.Mutation(dto, stock)
+    await inventoryService.TransferOut(dto, stock)
   }
 }
 

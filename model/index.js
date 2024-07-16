@@ -70,16 +70,19 @@ Inventory.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
 Inventory.belongsTo(Store, { foreignKey: "storeId", as: "store" })
 Inventory.hasMany(InventoryTrack, { foreignKey: "inventoryId", as: "tracks" })
 
+// Inventory - Purchase Management
 Purchase.belongsTo(Store, { foreignKey: "storeId", as: "store" })
 Purchase.hasMany(PurchaseVariant, { foreignKey: "purchaseId", as: "variants" })
 PurchaseVariant.belongsTo(Purchase, { foreignKey: "purchaseId", as: "purchase" })
 PurchaseVariant.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
 
+// Inventory - Adjustment Management
 Adjustment.belongsTo(Store, { foreignKey: "storeId", as: "store" })
 Adjustment.hasMany(AdjustmentVariant, { foreignKey: "adjustmentId", as: "variants" })
 AdjustmentVariant.belongsTo(Adjustment, { foreignKey: "adjustmentId", as: "adjustment" })
 AdjustmentVariant.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
 
+// Inventory - Mutation Management
 Mutation.belongsTo(Store, { foreignKey: "fromStoreId", as: "fromStore" })
 Mutation.belongsTo(Store, { foreignKey: "toStoreId", as: 'toStore' })
 Mutation.hasMany(MutationVariant, { foreignKey: "mutationId", as: "mutations" })
@@ -92,5 +95,7 @@ module.exports = {
   Category, Product, Variant,
   Discount, DiscountStore, DiscountProduct,
   Inventory, InventoryTrack,
-  Purchase, PurchaseVariant, Adjustment, AdjustmentVariant, Mutation, MutationVariant
+  Purchase, PurchaseVariant, 
+  Adjustment, AdjustmentVariant, 
+  Mutation, MutationVariant
 }

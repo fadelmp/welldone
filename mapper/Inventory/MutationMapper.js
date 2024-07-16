@@ -8,7 +8,8 @@ class MutationMapper extends BaseMapper {
       number: dto.number,
       fromStoreId: dto.fromStoreId,
       toStoreId: dto.toStoreId,
-      createdAt: dto.date
+      createdAt: dto.date, 
+      status: false
     }
   }
 
