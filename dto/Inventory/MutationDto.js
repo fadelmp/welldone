@@ -4,6 +4,7 @@ class MutationDto extends BaseDto {
 
   constructor(req) {
     super(req)
+    this.id = req.params.id
     this.number = req.body.number
     this.date = req.body.date
     this.fromStoreId = req.body.from_store_id
@@ -22,7 +23,8 @@ class MutationDto extends BaseDto {
       from_store_name: this.fromStoreName,
       to_store_name: this.toStoreName,
       total_variant: this.totalVariant,
-      total_stock: this.totalStock
+      total_stock: this.totalStock,
+      status: this.status
     }
   }
 }

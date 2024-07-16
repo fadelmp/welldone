@@ -62,7 +62,7 @@ class InventoryService {
 
     let inventory = await this.update(dto.fromStoreId, stock, action)
 
-    await trackService.Transfer(inventory, dto, stock.total)
+    await trackService.TransferOut(inventory, dto, stock.total)
   }
 
   async TransferIn(dto, stock) {
@@ -71,7 +71,7 @@ class InventoryService {
 
     let inventory = await this.update(dto.toStoreId, stock, action)
 
-    await trackService.Transfer(inventory, dto, stock.total)
+    await trackService.TransferIn(inventory, dto, stock.total)
   }
 
   async Sales(dto, stock) {
