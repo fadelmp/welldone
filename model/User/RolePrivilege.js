@@ -20,13 +20,7 @@ RolePrivilege.init({
     type: DataTypes.STRING,
     allowNull: false,
     references: { model: "Privilege", key: "id" }
-  },
-  isActived: { type: DataTypes.BOOLEAN, field: 'is_actived', defaultValue: true },
-  isDeleted: { type: DataTypes.BOOLEAN, field: 'is_deleted', defaultValue: false },
-  createdAt: { type: DataTypes.DATE, field: 'created_at' },
-  createdBy: { type: DataTypes.STRING, field: 'created_by' },
-  updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
-  updatedBy: { type: DataTypes.STRING, field: 'updated_by' }
+  }
 }, {
   sequelize,
   tableName: 'user_role_privilege',

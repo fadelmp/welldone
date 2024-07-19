@@ -9,8 +9,7 @@ class UserComparator {
 
     let user = await repository.FindById(id)
 
-    if (!user)
-      throw new NotFound(message.NOT_FOUND)
+    if (!user) throw new NotFound(message.NOT_FOUND)
 
     return user
   }
@@ -19,18 +18,16 @@ class UserComparator {
 
     let user = await repository.FindByUsername(data.username)
 
-    if (user)
-      if (user.username == data.username && user.id != data.id)
-        throw new DataExists(message.USERNAME_EXISTS)
+    if (user && user.username == data.username && user.id != data.id)
+      throw new DataExists(message.USERNAME_EXISTS)
   }
 
   async CheckFullname(data) {
 
     let user = await repository.FindByFullname(data.fullname)
 
-    if (user)
-      if (user.fullname == data.fullname && user.id != data.id)
-        throw new DataExists(message.FULLNAME_EXISTS)
+    if (user && user.fullname == data.fullname && user.id != data.id)
+      throw new DataExists(message.FULLNAME_EXISTS)
   }
 }
 

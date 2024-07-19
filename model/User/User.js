@@ -31,7 +31,7 @@ User.init({
     field: 'password'
   },
   roleId: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
     field: 'role_id',
     references: { model: "Role", key: "id" }
@@ -40,6 +40,16 @@ User.init({
     type: DataTypes.STRING,
     field: 'store_id',
     references: { model: "Store", key: "id" }
+  },
+  isBlocked: {
+    type: DataTypes.BOOLEAN,
+    field: 'is_blocked',
+    defaultValue: false
+  },
+  tryAttempt: {
+    type: DataTypes.INTEGER,
+    field: 'try_attempt',
+    defaultValue: 3
   },
   isActived: { type: DataTypes.BOOLEAN, field: 'is_actived', defaultValue: true },
   isDeleted: { type: DataTypes.BOOLEAN, field: 'is_deleted', defaultValue: false },

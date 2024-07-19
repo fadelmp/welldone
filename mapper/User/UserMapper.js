@@ -1,6 +1,6 @@
 const BaseMapper = require("../BaseMapper")
 
-class UserMapper {
+class UserMapper extends BaseMapper {
 
   async ToUser(dto) {
 
@@ -8,7 +8,6 @@ class UserMapper {
       id: dto.id,
       username: dto.username,
       fullname: dto.fullname,
-      password: dto.password,
       roleId: dto.roleId,
       storeId: dto.storeId
     }
@@ -16,7 +15,9 @@ class UserMapper {
 
   async ToUserDtoList(users) {
 
-    return Promise.all(users.map(user => this.toUserDto(user)))
+    return Promise.all(
+      users.map(
+        user => this.toUserDto(user)))
   }
 
   async toUserDto(user) {

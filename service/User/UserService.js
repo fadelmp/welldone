@@ -1,7 +1,9 @@
+const crypt = require('../../helper/Crypt')
+const mapper = require('../../mapper/User/UserMapper')
 const repository = require('../../repository/User/UserRepository')
 const comparator = require('../../comparator/User/UserComparator')
-const mapper = require('../../mapper/User/UserMapper')
-const crypt = require('../../helper/Crypt')
+
+const password = "Welldone_12345"
 
 class UserService {
 
@@ -9,42 +11,41 @@ class UserService {
 
     let users = await repository.FindAll()
 
-    return mapper.ToUserDtoList(users)
+    return mapper.TodtoList(users)
   }
 
-  async Create(userDto) {
+  async Create(dto) {
 
-    let key = "welldone123456789012345678901234"
-    let password = await crypt.DecryptPass(userDto.password, key)
+    await comparator.CheckUsername(dto)
+    await comparator.CheckFullname(dto)
 
-    await comparator.CheckUsername(userDto)
-    await comparator.CheckFullname(userDto)
-
-    let user = await mapper.ToUser(userDto)
-    await mapper.Create(user, userDto)
+    let user = await mapper.ToUser(dto)
+    await mapper.Create(user, dto.activedUser)
     user.password = await crypt.HashPass(password)
 
     await repository.Create(user)
-    return userDto
+    return dto
   }
 
-  async Update(userDto) {
+  async Update(dto) {
 
-    await comparator.CheckId(userDto.id)
-    await comparator.CheckUsername(userDto)
-    await comparator.CheckFullname(userDto)
+    let existingUser = await comparator.CheckId(dto.id)
+    await comparator.CheckUsername(dto)
+    await comparator.CheckFullname(dto)
 
-    let user = await mapper.ToUser(userDto)
-    await mapper.Update(user, userDto)
+    let user = await mapper.ToUser(dto)
+    user.password = existingUser.password
 
+    await mapper.Update(user, dto.activedUser)
     await repository.Update(user)
-    return userDto 
+    
+    return dto 
   }
 
-  async Delete(userDto) {
+  async Delete(dto) {
 
-    let user = await comparator.CheckId(userDto.id)
-    await mapper.Delete(user, userDto)
+    let user = await comparator.CheckId(dto.id)
+    await mapper.Delete(user, dto.activedUser)
 
     await repository.Delete(user)
     return ""

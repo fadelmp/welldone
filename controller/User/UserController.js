@@ -1,4 +1,4 @@
-const dto = require('../../dto/User/UserDto')
+const UserDto = require('../../dto/User/UserDto')
 const response = require('../../helper/Response')
 const service = require('../../service/User/UserService')
 const message = require('../../message/User/UserMessage')
@@ -23,7 +23,7 @@ class UserController {
   async Create(req, res, next) {
 
     try {
-      let userDto = new dto(req)
+      let userDto = new UserDto(req)
 
       userDto = await service.Create(userDto)
 
@@ -38,7 +38,7 @@ class UserController {
   async Update(req, res, next) {
 
     try {
-      let userDto = new dto(req)
+      let userDto = new UserDto(req)
 
       userDto = await service.Update(userDto)
 
@@ -53,7 +53,7 @@ class UserController {
   async Delete(req, res,next) {
 
     try {
-      let userDto = new dto(req)
+      let userDto = new UserDto(req)
 
       await service.Delete(userDto)
       

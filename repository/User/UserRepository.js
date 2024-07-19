@@ -7,7 +7,7 @@ class UserRepository {
   async FindAll() {
     
     try {
-      return await user.findAll({ where: { isDeleted: false } })
+      return await User.findAll({ where: { isDeleted: false } })
     
     } catch (error) {
       // Error Handling
@@ -18,7 +18,7 @@ class UserRepository {
   async FindById(id) {
 
     try {
-      return await user.findOne({ where: { id: id, isDeleted: false }})
+      return await User.findOne({ where: { id: id, isDeleted: false }})
       
     } catch (error) {
       // Error Handling
@@ -29,7 +29,7 @@ class UserRepository {
   async FindByUsername(username) {
 
     try {
-      return await user.findOne({ where: { username: username, isDeleted: false }})
+      return await User.findOne({ where: { username: username, isDeleted: false }})
 
     } catch (error) {
       // Error Handling
@@ -40,7 +40,7 @@ class UserRepository {
   async FindByFullname(fullname) {
 
     try {
-      return await user.findOne({ where: { fullname: fullname, isDeleted: false }})
+      return await User.findOne({ where: { fullname: fullname, isDeleted: false }})
 
     } catch (error) {
       // Error Handling
@@ -51,7 +51,7 @@ class UserRepository {
   async Create(data) {
 
     try {
-      return await user.create(data)
+      return await User.create(data)
       
     } catch (error) {
       // Error Handling
@@ -62,7 +62,7 @@ class UserRepository {
   async Update(data) {
 
     try {
-      return await user.update(data, { where: { id: data.id, isDeleted: false }})
+      return await User.update(data, { where: { id: data.id, isDeleted: false }})
       
     } catch(error) {
       // Error Handling
@@ -73,7 +73,7 @@ class UserRepository {
   async Delete(data) {
     
     try {
-      return await user.update(
+      return await User.update(
         { isActived: false, isDeleted: true, updatedBy: data.updatedBy }, 
         { where: { id: data.id, isDeleted: false }}
       )

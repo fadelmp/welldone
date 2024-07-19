@@ -15,9 +15,9 @@ class UserDto extends BaseDto {
   toJSON() {
     return {
       id: this.id,
+      email: this.email,
       username: this.username,
       fullname: this.fullname,
-      password: this.password,
       role_id: this.roleId,
       role_name: "",
       store_id: this.storeId,
