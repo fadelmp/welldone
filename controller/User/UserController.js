@@ -65,6 +65,36 @@ class UserController {
     }
   }
 
+  async ChangePassword(req, res,next) {
+
+    try {
+      let userDto = new UserDto(req)
+
+      await service.ChangePassword(userDto)
+      
+      return response.Success(res, message.CHANGE_PASSWORD_SUCCESS, {})
+
+    } catch (error) {
+      // Error Handling
+      next(error)
+    }
+  }
+
+  async ResetPassword(req, res,next) {
+
+    try {
+      let userDto = new UserDto(req)
+
+      await service.ResetPassword(userDto)
+      
+      return response.Success(res, message.RESET_PASSWORD_SUCCESS, {})
+
+    } catch (error) {
+      // Error Handling
+      next(error)
+    }
+  }
+
 }
 
 module.exports = new UserController()

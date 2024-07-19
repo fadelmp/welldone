@@ -50,6 +50,26 @@ class UserService {
     await repository.Delete(user)
     return ""
   }
+
+  async ChangePassword(dto) {
+
+    let user = await comparator.CheckId(dto.id)
+    user.password = await crypt.HashPass(dto.password)
+    await mapper.Update(user, dto.activedUser)
+
+    await repository.ChangePassword(user)
+    return ""
+  }
+
+  async ResetPassword(dto) {
+
+    let user = await comparator.CheckId(dto.id)
+    user.password = await crypt.HashPass(password)
+    await mapper.Update(user, dto.activedUser)
+
+    await repository.ChangePassword(user)
+    return ""
+  }
 }
 
 module.exports = new UserService()

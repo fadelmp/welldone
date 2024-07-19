@@ -83,6 +83,20 @@ class UserRepository {
       throw new QueryFailed(error, message.DELETE_FAILED) 
     }
   }
+
+  async ChangePassword(data) {
+
+    try {
+      return await User.update(
+        { password: data.password, isBlocked: false, tryAttempt: 3, updatedBy: data.updatedBy }, 
+        { where: { id: data.id, isDeleted: false }}
+      )
+      
+    } catch(error) {
+      // Error Handling
+      throw new QueryFailed(error, message.CHANGE_PASSWORD_FAILED) 
+    }
+  }
 }
 
 module.exports = new UserRepository()
