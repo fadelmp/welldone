@@ -20,6 +20,20 @@ class UserRepository {
     }
   }
 
+  async FindAllByStore(storeId, roleId) {
+    
+    try {
+      return await User.findAll({ 
+        where: { isDeleted: false, storeId: storeId, roleId: { [Op.gt]: roleId }},
+        include: [{ model: Role, as: 'role' }, { model: Store, as: 'store' }]
+      })
+    
+    } catch (error) {
+      // Error Handling
+      throw new QueryFailed(error, message.GET_FAILED)
+    }
+  }
+
   async FindById(id) {
 
     try {

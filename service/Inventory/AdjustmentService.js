@@ -5,9 +5,11 @@ const variantRepo = require('../../repository/Inventory/AdjustmentVariantReposit
 
 class AdjustmentService {
 
-  async FindAll() {
+  async FindAll(dto) {
 
-    let adjustments = await repository.FindAll()
+    let adjustments = (dto.store === "") 
+        ? await repository.FindAll()
+        : await repository.FindAllByStore(dto.store)
 
     return mapper.ToAdjustmentDtoList(adjustments)
   }

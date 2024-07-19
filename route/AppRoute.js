@@ -31,10 +31,8 @@ router.get('/', (req, res) => {
 // Authentication
 router.use('/auth', auth)
 
-// Location API
-router.use('/location', location)
-
 // Store Management
+router.use('/location', location)
 router.use('/store-management/stores', store)
 
 // User Management

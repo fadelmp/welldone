@@ -5,9 +5,11 @@ const variantRepo = require('../../repository/Inventory/PurchaseVariantRepositor
 
 class PurchaseService {
 
-  async FindAll() {
+  async FindAll(dto) {
 
-    let purchases = await repository.FindAll()
+    let purchases = (dto.store === "") 
+        ? await repository.FindAll()
+        : await repository.FindAllByStore(dto.store)
 
     return mapper.ToPurchaseDtoList(purchases)
   }

@@ -22,14 +22,18 @@ class MutationService {
 
   async FindShipment(storeId) {
 
-    let mutations = await repository.FindAllFromStore(storeId)
+    let mutations = (storeId === "") 
+        ? await repository.FindAll()
+        : await repository.FindAllFromStore(storeId)
 
     return mapper.ToMutationDtoList(mutations)
   }
 
   async FindApproval(storeId) {
 
-    let mutations = await repository.FindAllToStore(storeId)
+    let mutations = (storeId === "") 
+        ? await repository.FindAll()
+        : await repository.FindAllToStore(storeId)
 
     return mapper.ToMutationDtoList(mutations)
   }

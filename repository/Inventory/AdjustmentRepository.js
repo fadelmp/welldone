@@ -21,6 +21,23 @@ class AdjustmentRepository {
     }
   }
 
+  async FindAllByStore(storeId) {
+    
+    try {
+      return await Adjustment.findAll({ 
+        where: { storeId: storeId, isDeleted: false }, 
+        include: [
+          { model: Store, as: 'store' },
+          { model: AdjustmentVariant, as: 'variants' }
+        ]
+      })
+    
+    } catch (error) {
+      // Error Handling
+      throw new QueryFailed(error, message.GET_FAILED)
+    }
+  }
+
   async Create(data) {
 
     try {

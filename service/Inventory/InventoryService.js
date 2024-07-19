@@ -7,9 +7,11 @@ const comparator = require('../../comparator/Inventory/InventoryComparator')
 
 class InventoryService {
 
-  async FindAll() {
+  async FindAll(dto) {
 
-    let inventories = await repository.FindAll()
+    let inventories = (dto.store === "") 
+        ? await repository.FindAll()
+        : await repository.FindAllByStore(dto.store)
 
     return mapper.ToInventoryDtoList(inventories)
   }

@@ -21,6 +21,23 @@ class PurchaseRepository {
     }
   }
 
+  async FindAllByStore(storeId) {
+    
+    try {
+      return await Purchase.findAll({ 
+        where: { storeId: storeId, isDeleted: false }, 
+        include: [
+          { model: Store, as: 'store' },
+          { model: PurchaseVariant, as: 'variants' }
+        ]
+      })
+    
+    } catch (error) {
+      // Error Handling
+      throw new QueryFailed(error, message.GET_FAILED)
+    }
+  }
+
   async Create(data) {
 
     try {

@@ -7,9 +7,11 @@ const password = "Welldone_12345"
 
 class UserService {
 
-  async FindAll(roleId) {
+  async FindAll(dto) {
 
-    let users = await repository.FindAll(roleId)
+    let users = (dto.store === "") 
+        ? await repository.FindAll(dto.role) 
+        : await repository.FindAllByStore(dto.store, dto.role)
 
     return mapper.ToUserDtoList(users)
   }

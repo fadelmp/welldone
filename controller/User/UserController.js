@@ -9,7 +9,7 @@ class UserController {
 
     try {
       let userDto = new UserDto(req)
-      let users = await service.FindAll(userDto.role)
+      let users = await service.FindAll(userDto)
 
       return (users.length === 0)
         ? response.NotFound(res, message.NOT_FOUND)
