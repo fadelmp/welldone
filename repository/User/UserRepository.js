@@ -1,13 +1,17 @@
-const { User } = require('../../model')
+const { Op } = require('sequelize')
+const { User, Role, Store } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/User/UserMessage')
 
 class UserRepository {
 
-  async FindAll() {
+  async FindAll(roleId) {
     
     try {
-      return await User.findAll({ where: { isDeleted: false } })
+      return await User.findAll({ 
+        where: { isDeleted: false, roleId: { [Op.gt]: roleId }},
+        include: [{ model: Role, as: 'role' }, { model: Store, as: 'store' }]
+      })
     
     } catch (error) {
       // Error Handling

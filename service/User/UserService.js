@@ -7,11 +7,11 @@ const password = "Welldone_12345"
 
 class UserService {
 
-  async FindAll() {
+  async FindAll(roleId) {
 
-    let users = await repository.FindAll()
+    let users = await repository.FindAll(roleId)
 
-    return mapper.TodtoList(users)
+    return mapper.ToUserDtoList(users)
   }
 
   async Create(dto) {

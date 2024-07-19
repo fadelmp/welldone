@@ -26,7 +26,7 @@ Privilege.init({
   tableName: 'user_privilege',
   modelName: 'Privilege',
   paranoid: false,
-  timestamps: true,
+  timestamps: false,
 })
 
 module.exports = Privilege

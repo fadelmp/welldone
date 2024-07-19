@@ -26,7 +26,7 @@ RolePrivilege.init({
   tableName: 'user_role_privilege',
   modelName: 'RolePrivilege',
   paranoid: false,
-  timestamps: true,
+  timestamps: false,
 })
 
 module.exports = RolePrivilege

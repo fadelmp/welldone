@@ -4,9 +4,9 @@ class BaseDto {
 
   constructor(req) {
     this.activedUser = GetUser.ActivedUser(req)
-    this.roleId = GetUser.RoleId(req)
     this.userId = GetUser.UserId(req)
-    this.storeId = GetUser.StoreId(req)
+    this.role = GetUser.RoleId(req)
+    this.store = GetUser.StoreId(req)
   }
 
   toJSON() {

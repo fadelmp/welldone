@@ -21,7 +21,7 @@ Role.init({
   tableName: 'user_role',
   modelName: 'Role',
   paranoid: false,
-  timestamps: true,
+  timestamps: false,
 })
 
 module.exports = Role
