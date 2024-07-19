@@ -94,7 +94,7 @@ class UserRepository {
       
     } catch(error) {
       // Error Handling
-      throw new QueryFailed(error, message.CHANGE_PASSWORD_FAILED) 
+      throw new QueryFailed(error, message.UPDATE_FAILED) 
     }
   }
 }

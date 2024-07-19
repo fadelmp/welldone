@@ -11,5 +11,6 @@ router.delete('/:id', controller.Delete)
 
 router.patch('/change-password/:id', controller.ChangePassword)
 router.patch('/reset-password/:id', controller.ResetPassword)
+router.patch('/unblock/:id', controller.Unblock)
 
 module.exports = router

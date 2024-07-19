@@ -50,7 +50,7 @@ class UserController {
     }
   }
 
-  async Delete(req, res,next) {
+  async Delete(req, res, next) {
 
     try {
       let userDto = new UserDto(req)
@@ -65,7 +65,7 @@ class UserController {
     }
   }
 
-  async ChangePassword(req, res,next) {
+  async ChangePassword(req, res, next) {
 
     try {
       let userDto = new UserDto(req)
@@ -80,7 +80,7 @@ class UserController {
     }
   }
 
-  async ResetPassword(req, res,next) {
+  async ResetPassword(req, res, next) {
 
     try {
       let userDto = new UserDto(req)
@@ -88,6 +88,21 @@ class UserController {
       await service.ResetPassword(userDto)
       
       return response.Success(res, message.RESET_PASSWORD_SUCCESS, {})
+
+    } catch (error) {
+      // Error Handling
+      next(error)
+    }
+  }
+
+  async Unblock(req, res, next) {
+
+    try {
+      let userDto = new UserDto(req)
+
+      await service.Unblock(userDto)
+      
+      return response.Success(res, message.UNBLOCK_SUCCESS, {})
 
     } catch (error) {
       // Error Handling

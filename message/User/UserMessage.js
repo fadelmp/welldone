@@ -15,6 +15,7 @@ module.exports = {
   CHANGE_PASSWORD_SUCCESS: "Change Password Success",
   CHANGE_PASSWORD_FAILED: "Change Password Failed",
   RESET_PASSWORD_SUCCESS: "Reset Password Success",
+  UNBLOCK_SUCCESS: "Unblock Existing User Success",
 
   USERNAME_EXISTS: "User Username Already Exists",
   FULLNAME_EXISTS: "User Fullname Already Exists",

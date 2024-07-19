@@ -70,6 +70,15 @@ class UserService {
     await repository.ChangePassword(user)
     return ""
   }
+
+  async Unblock(dto) {
+
+    let user = await comparator.CheckId(dto.id)
+    await mapper.Update(user, dto.activedUser)
+
+    await repository.ChangePassword(user)
+    return ""
+  }
 }
 
 module.exports = new UserService()
