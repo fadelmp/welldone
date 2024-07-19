@@ -1,7 +1,8 @@
 const { Op } = require('sequelize')
-const { User, Role, Store } = require('../../model')
+const { User, Role, Store, Privilege } = require('../../model')
 const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/User/UserMessage')
+const authMess = require('../../message/Auth/AuthMessage')
 
 class UserRepository {
 
@@ -33,7 +34,13 @@ class UserRepository {
   async FindByUsername(username) {
 
     try {
-      return await User.findOne({ where: { username: username, isDeleted: false }})
+      return await User.findOne({ 
+        where: { username: username, isDeleted: false },
+        include: [
+          { model: Store, as: 'store' },
+          { model: Role, as: 'role', include: [{ model: Privilege, as: 'privileges' }]}
+        ]
+      })
 
     } catch (error) {
       // Error Handling
@@ -85,6 +92,20 @@ class UserRepository {
     } catch(error) {
       // Error Handling
       throw new QueryFailed(error, message.DELETE_FAILED) 
+    }
+  }
+
+  async ChangeAttempt(data) {
+
+    try {
+      return await User.update(
+        { tryAttempt: data.tryAttempt, isBlocked: data.isBlocked, updatedBy: data.updatedBy }, 
+        { where: { id: data.id, isDeleted: false }}
+      )
+      
+    } catch(error) {
+      // Error Handling
+      throw new QueryFailed(error, authMess.LOGIN_FAILED) 
     }
   }
 

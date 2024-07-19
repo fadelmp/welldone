@@ -5,8 +5,7 @@ class Privilege extends Model {}
 
 Privilege.init({
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull:false,
     field: 'id'

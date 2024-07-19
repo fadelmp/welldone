@@ -1,6 +1,7 @@
 class ResponseDto {
-  constructor(message, data) {
+  constructor(message, token, data) {
     this.message = message
+    this.token = token
     this.data = data
   }
 }

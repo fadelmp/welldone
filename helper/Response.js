@@ -1,30 +1,36 @@
 const ResponseDto = require('../dto/ResponseDto')
+const Token = require('./Token')
 
 class Response {
 
-  async Success(res, message, data) {
+  async Success(req, res, message, data) {
 
-    return this.response(res, 200, message, data)
+    return this.response(res, 200, message, token, data)
   }
 
-  async Failed(res, message) {
+  async Failed(req, res, message) {
 
-    return this.response(res, 500, message, {})
+    return this.response(res, 500, message, token, {})
   }
 
-  async NotFound(res, message) {
+  async NotFound(req, res, message) {
 
-    return this.response(res, 404, message, {})
+    return this.response(res, 404, message, token, {})
   }
 
-  async BadRequest(res) {
+  async BadRequest(req, res) {
 
-    return this.response(res, 400, "Bad Request", {})
+    return this.response(res, 400, "Bad Request", token, {})
   }
 
-  async response(res, httpCode, message, data) {
+  async Login(res, message, token, data) {
+    
+    return this.response(res, 200, message, token, data)
+  }
 
-    let response = new ResponseDto(message, data)
+  async response(res, httpCode, message, token, data) {
+
+    let response = new ResponseDto(message, token, data)
 
     return res.status(httpCode).json(response)
   }

@@ -7,7 +7,6 @@ class UserDto extends BaseDto {
     this.id = req.params.id
     this.username = req.body.username
     this.fullname = req.body.fullname
-    this.password = req.body.password
     this.roleId = req.body.role_id
     this.storeId = req.body.store_id
   }
@@ -15,7 +14,6 @@ class UserDto extends BaseDto {
   toJSON() {
     return {
       id: this.id,
-      email: this.email,
       username: this.username,
       fullname: this.fullname,
       role_id: this.roleId,

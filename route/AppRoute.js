@@ -7,6 +7,7 @@ const category = require('./Product/CategoryRoute')
 const product = require('./Product/ProductRoute')
 const variant = require('./Product/VariantRoute')
 
+const auth = require('./Auth/AuthRoute')
 const user = require('./User/UserRoute')
 
 const location = require('./Store/LocationRoute')
@@ -26,6 +27,9 @@ router.get('/', (req, res) => {
 })
 
 // Mount other routes
+
+// Authentication
+router.use('/auth', auth)
 
 // Location API
 router.use('/location', location)

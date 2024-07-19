@@ -6,19 +6,21 @@ class RolePrivilege extends Model {}
 RolePrivilege.init({
   id: {
     type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
     allowNull:false,
     field: 'id'
   },
   roleId: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'role_id',
     references: { model: "Role", key: "id" }
   },
   privilegeId: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'privilege_id',
     references: { model: "Privilege", key: "id" }
   }
 }, {

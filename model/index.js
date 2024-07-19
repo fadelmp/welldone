@@ -30,7 +30,7 @@ const InventoryTrack = require('./Inventory/InventoryTrack')
 // Store Management
 Store.belongsTo(City, { foreignKey: 'cityId', as: 'city' })
 City.belongsTo(Province, { foreignKey: 'provinceId', as: 'province' })
-Store.hasMany(Inventory, { foreignKey: "store_id", as: "inventories" })
+Store.hasMany(Inventory, { foreignKey: "storeId", as: "inventories" })
 
 // User Management
 User.belongsTo(Role, { foreignKey: "roleId", as: "role" })
@@ -50,8 +50,8 @@ Variant.belongsTo(Product, { foreignKey: "productId", as: "product" })
 Variant.hasMany(Inventory, { foreignKey: "variantId", as: "inventories" })
 
 // Discount Management
-Discount.hasMany(DiscountStore, { foreignKey: "discountId", as: "discount_stores" })
-Discount.hasMany(DiscountProduct, { foreignKey: "discountId", as: "discount_products" })
+Discount.hasMany(DiscountStore, { foreignKey: "discountId", as: "discountStores" })
+Discount.hasMany(DiscountProduct, { foreignKey: "discountId", as: "discountProducts" })
 Discount.belongsToMany(Store, {
   through: DiscountStore,
   foreignKey: 'discountId',
@@ -91,7 +91,7 @@ MutationVariant.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
 
 module.exports = {
   Store, City, Province,
-  User, Role, RolePrivilege,
+  User, Role, RolePrivilege, Privilege,
   Category, Product, Variant,
   Discount, DiscountStore, DiscountProduct,
   Inventory, InventoryTrack,
