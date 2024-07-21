@@ -14,7 +14,7 @@ class DiscountStoreRepository extends BaseRepository {
   async Delete(discountId) {
 
     let error = message.DELETE_FAILED
-    let where = { discountId: discountId }
+    let where = { discountId }
 
     return await this._Destroy(DiscountStore, where, error)
   }

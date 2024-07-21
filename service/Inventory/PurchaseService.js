@@ -7,9 +7,7 @@ class PurchaseService {
 
   async FindAll(dto) {
 
-    let purchases = (dto.store === "") 
-        ? await repository.FindAll()
-        : await repository.FindAllByStore(dto.store)
+    let purchases = await repository.FindAll(dto.store)
 
     return mapper.ToPurchaseDtoList(purchases)
   }

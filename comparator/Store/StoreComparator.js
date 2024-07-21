@@ -17,12 +17,8 @@ class StoreComparator {
 
   async CheckData(storeDto) {
 
-    let stores = await repository.FindByNameOrCode(storeDto)
-
-    for (let store of stores) {
-      await this.checkName(store, storeDto)
-      await this.checkCode(store, storeDto)
-    }
+    await this.checkName(storeDto)
+    await this.checkCode(storeDto)
   }
 
   async CheckInventory(id) {
@@ -35,14 +31,18 @@ class StoreComparator {
         throw new InternalServer(message.INVENTORY_EXISTS)
   }
 
-  async checkName(store, storeDto) {
+  async checkName(storeDto) {
+
+    let store = await repository.FindByName(storeDto.name)
 
     if (store && store.name == storeDto.name && store.id != storeDto.id)
       throw new DataExists(message.NAME_EXISTS)
   }
 
-  async checkCode(store, storeDto) {
+  async checkCode(storeDto) {
 
+    let store = await repository.FindByCode(storeDto.code)
+    
     if (store && store.code == storeDto.code && storeDto.id != store.id)
       throw new DataExists(message.CODE_EXISTS)
   }

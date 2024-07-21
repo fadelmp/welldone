@@ -1,8 +1,14 @@
-const { Mutation, MutationVariant, Store } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
+const BaseRepository = require('../BaseRepository')
 const message = require('../../message/Inventory/MutationMessage')
+const { Mutation, MutationVariant, Store } = require('../../model')
 
-class MutationRepository {
+const include = [
+  { model: Store, as: 'fromStore' },
+  { model: Store, as: 'toStore' },
+  { model: MutationVariant, as: 'variants' }
+]
+
+class MutationRepository extends BaseRepository {
 
   async FindAll() {
     

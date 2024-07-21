@@ -15,11 +15,7 @@ class UserRepository extends BaseRepository {
 
   async FindAll(roleId, storeId) {
 
-    let where = {
-      ...(await this._False()),
-      roleId: { [Op.gt]: roleId },
-      ...(storeId && { storeId })
-    }
+    let where = { ...(await this._False()), roleId: { [Op.gt]: roleId }, ...(storeId && { storeId }) }
 
     return await this._FindAll(User, where, include, getFailed)
   }

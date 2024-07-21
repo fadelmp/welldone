@@ -7,9 +7,7 @@ class AdjustmentService {
 
   async FindAll(dto) {
 
-    let adjustments = (dto.store === "") 
-        ? await repository.FindAll()
-        : await repository.FindAllByStore(dto.store)
+    let adjustments = await repository.FindAll(dto.store)
 
     return mapper.ToAdjustmentDtoList(adjustments)
   }

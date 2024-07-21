@@ -1,18 +1,14 @@
 const { Province } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
+const BaseRepository = require('../BaseRepository')
 const message = require('../../message/Store/LocationMessage')
 
-class ProvinceRepository {
+class ProvinceRepository extends BaseRepository {
 
   async FindAll() {
     
-    try {
-      return await Province.findAll()
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_PROVINCE_FAILED)
-    }
+    let error = message.GET_PROVINCE_FAILED
+
+    return await this._FindAll(Province, {}, {}, error)
   }
 }
 

@@ -1,4 +1,4 @@
-function ActivedUser(req) {
+function Username(req) {
     
   return req.headers['username']
 }
@@ -18,9 +18,15 @@ function StoreId(req) {
   return req.headers['store_id']
 }
 
+function Uri(req) {
+
+  return req.originalUrl
+}
+
 module.exports = { 
-  ActivedUser,
+  Username,
   RoleId,
   UserId,
-  StoreId
+  StoreId,
+  Uri
 }

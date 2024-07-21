@@ -1,113 +1,61 @@
-const { Inventory, InventoryTrack, Store, Variant, Product, Category } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
+const BaseRepository = require('../BaseRepository')
 const message = require('../../message/Inventory/InventoryMessage')
+const { Inventory, InventoryTrack, Store, Variant, Product, Category } = require('../../model')
 
-class InventoryRepository {
+const getFailed = message.GET_FAILED
 
-  async FindAll() {
-    
-    try {
-      return await Inventory.findAll({ 
-        where: { isDeleted: false }, 
-        include: [
-          { model: InventoryTrack, as: 'tracks' },
-          { model: Store, as: 'store' }, 
-          { model: Variant, as: 'variant', include: [
-            { model: Product, as: 'product', include: [
-              { model: Category, as: 'category'}
-            ]}
-          ]}
-        ]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
-  }
+class InventoryRepository extends BaseRepository {
 
-  async FindAllByStore(storeId) {
+  async FindAll(storeId) {
+
+    let where = { ...(await this._False()), ...(storeId && { storeId })}
+    let include = [
+      { model: InventoryTrack, as: 'tracks' },
+      { model: Store, as: 'store' }, 
+      { model: Variant, as: 'variant', include: [
+        { model: Product, as: 'product', include: [{ model: Category, as: 'category'}]}
+      ]}
+    ]
     
-    try {
-      return await Inventory.findAll({ 
-        where: { storeId: storeId, isDeleted: false }, 
-        include: [
-          { model: InventoryTrack, as: 'tracks' },
-          { model: Store, as: 'store' }, 
-          { model: Variant, as: 'variant', include: [
-            { model: Product, as: 'product', include: [
-              { model: Category, as: 'category'}
-            ]}
-          ]}
-        ]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAll(Inventory, where, include, getFailed)
   }
 
   async FindByStoreAndVariant(storeId, variantId) {
 
-    try {
-      return await Inventory.findOne({ where: { 
-        storeId: storeId, 
-        variantId: variantId, 
-        isDeleted: false 
-      }})
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    let where = { ...(await this._False()), storeId, variantId }
+
+    return await this._FindOne(Inventory, where, {}, getFailed)
   }
 
   async Create(data) {
 
-    try {
-      return await Inventory.create(data)
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.CREATE_FAILED)
-    }
+    let error = message.CREATE_FAILED
+    
+    return await this._Create(Inventory, data, error)
   }
 
   async Update(data) {
 
-    try {
-      return await Inventory.update(
-        { total: data.total, updatedBy: data.updatedBy }, 
-        { where: { id: data.id }}
-      )
+    let error = message.UPDATE_FAILED
+    let condition = { total: data.total, updatedBy: data.updatedBy }
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.UPDATE_FAILED)
-    }
+    return await this._SpecificUpdate(Inventory, data.id, condition, error)
   }
 
   async DeleteByStore(storeId) {
 
-    try {
-      return await Inventory.destroy({ where: { storeId: storeId }})
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.DELETE_FAILED)
-    } 
+    let error = message.DELETE_FAILED
+    let where = { storeId }
+
+    return await this._Destroy(Inventory, where, error)
   }
 
   async DeleteByVariant(variantId) {
 
-    try {
-      return await Inventory.destroy({ where: { variantId: variantId }})
+    let error = message.DELETE_FAILED
+    let where = { variantId }
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.DELETE_FAILED)
-    }
+    return await this._Destroy(Inventory, where, error)
   }
 }
 

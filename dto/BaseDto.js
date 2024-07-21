@@ -1,12 +1,12 @@
-const GetUser = require('../middleware/GetUser')
+const GetHeader = require('../middleware/GetHeader')
 
 class BaseDto {
 
   constructor(req) {
-    this.activedUser = GetUser.ActivedUser(req)
-    this.userId = GetUser.UserId(req)
-    this.role = GetUser.RoleId(req)
-    this.store = GetUser.StoreId(req)
+    this.activedUser = GetHeader.Username(req)
+    this.userId = GetHeader.UserId(req)
+    this.role = GetHeader.RoleId(req)
+    this.store = GetHeader.StoreId(req)
   }
 
   toJSON() {

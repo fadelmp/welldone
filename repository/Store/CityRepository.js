@@ -1,18 +1,15 @@
 const { City } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
+const BaseRepository = require('../BaseRepository')
 const message = require('../../message/Store/LocationMessage')
 
-class CityRepository {
+class CityRepository extends BaseRepository {
 
   async FindAll(provinceId) {
     
-    try {
-      return await City.findAll({ where: { provinceId: provinceId }})
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_CITY_FAILED)
-    }
+    let error = message.GET_CITY_FAILED
+    let where = { provinceId }
+
+    return await this._FindAll(City, where, {}, error)
   }
 }
 

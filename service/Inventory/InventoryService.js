@@ -9,9 +9,7 @@ class InventoryService {
 
   async FindAll(dto) {
 
-    let inventories = (dto.store === "") 
-        ? await repository.FindAll()
-        : await repository.FindAllByStore(dto.store)
+    let inventories = await repository.FindAll(dto.store)
 
     return mapper.ToInventoryDtoList(inventories)
   }
@@ -97,9 +95,10 @@ class InventoryService {
 
     let inventory = await comparator.CheckStoreVariant(storeId, stock.variant_id)
     await mapper.Update(inventory, "SYSTEM")
-    inventory.total += (action === "ADD") ? stock.total : -stock.total
 
+    inventory.total += (action === "ADD") ? stock.total : -stock.total
     await repository.Update(inventory)
+
     return inventory
   }
 }

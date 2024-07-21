@@ -1,40 +1,33 @@
+const BaseRepository = require('../BaseRepository')
 const { Inventory, InventoryTrack } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/Inventory/InventoryMessage')
 
-class InventoryTrackRepository {
+class InventoryTrackRepository extends BaseRepository {
 
   async Create(data) {
 
-    try {
-      return await InventoryTrack.create(data)
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.CREATE_FAILED)
-    }
+    let error = message.CREATE_FAILED
+
+    return await this._Create(InventoryTrack, data, error)
   }
 
   async DeleteByStore(storeId) {
 
-    try {
-      return await InventoryTrack.destroy({include: [{ model: Inventory, where: { storeId: storeId } }]})
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.DELETE_FAILED)
-    } 
+    let where = { storeId }
+    let error = message.DELETE_FAILED
+    let include = [{ model: Inventory, where: where }]
+
+    return await this._Destroy(InventoryTrack, where, include, error)
   }
 
   async DeleteByVariant(variantId) {
 
-    try {
-      return await InventoryTrack.destroy({include: [{ model: Inventory, where: { variantId: variantId } }]})
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.DELETE_FAILED)
-    }
+    let where = { variantId }
+    let error = message.DELETE_FAILED
+    let include = [{ model: Inventory, where: where }]
+
+    return await this._Destroy(InventoryTrack, where, include, error)
   }
 }
 

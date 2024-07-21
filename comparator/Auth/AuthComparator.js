@@ -1,8 +1,11 @@
 const crypt = require('../../helper/Crypt')
-const NotFound = require('../../error/NotFound')
 const message = require('../../message/Auth/AuthMessage')
-const InternalServer = require('../../error/InternalServer')
+const roleRepo = require('../../repository/User/RoleRepository')
 const repository = require('../../repository/User/UserRepository')
+
+const NotFound = require('../../error/NotFound')
+const Forbidden = require('../../error/Forbidden')
+const InternalServer = require('../../error/InternalServer')
 
 class AuthComparator {
 
@@ -33,6 +36,14 @@ class AuthComparator {
 
     if (user.isBlocked)
       throw new InternalServer(message.USER_BLOCKED)
+  }
+
+  async CheckAccess(roleId, uri) {
+
+    let role = await roleRepo.FindById(roleId)
+    let privileges = role.privileges
+
+    return privileges.some(privilege => uri.includes(privilege.url))
   }
 
 }

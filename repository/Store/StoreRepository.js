@@ -1,89 +1,62 @@
 const { Op } = require('sequelize')
-const { Store, City, Province, Inventory } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
+const BaseRepository = require('../BaseRepository')
 const message = require('../../message/Store/StoreMessage')
+const { Store, City, Province, Inventory } = require('../../model')
 
+const getFailed = message.GET_FAILED
 
-class StoreRepository {
+class StoreRepository extends BaseRepository {
 
   async FindAll() {
     
-    try {
-      return await Store.findAll({ 
-        where: { isDeleted: false },
-        include: [{ model: City, as: 'city', include: [{ model: Province, as: 'province' }]}]
-      })
+    let where = await this._False()
+    let include = [{ model: City, as: 'city', include: [{ model: Province, as: 'province' }]}] 
     
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAll(Store, where, include, getFailed)
   }
 
   async FindById(id) {
 
-    try {
-      return await Store.findOne({ 
-        where: { id: id, isDeleted: false },
-        include: { model: Inventory, as: 'inventories' }
-      })
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    let where = await this._False()
+    where.id = id
+    let include = { model: Inventory, as: 'inventories' } 
+
+    return await this._FindOne(Store, where, include, getFailed)
   }
 
-  async FindByNameOrCode(data) {
+  async FindByName(name) {
 
-    try {
-      return await Store.findAll({
-        where: { [Op.and]: [
-          { [Op.or]: [{ name: data.name }, { code: data.code }] },
-          { isDeleted: false }
-        ]}
-      })
+    let where = { ...(await this._False()), name }
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindOne(Store, where, {}, getFailed)
+  }
+
+  async FindByCode(code) {
+
+    let where = { ...(await this._False()), code }
+
+    return await this._FindOne(Store, where, {}, getFailed)
   }
 
   async Create(data) {
 
-    try {
-      return await Store.create(data)
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.CREATE_FAILED)
-    }
+    let error = message.CREATE_FAILED
+
+    return await this._Create(Store, data, error)
   }
 
   async Update(data) {
 
-    try {
-      return await Store.update(data, { where: { id: data.id, isDeleted: false }})
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.UPDATE_FAILED) 
-    }
+    let error = message.UPDATE_FAILED
+
+    return await this._Update(Store, data, error)
   }
 
   async Delete(data) {
-    
-    try {
-      return await Store.update(
-        { isActived: false, isDeleted: true, updatedBy: data.updatedBy }, 
-        { where: { id: data.id, isDeleted: false }}
-      )
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.DELETE_FAILED) 
-    }
+
+    let error = message.DELETE_FAILED
+
+    return await this._Delete(Store, data, error)
   }
 }
 

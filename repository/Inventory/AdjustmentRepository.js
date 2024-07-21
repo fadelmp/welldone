@@ -1,52 +1,23 @@
-const { Adjustment, AdjustmentVariant, Store } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
+const BaseRepository = require('../BaseRepository')
 const message = require('../../message/Inventory/AdjustmentMessage')
+const { Adjustment, AdjustmentVariant, Store } = require('../../model')
 
-class AdjustmentRepository {
+class AdjustmentRepository extends BaseRepository {
 
-  async FindAll() {
-    
-    try {
-      return await Adjustment.findAll({ 
-        where: { isDeleted: false }, 
-        include: [
-          { model: Store, as: 'store' },
-          { model: AdjustmentVariant, as: 'variants' }
-        ]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
-  }
+  async FindAll(storeId) {
 
-  async FindAllByStore(storeId) {
+    let error = message.GET_FAILED
+    let where = { ...(await this._False()), ...(storeId && { storeId })}
+    let include = [{ model: Store, as: 'store' }, { model: AdjustmentVariant, as: 'variants' }]
     
-    try {
-      return await Adjustment.findAll({ 
-        where: { storeId: storeId, isDeleted: false }, 
-        include: [
-          { model: Store, as: 'store' },
-          { model: AdjustmentVariant, as: 'variants' }
-        ]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAll(Adjustment, where, include, error)
   }
 
   async Create(data) {
 
-    try {
-      return await Adjustment.create(data)
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.CREATE_FAILED)
-    }
+    let error = message.CREATE_FAILED
+
+    return await this._Create(Adjustment, data, error)
   }
 }
 
