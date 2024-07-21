@@ -25,6 +25,14 @@ class Token {
 
     return token
   }
+
+  async Validate(token) {
+
+    let error = null
+    jwt.verify(token, secretKey, (err, decoded) => { error = err })
+
+    return (error == null) ? true : false
+  }
 }
 
 module.exports = new Token()

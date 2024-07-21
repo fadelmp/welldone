@@ -1,4 +1,4 @@
-const GetHeader = require('../middleware/GetHeader')
+const GetHeader = require('../helper/GetHeader')
 
 class BaseDto {
 
