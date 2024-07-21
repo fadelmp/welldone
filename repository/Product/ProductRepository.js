@@ -12,14 +12,6 @@ class ProductRepository extends BaseRepository {
     return await this._FindAllAvailable(Product, include, getFailed)
   }
 
-  async FindByCategoryId(categoryId) {
-
-    let where = await this._False()
-    where.categoryId = categoryId
-
-    return await this._FindAll(Product, where, include, getFailed)
-  }
-
   async FindById(id) {
 
     return await this._FindById(Product, id, include, getFailed)
@@ -28,6 +20,13 @@ class ProductRepository extends BaseRepository {
   async FindByName(name) {
 
     return await this._FindByName(Product, name, include, getFailed)
+  }
+
+  async FindByCategoryId(categoryId) {
+
+    let where = { ...(await this._False()), categoryId }
+
+    return await this._FindAll(Product, where, include, getFailed)
   }
 
   async Create(data) {

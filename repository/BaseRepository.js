@@ -59,6 +59,14 @@ class BaseRepository {
     return await this.#exec(async() => query, message)
   }
 
+  async _SpecificUpdate(model, id, condition, message) {
+
+    let where = await this.#id(id)
+    let query = model.update(condition, { where: where })
+
+    return await this.#exec(async() => query, message)
+  }
+
   async _Delete(model, data, message) {
 
     let where = await this.#id(data.id)

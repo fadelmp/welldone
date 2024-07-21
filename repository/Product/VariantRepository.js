@@ -22,18 +22,16 @@ class VariantRepository extends BaseRepository {
 
   async FindByProductId(productId) {
 
-    let where = this._whereFalse()
-    where.productId = productId
+    let where = { ...(await this._False()), productId }
 
     return await this._FindAll(Variant, where, include, getFailed)
   }
 
   async FindBySku(sku) {
 
-    let where = this._False()
-    where.sku = sku
+    let where = { ...(await this._False()), sku }
 
-    return await this._FindAll(Variant, where, include, getFailed)
+    return await this._FindOne(Variant, where, include, getFailed)
   }
 
   async Create(data) {

@@ -9,17 +9,15 @@ const include = [{ model: Store, as: 'stores' }, { model: Product, as: 'products
 class DiscountRepository extends BaseRepository {
 
   async FindAllVoucher() {
-    
-    let where = this._False()
-    where.isVoucher = true
+
+    let where = { ...(await this._False()), isVoucher: true }
 
     return await this._FindAll(Discount, where, include, getFailed)
   }
 
   async FindAllDiscount() {
     
-    let where = this._False()
-    where.isVoucher = false
+    let where = { ...(await this._False()), isVoucher: false }
 
     return await this._FindAll(Discount, where, include, getFailed)
   }
@@ -31,27 +29,21 @@ class DiscountRepository extends BaseRepository {
 
   async FindByVoucherName(name) {
 
-    let where = await this._False()
-    where.name = name
-    where.isVoucher = true
+    let where = { ...(await this._False()), name, isVoucher: true }
 
     return await this._FindAll(Discount, where, {}, getFailed)
   }
 
   async FindByVoucherCode(code) {
 
-    let where = await this._False()
-    where.code = code
-    where.isVoucher = true
+    let where = { ...(await this._False()), code, isVoucher: true }
 
     return await this._FindAll(Discount, where, {}, getFailed)
   }
 
   async FindByDiscountName(name) {
 
-    let where = await this._False()
-    where.name = name
-    where.isVoucher = false
+    let where = { ...(await this._False()), name, isVoucher: false }
 
     return await this._FindAll(Discount, where, {}, getFailed)
   }

@@ -1,129 +1,83 @@
 const { Op } = require('sequelize')
-const { User, Role, Store, Privilege } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
+const BaseRepository = require('../BaseRepository')
 const message = require('../../message/User/UserMessage')
 const authMess = require('../../message/Auth/AuthMessage')
+const { User, Role, Store, Privilege } = require('../../model')
 
-class UserRepository {
+const getFailed = message.GET_FAILED
+const include = [
+  { model: Store, as: 'store' },
+  { model: Role, as: 'role', include: [
+    { model: Privilege, as: 'privileges' }
+  ]}
+]
+class UserRepository extends BaseRepository {
 
   async FindAll(roleId, storeId) {
-    
-    try {
-      const include = [{ model: Role, as: 'role' }, { model: Store, as: 'store' }]
-      const where = { isDeleted: false, roleId: { [Op.gt]: roleId }}
 
-      if (storeId != "")
-        where.storeId = storeId
-
-      return await User.findAll({ where: where, include: include })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
+    let where = {
+      ...(await this._False()),
+      roleId: { [Op.gt]: roleId },
+      ...(storeId && { storeId })
     }
+
+    return await this._FindAll(User, where, include, getFailed)
   }
 
   async FindById(id) {
 
-    try {
-      return await User.findOne({ where: { id: id, isDeleted: false }})
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindById(User, id, {}, getFailed)
   }
 
   async FindByUsername(username) {
 
-    try {
-      return await User.findOne({ 
-        where: { username: username, isDeleted: false },
-        include: [
-          { model: Store, as: 'store' },
-          { model: Role, as: 'role', include: [{ model: Privilege, as: 'privileges' }]}
-        ]
-      })
+    let where = { ...(await this._False()), username }
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindOne(User, where, include, getFailed)
   }
 
   async FindByFullname(fullname) {
 
-    try {
-      return await User.findOne({ where: { fullname: fullname, isDeleted: false }})
+    let where = { ...(await this._False()), fullname }
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAll(User, where, {}, getFailed)
   }
 
   async Create(data) {
 
-    try {
-      return await User.create(data)
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.CREATE_FAILED)
-    }
+    let error = message.CREATE_FAILED
+
+    return await this._Create(User, data, error)
   }
 
   async Update(data) {
 
-    try {
-      return await User.update(data, { where: { id: data.id, isDeleted: false }})
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.UPDATE_FAILED) 
-    }
+    let error = message.UPDATE_FAILED
+
+    return await this._Update(User, data, error)
   }
 
   async Delete(data) {
     
-    try {
-      return await User.update(
-        { isActived: false, isDeleted: true, updatedBy: data.updatedBy }, 
-        { where: { id: data.id, isDeleted: false }}
-      )
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.DELETE_FAILED) 
-    }
+    let error = message.DELETE_FAILED
+
+    return await this._Delete(User, data, error)
   }
 
   async ChangeAttempt(data) {
 
-    try {
-      return await User.update(
-        { tryAttempt: data.tryAttempt, isBlocked: data.isBlocked, updatedBy: data.updatedBy }, 
-        { where: { id: data.id, isDeleted: false }}
-      )
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, authMess.LOGIN_FAILED) 
-    }
+    let error = authMess.LOGIN_FAILED
+    let condition = { tryAttempt: data.tryAttempt, isBlocked: data.isBlocked, updatedBy: data.updatedBy }
+
+    return await this._SpecificUpdate(User, data.id, condition, error)
   }
 
   async ChangePassword(data) {
 
-    try {
-      return await User.update(
-        { password: data.password, isBlocked: false, tryAttempt: 3, updatedBy: data.updatedBy }, 
-        { where: { id: data.id, isDeleted: false }}
-      )
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.UPDATE_FAILED) 
-    }
+    let error = message.CHANGE_PASSWORD_FAILED
+    let condition = { password: data.password, isBlocked: false, tryAttempt: 3, updatedBy: data.updatedBy }
+
+    return await this._SpecificUpdate(User, data.id, condition, error)
   }
 }
 
