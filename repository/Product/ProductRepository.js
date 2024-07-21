@@ -1,95 +1,54 @@
+const BaseRepository = require('../BaseRepository')
 const { Category, Product, Variant } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/Product/ProductMessage')
 
-class ProductRepository {
+const getFailed = message.GET_FAILED
+const include = [{ model: Category, as: 'category'}, { model: Variant, as: 'variants' }]
+
+class ProductRepository extends BaseRepository {
 
   async FindAll() {
-    
-    try {
-      return await Product.findAll({ 
-        where: { isDeleted: false },
-        include: [
-          { model: Category, as: 'category'},
-          { model: Variant, as: 'variants' }]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+
+    return await this._FindAllAvailable(Product, include, getFailed)
   }
 
   async FindByCategoryId(categoryId) {
 
-    try {
-      return await Product.findAll({ where: { categoryId: categoryId, isDeleted: false }})
+    let where = await this._False()
+    where.categoryId = categoryId
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAll(Product, where, include, getFailed)
   }
 
   async FindById(id) {
 
-    try {
-      return await Product.findOne({ 
-        where: { id: id, isDeleted: false },
-        include: { model: Variant, as: 'variants'} 
-      })
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindById(Product, id, include, getFailed)
   }
 
   async FindByName(name) {
 
-    try {
-      return await Product.findOne({ where: { name: name, isDeleted: false }})
-
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindByName(Product, name, include, getFailed)
   }
 
   async Create(data) {
 
-    try {
-      return await Product.create(data)
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.CREATE_FAILED)
-    }
+    let error = message.CREATE_FAILED
+
+    return await this._Create(Product, data, error)
   }
 
   async Update(data) {
 
-    try {
-      return await Product.update(data, { where: { id: data.id, isDeleted: false }})
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.UPDATE_FAILED) 
-    }
+    let error = message.UPDATE_FAILED
+    
+    return await this._Update(Product, data, error)
   }
 
   async Delete(data) {
     
-    try {
-      return await Product.update(
-        { isActived: false, isDeleted: true, updatedBy: data.updatedBy }, 
-        { where: { id: data.id, isDeleted: false }}
-      )
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.DELETE_FAILED) 
-    }
+    let error = message.DELETE_FAILED
+    
+    return await this._Delete(Product, data, error)
   }
 }
 

@@ -9,9 +9,7 @@ class UserService {
 
   async FindAll(dto) {
 
-    let users = (dto.store === "") 
-        ? await repository.FindAll(dto.role) 
-        : await repository.FindAllByStore(dto.store, dto.role)
+    let users = await repository.FindAll(dto.role, dto.store) 
 
     return mapper.ToUserDtoList(users)
   }

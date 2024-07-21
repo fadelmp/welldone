@@ -6,27 +6,16 @@ const authMess = require('../../message/Auth/AuthMessage')
 
 class UserRepository {
 
-  async FindAll(roleId) {
+  async FindAll(roleId, storeId) {
     
     try {
-      return await User.findAll({ 
-        where: { isDeleted: false, roleId: { [Op.gt]: roleId }},
-        include: [{ model: Role, as: 'role' }, { model: Store, as: 'store' }]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
-  }
+      const include = [{ model: Role, as: 'role' }, { model: Store, as: 'store' }]
+      const where = { isDeleted: false, roleId: { [Op.gt]: roleId }}
 
-  async FindAllByStore(storeId, roleId) {
-    
-    try {
-      return await User.findAll({ 
-        where: { isDeleted: false, storeId: storeId, roleId: { [Op.gt]: roleId }},
-        include: [{ model: Role, as: 'role' }, { model: Store, as: 'store' }]
-      })
+      if (storeId != "")
+        where.storeId = storeId
+
+      return await User.findAll({ where: where, include: include })
     
     } catch (error) {
       // Error Handling

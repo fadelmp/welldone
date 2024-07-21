@@ -1,151 +1,102 @@
 const { Op } = require('sequelize');
+const BaseRepository = require('../BaseRepository');
 const { Discount, Product, Store, DiscountProduct } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
-const message = require('../../message/Discount/DiscountMessage')
+const message = require('../../message/Discount/DiscountMessage');
 
-class DiscountRepository {
+const getFailed = message.GET_FAILED
+const include = [{ model: Store, as: 'stores' }, { model: Product, as: 'products' }]
+
+class DiscountRepository extends BaseRepository {
 
   async FindAllVoucher() {
     
-    try {
-      return await Discount.findAll({ 
-        where: { isVoucher: true, isDeleted: false }, 
-        include: [{ model: Store, as: 'stores' }, { model: Product, as: 'products' }]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
-  }
+    let where = this._False()
+    where.isVoucher = true
 
-  async FindActivedVoucher() {
-    
-    try {
-      return await Discount.findAll({ where: { 
-        isVoucher: true, 
-        isDeleted: false,
-        startDate: { [Op.lte]: new Date() },
-        endDate: { [Op.gte]: new Date() }
-      }})
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAll(Discount, where, include, getFailed)
   }
 
   async FindAllDiscount() {
     
-    try {
-      return await Discount.findAll({ 
-        where: { isVoucher: false, isDeleted: false }, 
-        include: [{ model: Store, as: 'stores' }, { model: Product, as: 'products' }]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
-  }
+    let where = this._False()
+    where.isVoucher = false
 
-  async FindActivedDiscount(productId) {
-    
-    try {
-      return await Discount.findAll({ 
-        where: { 
-          isVoucher: false, 
-          isDeleted: false,
-          startDate: { [Op.lte]: new Date() },
-          endDate: { [Op.gte]: new Date() }
-        }, 
-        include: [{ model: DiscountProduct, as: 'discount_products', where: { productId: productId } }]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAll(Discount, where, include, getFailed)
   }
 
   async FindById(id) {
 
-    try {
-      return await Discount.findOne({ where: { id: id, isDeleted: false } })
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindById(Discount, id, {}, getFailed)
   }
 
   async FindByVoucherName(name) {
 
-    try {
-      return await Discount.findOne({ where: { name: name, isVoucher: true, isDeleted: false }})
+    let where = await this._False()
+    where.name = name
+    where.isVoucher = true
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAll(Discount, where, {}, getFailed)
   }
 
   async FindByVoucherCode(code) {
 
-    try {
-      return await Discount.findOne({ where: { code: code, isVoucher: true, isDeleted: false }})
+    let where = await this._False()
+    where.code = code
+    where.isVoucher = true
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAll(Discount, where, {}, getFailed)
   }
 
   async FindByDiscountName(name) {
 
-    try {
-      return await Discount.findOne({ where: { name: name, isVoucher: false, isDeleted: false }})
+    let where = await this._False()
+    where.name = name
+    where.isVoucher = false
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAll(Discount, where, {}, getFailed)
+  }
+
+  async FindActivedVoucher() {
+    
+    let where = this._False()
+    where.isVoucher = true
+    where.startDate = { [Op.lte]: new Date() }
+    where.endDate = { [Op.lte]: new Date() }
+
+    return await this._FindAll(Discount, where, {}, getFailed)
+  }
+
+  async FindActivedDiscount(productId) {
+    
+    let where = this._False()
+    where.isVoucher = false
+    where.startDate = { [Op.lte]: new Date() }
+    where.endDate = { [Op.lte]: new Date() }
+
+    let include = [{ model: DiscountProduct, as: 'discount_products', where: { productId: productId } }]
+
+    return await this._FindAll(Discount, where, include, getFailed)
   }
 
   async Create(data) {
 
-    try {
-      return await Discount.create(data)
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.CREATE_FAILED)
-    }
+    let error = message.CREATE_FAILED
+
+    return await this._Create(Discount, data, error)
   }
 
   async Update(data) {
 
-    try {
-      return await Discount.update(data, { where: { id: data.id, isDeleted: false }})
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.UPDATE_FAILED) 
-    }
+    let error = message.UPDATE_FAILED
+
+    return await this._Update(Discount, data, error)
   }
 
   async Delete(data) {
     
-    try {
-      return await Discount.update(
-        { isActived: false, isDeleted: true, updatedBy: data.updatedBy }, 
-        { where: { id: data.id, isDeleted: false }}
-      )
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.DELETE_FAILED) 
-    }
+    let error = message.DELETE_FAILED
+    
+    return await this._Delete(Discount, data, error)
   }
 }
 

@@ -1,82 +1,46 @@
+const BaseRepository = require('../BaseRepository')
 const { Category, Product } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
 const message = require('../../message/Product/CategoryMessage')
 
-class CategoryRepository {
+const getFailed = message.GET_FAILED 
+const include = { model: Product, as: 'products' }
+
+class CategoryRepository extends BaseRepository {
 
   async FindAll() {
-    
-    try {
-      return await Category.findAll({ 
-        where: { isDeleted: false }, 
-        include: { model: Product, as: 'products' }
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+
+    return this._FindAllAvailable(Category, include, getFailed)
   }
 
   async FindById(id) {
 
-    try {
-      return await Category.findOne({ 
-        where: { id: id, isDeleted: false },
-        include: { model: Product, as: 'products' }
-      })
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return this._FindById(Category, id, include, getFailed)
   }
 
   async FindByName(name) {
 
-    try {
-      return await Category.findOne({ where: { name: name, isDeleted: false }})
-
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return this._FindByName(Category, name, include, getFailed)
   }
 
   async Create(data) {
 
-    try {
-      return await Category.create(data)
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.CREATE_FAILED)
-    }
+    let error = message.CREATE_FAILED
+
+    return await this._Create(Category, data, error)
   }
 
   async Update(data) {
 
-    try {
-      return await Category.update(data, { where: { id: data.id, isDeleted: false }})
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.UPDATE_FAILED) 
-    }
+    let error = message.UPDATE_FAILED
+
+    return await this._Update(Category, data, error)
   }
 
   async Delete(data) {
     
-    try {
-      return await Category.update(
-        { isActived: false, isDeleted: true, updatedBy: data.updatedBy }, 
-        { where: { id: data.id, isDeleted: false }}
-      )
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.DELETE_FAILED) 
-    }
+    let error = message.DELETE_FAILED
+
+    return await this._Delete(Category, data, error)
   }
 }
 

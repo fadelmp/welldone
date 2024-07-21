@@ -1,29 +1,22 @@
 const { DiscountProduct } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
+const BaseRepository = require('../BaseRepository')
 const message = require('../../message/Discount/DiscountMessage')
 
-class DiscountProductRepository {
+class DiscountProductRepository extends BaseRepository {
 
   async Create(data) {
 
-    try {
-      return await DiscountProduct.create(data)
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.CREATE_FAILED)
-    }
+    let error = message.CREATE_FAILED
+
+    return await this._Create(DiscountProduct, data, error)
   }
 
   async Delete(discountId) {
 
-    try {
-      return await DiscountProduct.destroy({ where: { discountId: discountId }})
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.DELETE_FAILED)
-    } 
+    let error = message.DELETE_FAILED
+    let where = { discountId: discountId }
+
+    return await this._Destroy(DiscountProduct, where, error)
   }
 }
 

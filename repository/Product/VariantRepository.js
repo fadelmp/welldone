@@ -1,95 +1,60 @@
-const { Category, Product, Variant, Inventory } = require('../../model')
-const QueryFailed = require('../../error/QueryFailed')
+const BaseRepository = require('../BaseRepository')
 const message = require('../../message/Product/VariantMessage')
+const { Category, Product, Variant, Inventory } = require('../../model')
 
-class VariantRepository {
+const getFailed = message.GET_FAILED
+const include = [
+  { model: Product, as: 'product', include: [{ model: Category, as: 'category' }]},
+  { model: Inventory, as: 'inventories' }
+]
+
+class VariantRepository extends BaseRepository {
 
   async FindAll() {
     
-    try {
-      return await Variant.findAll({ 
-        where: { isDeleted: false },
-        include: [
-          { model: Product, as: 'product', include: [{ model: Category, as: 'category' }]},
-          { model: Inventory, as: 'inventories' }]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
-  }
-
-  async FindByProductId(productId) {
-
-    try {
-      return await Variant.findAll({ where: { productId: productId, isDeleted: false }})
-
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAllAvailable(Variant, include, getFailed)
   }
 
   async FindById(id) {
     
-    try {
-      return await Variant.findOne({ 
-        where: { id: id, isDeleted: false },
-        include: { model: Inventory, as: 'inventories' }
-      })
+    return await this._FindById(Variant, id, include, getFailed)
+  }
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+  async FindByProductId(productId) {
+
+    let where = this._whereFalse()
+    where.productId = productId
+
+    return await this._FindAll(Variant, where, include, getFailed)
   }
 
   async FindBySku(sku) {
 
-    try {
-      return await Variant.findOne({ where: { sku: sku, isDeleted: false }})
+    let where = this._False()
+    where.sku = sku
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindAll(Variant, where, include, getFailed)
   }
 
   async Create(data) {
 
-    try {
-      return await Variant.create(data)
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.CREATE_FAILED)
-    }
+    let error = message.CREATE_FAILED
+
+    return await this._Create(Variant, data, error)
   }
 
   async Update(data) {
 
-    try {
-      return await Variant.update(data, { where: { id: data.id, isDeleted: false }})
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.UPDATE_FAILED) 
-    }
+    let error = message.UPDATE_FAILED
+    
+    return await this._Update(Variant, data, error)
   }
 
   async Delete(data) {
     
-    try {
-      return await Variant.update(
-        { isActived: false, isDeleted: true, updatedBy: data.updatedBy }, 
-        { where: { id: data.id, isDeleted: false }}
-      )
-      
-    } catch(error) {
-      // Error Handling
-      throw new QueryFailed(error, message.DELETE_FAILED) 
-    }
+    let error = message.DELETE_FAILED
+
+    return await this._Delete(Variant, data, error)
   }
 }
 
