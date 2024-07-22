@@ -27,6 +27,10 @@ const MutationVariant = require('./Inventory/MutationVariant')
 const Inventory = require('./Inventory/Inventory')
 const InventoryTrack = require('./Inventory/InventoryTrack')
 
+const Order = require('./Order/Order')
+const Payment = require('./Order/Payment')
+const OrderItem = require('./Order/OrderItem')
+
 // Store Management
 Store.belongsTo(City, { foreignKey: 'cityId', as: 'city' })
 City.belongsTo(Province, { foreignKey: 'provinceId', as: 'province' })
@@ -89,6 +93,9 @@ Mutation.hasMany(MutationVariant, { foreignKey: "mutationId", as: "variants" })
 MutationVariant.belongsTo(Mutation, { foreignKey: "mutationId", as: "mutation" })
 MutationVariant.belongsTo(Variant, { foreignKey: "variantId", as: "variant" })
 
+// Order Management
+OrderItem.belongsTo(Order, { foreignKey: "orderId", as: "order" })
+
 module.exports = {
   Store, City, Province,
   User, Role, RolePrivilege, Privilege,
@@ -97,5 +104,6 @@ module.exports = {
   Inventory, InventoryTrack,
   Purchase, PurchaseVariant, 
   Adjustment, AdjustmentVariant, 
-  Mutation, MutationVariant
+  Mutation, MutationVariant,
+  Order, Payment, OrderItem
 }
