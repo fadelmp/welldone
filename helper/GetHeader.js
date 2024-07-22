@@ -23,6 +23,11 @@ function StoreId(req) {
   return req.headers['x-welldone-store']
 }
 
+function StoreName(req) {
+
+  return req.headers['x-welldone-store-name']
+}
+
 function Uri(req) {
 
   return req.originalUrl
@@ -34,5 +39,6 @@ module.exports = {
   RoleId,
   UserId,
   StoreId,
+  StoreName,
   Uri
 }

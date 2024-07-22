@@ -7,6 +7,7 @@ class BaseDto {
     this.userId = GetHeader.UserId(req)
     this.role = GetHeader.RoleId(req)
     this.store = GetHeader.StoreId(req)
+    this.storeName = GetHeader.StoreName(req)
   }
 
   toJSON() {

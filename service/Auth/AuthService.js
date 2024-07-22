@@ -18,7 +18,7 @@ class AuthService {
     
     await repository.ChangeAttempt(user)
 
-    let token = await Token.Generate(user.id, user.username, user.roleId, user.storeId)
+    let token = await Token.Generate(user.id, user.username, user.roleId, user.store.id, user.store.name)
     let privileges = await mapper.ToPrivilegeDtoList(user.role.privileges)
     
     return { token, privileges }
