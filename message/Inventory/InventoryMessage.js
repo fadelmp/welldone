@@ -16,4 +16,7 @@ module.exports = {
 
   TRACK_FAILED: "Failed To Create Track Inventory",
   NOT_FOUND : "Inventory Not Found",
+
+  OUT_OF_STOCK: "Item Are Out Of Stock",
+  EMPTY_STOCK: "Empty Stock Item"
 }

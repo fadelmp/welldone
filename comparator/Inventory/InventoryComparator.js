@@ -7,6 +7,15 @@ const InternalServer = require('../../error/InternalServer')
 
 class InventoryComparator {
 
+  async CheckStock(storeId, variantId, quantity) {
+
+    let inventory = await this.CheckStoreVariant(storeId, variantId)
+
+    if (inventory.total === 0) throw new InternalServer(message.EMPTY_STOCK)
+
+    if (inventory.total < quantity) throw new InternalServer(message.OUT_OF_STOCK)
+  }
+
   async CheckStoreVariant(storeId, variantId) {
 
     let inventory = await repository.FindByStoreAndVariant(storeId, variantId)
