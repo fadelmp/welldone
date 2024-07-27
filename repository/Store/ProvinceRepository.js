@@ -8,7 +8,7 @@ class ProvinceRepository extends BaseRepository {
     
     let error = message.GET_PROVINCE_FAILED
 
-    return await this._FindAll(Province, {}, {}, error)
+    return await this._FindAll(Province, {}, [], error)
   }
 }
 

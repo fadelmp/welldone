@@ -9,7 +9,7 @@ class CityRepository extends BaseRepository {
     let error = message.GET_CITY_FAILED
     let where = { provinceId }
 
-    return await this._FindAll(City, where, {}, error)
+    return await this._FindAll(City, where, [], error)
   }
 }
 

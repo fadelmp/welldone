@@ -28,14 +28,14 @@ class StoreRepository extends BaseRepository {
 
     let where = { ...(await this._False()), name }
 
-    return await this._FindOne(Store, where, {}, getFailed)
+    return await this._FindOne(Store, where, [], getFailed)
   }
 
   async FindByCode(code) {
 
     let where = { ...(await this._False()), code }
 
-    return await this._FindOne(Store, where, {}, getFailed)
+    return await this._FindOne(Store, where, [], getFailed)
   }
 
   async Create(data) {

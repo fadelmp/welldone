@@ -22,7 +22,7 @@ class UserRepository extends BaseRepository {
 
   async FindById(id) {
 
-    return await this._FindById(User, id, {}, getFailed)
+    return await this._FindById(User, id, [], getFailed)
   }
 
   async FindByUsername(username) {
@@ -36,7 +36,7 @@ class UserRepository extends BaseRepository {
 
     let where = { ...(await this._False()), fullname }
 
-    return await this._FindAll(User, where, {}, getFailed)
+    return await this._FindAll(User, where, [], getFailed)
   }
 
   async Create(data) {
