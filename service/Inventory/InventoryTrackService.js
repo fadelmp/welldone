@@ -35,10 +35,10 @@ class InventoryTrackService {
     await this.create(inventory, total, type, notes)
   }
 
-  async Sales(inventory, dto, total) {
+  async Sales(inventory, date, total) {
 
     let type = "sales"
-    let notes = "Sold at " + dto.date
+    let notes = "Sold at " + date
 
     await this.create(inventory, total, type, notes)
   }

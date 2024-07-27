@@ -62,6 +62,31 @@ OrderItem.init({
     allowNull: true,
     field: 'discount_name'
   },
+  discountPrice: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'discount_price'
+  },
+  capitalPrice: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'capital_price'
+  },
+  revenuePrice: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'revenue_price'
+  },
+  amountPrice: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'amount_price'
+  },
+  finalPrice: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'final_price'
+  },
   quantity: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -86,6 +111,11 @@ OrderItem.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     field: 'total_amount'
+  },
+  total: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'total'
   },
   isActived: { type: DataTypes.BOOLEAN, field: 'is_actived', defaultValue: true },
   isDeleted: { type: DataTypes.BOOLEAN, field: 'is_deleted', defaultValue: false },

@@ -17,5 +17,7 @@ module.exports = {
 
   NAME_EXISTS: "Voucher Name Already Exists",
   CODE_EXISTS: "Voucher Code ALready Exists",
-  NOT_FOUND : "Voucher Not Found"
+  NOT_FOUND : "Voucher Not Found",
+  EXPIRED: "Voucher Already Expired",
+  UNDER_MINIMUM: "Total Transactions is Under Minimum. Cannot use this Voucher"
 }

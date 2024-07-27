@@ -2,8 +2,22 @@ const repository = require('../../repository/Discount/DiscountRepository')
 const message = require('../../message/Discount/VoucherMessage')
 const DataExists = require('../../error/DataExists')
 const NotFound = require('../../error/NotFound')
+const InternalServer = require('../../error/InternalServer')
 
-class voucherComparator {
+class VoucherComparator {
+
+  async Validate(voucherId, total) {
+
+    if (voucherId === "")
+      return
+
+    let voucher = await this.CheckId(voucherId)
+
+    await this.checkDate(voucher.startDate, voucher.endDate)
+    await this.checkMinimum(voucher.minimum, total)
+
+    return voucher
+  }
 
   async CheckId(id) {
 
@@ -29,6 +43,21 @@ class voucherComparator {
     if (voucher && voucher.code == data.code && voucher.id != data.id)
       throw new DataExists(message.CODE_EXISTS)
   }
+
+  async checkDate(start, end) {
+
+    let today = new Date()
+
+    if (today < start || today > end)
+      throw new InternalServer(message.EXPIRED) 
+  }
+
+  async checkMinimum(minimum, total) {
+
+    if (total < minimum)
+      throw new InternalServer(message.UNDER_MINIMUM)
+  }
+
 }
 
-module.exports = new voucherComparator()
+module.exports = new VoucherComparator()

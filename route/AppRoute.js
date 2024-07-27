@@ -24,6 +24,8 @@ const purchase = require('./Inventory/PurchaseRoute')
 const adjustment = require('./Inventory/AdjustmentRoute')
 const mutation = require('./Inventory/MutationRoute')
 
+const order = require('./Order/OrderRoute')
+
 // Authentication
 router.use('/auth', auth)
 
@@ -50,6 +52,9 @@ router.use('/inventory-management/adjustments', CheckAuth, CheckRole, adjustment
 router.use('/inventory-management/mutations', CheckAuth, CheckRole, mutation)
 
 // Order Management
+
+// Cashier
+router.use('/cashier/orders', order)
 
 // Report
 

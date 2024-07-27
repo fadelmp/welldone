@@ -24,7 +24,7 @@ class InventoryRepository extends BaseRepository {
 
     let where = { ...(await this._False()), storeId, variantId }
 
-    return await this._FindOne(Inventory, where, {}, getFailed)
+    return await this._FindOne(Inventory, where, [], getFailed)
   }
 
   async Create(data) {

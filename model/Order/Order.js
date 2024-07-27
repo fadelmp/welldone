@@ -16,7 +16,7 @@ Order.init({
     allowNull: false,
     field: 'number'
   },
-  invoiceNumber: {
+  invoice: {
     type: DataTypes.STRING,
     allowNull: false,
     field: 'invoice_number'
@@ -54,22 +54,32 @@ Order.init({
   totalDiscount: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'total_discount'
+    field: 'total_discount',
+    defaultValue: 0
   },
   totalCapital: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'total_capital'
+    field: 'total_capital',
+    defaultValue: 0
   },
   totalRevenue: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'total_revenue'
+    field: 'total_revenue',
+    defaultValue: 0
   },
   totalAmount: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'total_amount'
+    field: 'total_amount',
+    defaultValue: 0
+  },
+  total: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'total',
+    defaultValue: 0
   },
   isActived: { type: DataTypes.BOOLEAN, field: 'is_actived', defaultValue: true },
   isDeleted: { type: DataTypes.BOOLEAN, field: 'is_deleted', defaultValue: false },

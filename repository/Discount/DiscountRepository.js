@@ -12,7 +12,7 @@ class DiscountRepository extends BaseRepository {
 
     let where = { ...(await this._False()), isVoucher: true }
 
-    return await this._FindAll(Discount, where, include, getFailed)
+    return await this._FindAll(Discount, where, voucherInclude, getFailed)
   }
 
   async FindAllDiscount() {
@@ -24,28 +24,28 @@ class DiscountRepository extends BaseRepository {
 
   async FindById(id) {
 
-    return await this._FindById(Discount, id, {}, getFailed)
+    return await this._FindById(Discount, id, [], getFailed)
   }
 
   async FindByVoucherName(name) {
 
     let where = { ...(await this._False()), name, isVoucher: true }
 
-    return await this._FindAll(Discount, where, {}, getFailed)
+    return await this._FindAll(Discount, where, [], getFailed)
   }
 
   async FindByVoucherCode(code) {
 
     let where = { ...(await this._False()), code, isVoucher: true }
 
-    return await this._FindAll(Discount, where, {}, getFailed)
+    return await this._FindAll(Discount, where, [], getFailed)
   }
 
   async FindByDiscountName(name) {
 
     let where = { ...(await this._False()), name, isVoucher: false }
 
-    return await this._FindAll(Discount, where, {}, getFailed)
+    return await this._FindAll(Discount, where, [], getFailed)
   }
 
   async FindActivedVoucher() {
@@ -55,7 +55,7 @@ class DiscountRepository extends BaseRepository {
     where.startDate = { [Op.lte]: new Date() }
     where.endDate = { [Op.lte]: new Date() }
 
-    return await this._FindAll(Discount, where, {}, getFailed)
+    return await this._FindAll(Discount, where, [], getFailed)
   }
 
   async FindActivedDiscount(productId) {

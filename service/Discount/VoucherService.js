@@ -62,6 +62,19 @@ class VoucherService {
 
     return ""
   }
+
+  async Calculate(voucher, totals) {
+
+    if (voucher == null)
+      return 0
+
+    if (voucher.isNominal)
+      return voucher.value
+  
+    let discount = (voucher.value * totals.final) / 100
+  
+    return (discount > voucher.maximum) ? voucher.maximum : discount
+  }
 }
 
 module.exports = new VoucherService()

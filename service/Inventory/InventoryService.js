@@ -42,7 +42,7 @@ class InventoryService {
 
     let action = "ADD"
 
-    let inventory = await this.update(dto.storeId, stock, action)
+    let inventory = await this.update(dto.storeId, stock.variant_id, stock.total, action)
     
     await trackService.Entry(inventory, dto, stock.total)
   }
@@ -51,7 +51,7 @@ class InventoryService {
 
     let action = "SUBSTRACT"
 
-    let inventory = await this.update(dto.storeId, stock, action)
+    let inventory = await this.update(dto.storeId, stock.variant_id, stock.total, action)
 
     await trackService.Adjustment(inventory, dto, stock.total)
   }
@@ -60,7 +60,7 @@ class InventoryService {
 
     let action = "SUBSTRACT"
 
-    let inventory = await this.update(dto.fromStoreId, stock, action)
+    let inventory = await this.update(dto.storeId, stock.variant_id, stock.total, action)
 
     await trackService.TransferOut(inventory, dto, stock.total)
   }
@@ -69,18 +69,18 @@ class InventoryService {
 
     let action = "ADD"
 
-    let inventory = await this.update(dto.toStoreId, stock, action)
+    let inventory = await this.update(dto.storeId, stock.variant_id, stock.total, action)
 
     await trackService.TransferIn(inventory, dto, stock.total)
   }
 
-  async Sales(dto, stock) {
+  async Sales(storeId, variantId, total, date) {
 
     let action = "SUBSTRACT"
 
-    let inventory = await this.update(dto.storeId, stock, action)
+    let inventory = await this.update(storeId, variantId, total, action)
 
-    await trackService.Sales(inventory, dto, stock.total)
+    await trackService.Sales(inventory, date, total)
   }
 
   async create(storeId, variantId) {
@@ -91,12 +91,12 @@ class InventoryService {
     await repository.Create(inventory)
   }
 
-  async update(storeId, stock, action) {
+  async update(storeId, variantId, total, action) {
 
-    let inventory = await comparator.CheckStoreVariant(storeId, stock.variant_id)
+    let inventory = await comparator.CheckStoreVariant(storeId, variantId)
     await mapper.Update(inventory, "SYSTEM")
 
-    inventory.total += (action === "ADD") ? stock.total : -stock.total
+    inventory.total += (action === "ADD") ? total : -total
     await repository.Update(inventory)
 
     return inventory
