@@ -1,4 +1,5 @@
 const mapper = require('../../mapper/Order/OrderItemMapper')
+const discountService = require('../Discount/DiscountService')
 const inventoryService = require('../Inventory/InventoryService')
 const repository = require('../../repository/Order/OrderItemRepository')
 const variantRepo = require('../../repository/Product/VariantRepository')
@@ -29,12 +30,12 @@ class OrderItemService {
 
     let variant = await variantRepo.FindById(item.variantId)
 
-    let discount = 0
+    let discount = await discountService.Calculate(item.discountId)
     let quantity = item.quantity
     let capital = variant.capitalPrice
     let amount = variant.unitPrice
 
-    let orderItem = await mapper.ToOrderItem(order, variant, quantity, discount, capital, amount)
+    let orderItem = await mapper.ToOrderItem(order, item, variant, quantity, discount, capital, amount)
 
     await mapper.Create(orderItem, "SYSTEM")
     await repository.Create(orderItem)

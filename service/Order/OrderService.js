@@ -10,6 +10,7 @@ class OrderService {
   async Create(dto) {
 
     await comparator.CheckStock(dto)
+    await comparator.CheckDiscount(dto.items)
     let voucher = await comparator.CheckVoucher(dto)
 
     let number = await this._generateNumber()
@@ -51,20 +52,9 @@ class OrderService {
     return `${storeAbbreviation}/${today}/${String(totalOrder.length + 1).padStart(5, '0')}`
   }
 
-  _today() {
-
-    return moment().format('DDMMYY')
-  }
-
-  _startDay() {
-
-    return moment().startOf('day').toDate()
-  }
-
-  _endDay() {
-
-    return moment().endOf('day').toDate()
-  }
+  _today() { return moment().format('DDMMYY') }
+  _startDay() { return moment().startOf('day').toDate() }
+  _endDay() { return moment().endOf('day').toDate() }
 }
 
 module.exports = new OrderService()

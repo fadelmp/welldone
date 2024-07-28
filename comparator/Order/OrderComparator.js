@@ -1,4 +1,5 @@
 const voucherComparator = require('../Discount/VoucherComparator')
+const discountComparator = require('../Discount/DiscountComparator')
 const inventoryComparator = require('../Inventory/InventoryComparator')
 
 class OrderComparator {
@@ -7,6 +8,12 @@ class OrderComparator {
 
     return await voucherComparator.Validate(
       dto.voucherId, dto.total)
+  }
+
+  async CheckDiscount(items) {
+
+    for (const item of items)
+      await discountComparator.Validate(item.discountId)
   }
 
   async CheckStock(dto) {

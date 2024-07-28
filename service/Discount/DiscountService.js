@@ -60,6 +60,18 @@ class DiscountService {
 
     return ""
   }
+
+  async Calculate(discountId) {
+
+    if (discountId === "")
+      return 0
+
+    let discount = await repository.FindById(discountId)
+    if (discount === null)
+      return 0
+
+    return discount.value
+  }
 }
 
 module.exports = new DiscountService()

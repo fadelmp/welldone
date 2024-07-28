@@ -2,7 +2,7 @@ const BaseMapper = require("../BaseMapper")
 
 class OrderItemMapper extends BaseMapper {
 
-  async ToOrderItem(order, variant, quantity, discount, capital, amount) {
+  async ToOrderItem(order, item, variant, quantity, discount, capital, amount) {
 
     let revenue = amount - capital
     let final = amount - discount
@@ -16,6 +16,8 @@ class OrderItemMapper extends BaseMapper {
       productName: variant.product.name,
       categoryId: variant.product.category.id,
       categoryName: variant.product.category.name,
+      discountId: item.discountId,
+      discountName: item.discountName,
       discountPrice: discount,
       capitalPrice: capital,
       revenuePrice: revenue,

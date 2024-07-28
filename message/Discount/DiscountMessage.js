@@ -16,5 +16,6 @@ module.exports = {
   DELETE_FAILED: "Delete Discount Failed",
 
   NAME_EXISTS: "Discount Name Already Exists",
-  NOT_FOUND : "Discount Not Found"
+  NOT_FOUND : "Discount Not Found",
+  EXPIRED: "Discount Already Expired"
 }
