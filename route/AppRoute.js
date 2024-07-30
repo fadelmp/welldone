@@ -30,26 +30,26 @@ const order = require('./Order/OrderRoute')
 router.use('/auth', auth)
 
 // Store Management
-router.use('/store-management/stores', CheckAuth, CheckRole, store)
-router.use('/store-management/locations', CheckAuth, CheckRole, location)
+router.use('/store-management/stores', store)
+router.use('/store-management/locations', location)
 
 // User Management
-router.use('/user-management/users', CheckAuth, CheckRole, user)
+router.use('/user-management/users', user)
 
 // Product Management
-router.use('/product-management/categories', CheckAuth, CheckRole, category)
-router.use('/product-management/products', CheckAuth, CheckRole, product)
-router.use('/product-management/variants', CheckAuth, CheckRole, variant)
+router.use('/product-management/categories', category)
+router.use('/product-management/products', product)
+router.use('/product-management/variants', variant)
 
 // Discount Management
-router.use('/discount-management/vouchers', CheckAuth, CheckRole, voucher)
-router.use('/discount-management/discounts', CheckAuth, CheckRole, discount)
+router.use('/discount-management/vouchers', voucher)
+router.use('/discount-management/discounts', discount)
 
 // Inventory Management
-router.use('/inventory-management/inventories', CheckAuth, CheckRole, inventory)
-router.use('/inventory-management/purchases', CheckAuth, CheckRole, purchase)
-router.use('/inventory-management/adjustments', CheckAuth, CheckRole, adjustment)
-router.use('/inventory-management/mutations', CheckAuth, CheckRole, mutation)
+router.use('/inventory-management/inventories', inventory)
+router.use('/inventory-management/purchases', purchase)
+router.use('/inventory-management/adjustments', adjustment)
+router.use('/inventory-management/mutations', mutation)
 
 // Order Management
 
