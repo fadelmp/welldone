@@ -1,5 +1,5 @@
-const MutationDto = require('../../dto/Inventory/MutationDto')
 const response = require('../../helper/Response')
+const MutationDto = require('../../dto/Inventory/MutationDto')
 const service = require('../../service/Inventory/MutationService')
 const message = require('../../message/Inventory/MutationMessage')
 
@@ -8,6 +8,7 @@ class MutationController {
   async FindAll(req, res, next) {
 
     try {
+      let dto = new MutationDto(req)
       let mutations = await service.FindAll()
 
       return (mutations.length === 0)
@@ -23,7 +24,8 @@ class MutationController {
   async FindAllVariant(req, res, next) {
 
     try {
-      let mutations = await service.FindAllVariant()
+      let dto = new MutationDto(req)
+      let mutations = await service.FindAllVariant(dto)
 
       return (mutations.length == 0)
           ? response.NotFound(res, message.NOT_FOUND)

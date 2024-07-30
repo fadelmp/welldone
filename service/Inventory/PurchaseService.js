@@ -12,9 +12,9 @@ class PurchaseService {
     return mapper.ToPurchaseDtoList(purchases)
   }
 
-  async FindAllVariant() {
+  async FindAllVariant(dto) {
 
-    let variants = await variantRepo.FindAll()
+    let variants = await variantRepo.FindAll(dto.store)
 
     return mapper.ToPurchaseVariantDtoList(variants)
   }

@@ -1,5 +1,5 @@
-const PurchaseDto = require('../../dto/Inventory/PurchaseDto')
 const response = require('../../helper/Response')
+const PurchaseDto = require('../../dto/Inventory/PurchaseDto')
 const service = require('../../service/Inventory/PurchaseService')
 const message = require('../../message/Inventory/PurchaseMessage')
 
@@ -8,7 +8,8 @@ class PurchaseController {
   async FindAll(req, res, next) {
 
     try {
-      let purchases = await service.FindAll()
+      let dto = new PurchaseDto(req)
+      let purchases = await service.FindAll(dto)
 
       return (purchases.length === 0)
         ? response.NotFound(res, message.NOT_FOUND)
@@ -23,7 +24,8 @@ class PurchaseController {
   async FindAllVariant(req, res, next) {
 
     try {
-      let purchases = await service.FindAllVariant()
+      let dto = new PurchaseDto(req)
+      let purchases = await service.FindAllVariant(dto)
 
       return (purchases.length == 0)
           ? response.NotFound(res, message.NOT_FOUND)

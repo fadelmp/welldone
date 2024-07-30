@@ -1,14 +1,15 @@
 const response = require('../../helper/Response')
+const InventoryDto = require('../../dto/Inventory/InventoryDto')
 const service = require('../../service/Inventory/InventoryService')
 const message = require('../../message/Inventory/InventoryMessage')
-const InventoryDto = require('../../dto/Inventory/InventoryDto')
 
 class InventoryController {
   
   async FindAll(req, res, next) {
 
     try {
-      let inventories = await service.FindAll()
+      let dto = new InventoryDto(req)
+      let inventories = await service.FindAll(dto)
 
       return (inventories.length === 0)
         ? response.NotFound(res, message.NOT_FOUND)

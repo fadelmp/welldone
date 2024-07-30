@@ -12,9 +12,9 @@ class AdjustmentService {
     return mapper.ToAdjustmentDtoList(adjustments)
   }
 
-  async FindAllVariant() {
+  async FindAllVariant(dto) {
 
-    let variants = await variantRepo.FindAll()
+    let variants = await variantRepo.FindAll(dto.store)
 
     return mapper.ToAdjustmentVariantDtoList(variants)
   }

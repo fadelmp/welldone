@@ -8,7 +8,8 @@ class AdjustmentController {
   async FindAll(req, res, next) {
 
     try {
-      let adjustments = await service.FindAll()
+      let dto = new AdjustmentDto(req)
+      let adjustments = await service.FindAll(dto)
 
       return (adjustments.length === 0)
         ? response.NotFound(res, message.NOT_FOUND)
@@ -23,7 +24,8 @@ class AdjustmentController {
   async FindAllVariant(req, res, next) {
 
     try {
-      let adjustments = await service.FindAllVariant()
+      let dto = new AdjustmentDto(req)
+      let adjustments = await service.FindAllVariant(dto)
 
       return (adjustments.length == 0)
           ? response.NotFound(res, message.NOT_FOUND)

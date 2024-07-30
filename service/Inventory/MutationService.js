@@ -6,16 +6,16 @@ const variantRepo = require('../../repository/Inventory/MutationVariantRepositor
 
 class MutationService {
 
-  async FindAll() {
+  async FindAll(dto) {
 
-    let mutations = await repository.FindAll()
+    let mutations = await repository.FindAll(dto.store)
 
     return mapper.ToMutationDtoList(mutations)
   }
 
-  async FindAllVariant() {
+  async FindAllVariant(dto) {
 
-    let variants = await variantRepo.FindAll()
+    let variants = await variantRepo.FindAll(dto.store)
 
     return mapper.ToMutationVariantDtoList(variants)
   }
