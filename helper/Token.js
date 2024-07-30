@@ -34,6 +34,50 @@ class Token {
 
     return (error == null) ? true : false
   }
+
+  async ReadToken(token) {
+
+    if (token === undefined || token === null || token === "")
+      return ""
+
+    return jwt.verify(token, secretKey)
+  }
+
+  async ReadUser(token) {
+
+    const decoded = ReadToken(token)
+
+    return (decoded !== "") ? decoded.user_id : ""
+
+  }
+
+  async ReadUsername(token) {
+
+    const decoded = ReadToken(token)
+
+    return (decoded !== "") ? decoded.username : ""
+  }
+
+  async ReadRole(token) {
+
+    const decoded = ReadToken(token)
+
+    return (decoded !== "") ? decoded.role_id : ""
+  }
+
+  async ReadStore(token) {
+
+    const decoded = ReadToken(token)
+
+    return (decoded !== "") ? decoded.store_id : ""
+  }
+
+  async ReadStoreName(token) {
+
+    const decoded = ReadToken(token)
+
+    return (decoded !== "") ? decoded.store_name : ""
+  }
 }
 
 module.exports = new Token()
