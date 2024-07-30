@@ -2,102 +2,55 @@ const BaseRepository = require('../BaseRepository')
 const message = require('../../message/Inventory/MutationMessage')
 const { Mutation, MutationVariant, Store } = require('../../model')
 
+const getFailed = message.GET_FAILED
 const include = [
   { model: Store, as: 'fromStore' },
   { model: Store, as: 'toStore' },
-  { model: MutationVariant, as: 'variants' }
-]
+  { model: MutationVariant, as: 'variants' }]
 
 class MutationRepository extends BaseRepository {
 
-  async FindAll() {
+  async FindAll(storeId) {
     
-    try {
-      return await Mutation.findAll({ 
-        where: { isDeleted: false }, 
-        include: [
-          { model: Store, as: 'fromStore' },
-          { model: Store, as: 'toStore' },
-          { model: MutationVariant, as: 'variants' }
-        ]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    let where = { ...(await this._False()), ...(storeId && { storeId })}
+
+    return await this._FindAll(Mutation, where, include, getFailed)
   }
 
   async FindAllFromStore(storeId) {
 
-    try {
-      return await Mutation.findAll({ 
-        where: { fromStoreId: storeId, status: false, isDeleted: false }, 
-        include: [
-          { model: Store, as: 'fromStore' },
-          { model: Store, as: 'toStore' },
-          { model: MutationVariant, as: 'variants' }
-        ]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_SHIPMENT_FAILED)
-    }
+    let where = await this._False()
+    where.fromStoreId = storeId
+
+    return await this._FindAll(Mutation, where, include, getFailed)
   }
 
   async FindAllToStore(storeId) {
 
-    try {
-      return await Mutation.findAll({ 
-        where: { toStoreId: storeId, status: false, isDeleted: false }, 
-        include: [
-          { model: Store, as: 'fromStore' },
-          { model: Store, as: 'toStore' },
-          { model: MutationVariant, as: 'variants' }
-        ]
-      })
-    
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_APPROVAL_FAILED)
-    }
+    let where = await this._False()
+    where.toStoreId = storeId
+
+    return await this._FindAll(Mutation, where, include, getFailed)
   }
 
   async FindById(id) {
 
-    try {
-      return await Mutation.findOne({ where: { id: id, isDeleted: false }})
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.GET_FAILED)
-    }
+    return await this._FindById(Mutation, id, [], getFailed)
   }
 
   async Create(data) {
 
-    try {
-      return await Mutation.create(data)
-      
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.CREATE_FAILED)
-    }
+    let error = message.CREATE_FAILED
+
+    return await this._Create(Mutation, data, error)
   }
 
   async Update(data) {
 
-    try {
-      return await Mutation.update(
-        { status: true, updatedBy: data.updatedBy }, 
-        { where: { id: data.id, isDeleted: false }}
-      )
+    let error = message.APPROVE_FAILED
+    let condition = { total: data.total, updatedBy: data.updatedBy }
 
-    } catch (error) {
-      // Error Handling
-      throw new QueryFailed(error, message.APPROVE_FAILED)
-    }
+    return await this._SpecificUpdate(MutationRepository, data.id, condition, error)
   }
 }
 
