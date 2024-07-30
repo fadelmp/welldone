@@ -1,41 +1,36 @@
 const Token = require('./Token')
 
-function Token(req) {
-
-  return req.headers['x-welldone-authorization']
-}
-
 function UserId(req) {
 
-  const token = req.headers['x-welldone-authorization']
+  const token = getToken(req)
 
   return Token.ReadUser(token)
 }
 
 function Username(req) {
     
-  const token = req.headers['x-welldone-authorization']
+  const token = getToken(req)
 
   return Token.ReadUsername(token)
 }
 
 function RoleId(req) {
 
-  const token = req.headers['x-welldone-authorization']
+  const token = getToken(req)
 
   return Token.ReadRole(token)
 }
 
 function StoreId(req) {
 
-  const token = req.headers['x-welldone-authorization']
+  const token = getToken(req)
 
   return Token.ReadStore(token)
 }
 
 function StoreName(req) {
 
-  const token = req.headers['x-welldone-authorization']
+  const token = getToken(req)
 
   return Token.ReadStoreName(token)
 }
@@ -43,6 +38,11 @@ function StoreName(req) {
 function Uri(req) {
 
   return req.originalUrl
+}
+
+function getToken(req) {
+
+  return req.headers['x-welldone-authorization']
 }
 
 module.exports = { 

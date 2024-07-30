@@ -45,7 +45,7 @@ class Token {
 
   async ReadUser(token) {
 
-    const decoded = ReadToken(token)
+    const decoded = await ReadToken(token)
 
     return (decoded !== "") ? decoded.user_id : ""
 
@@ -53,28 +53,28 @@ class Token {
 
   async ReadUsername(token) {
 
-    const decoded = ReadToken(token)
+    const decoded = await ReadToken(token)
 
     return (decoded !== "") ? decoded.username : ""
   }
 
   async ReadRole(token) {
 
-    const decoded = ReadToken(token)
+    const decoded = await ReadToken(token)
 
     return (decoded !== "") ? decoded.role_id : ""
   }
 
   async ReadStore(token) {
 
-    const decoded = ReadToken(token)
+    const decoded = await ReadToken(token)
 
     return (decoded !== "") ? decoded.store_id : ""
   }
 
   async ReadStoreName(token) {
 
-    const decoded = ReadToken(token)
+    const decoded = await ReadToken(token)
 
     return (decoded !== "") ? decoded.store_name : ""
   }
