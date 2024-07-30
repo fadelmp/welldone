@@ -4,12 +4,13 @@ const { Adjustment, AdjustmentVariant, Store, Variant, Product, Category } = req
 
 class AdjustmentVariantRepository extends BaseRepository {
 
-  async FindAll() {
+  async FindAll(storeId) {
 
     let error = message.GET_FAILED
     let where = await this._False()
     let include = [
-      { model: Adjustment, as: 'adjustment', include: [{model: Store, as: 'store'}]},
+      { model: Adjustment, as: 'adjustment', where: storeId ? { storeId } : {}, include: [{
+        model: Store, as: 'store'}]},
       { model: Variant, as: 'variant', include: [
         { model: Product, as: 'product', include: [
           { model: Category, as: 'category'}

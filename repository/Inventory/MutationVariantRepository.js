@@ -4,12 +4,12 @@ const { Mutation, MutationVariant, Store, Variant, Product, Category } = require
 
 class MutationVariantRepository extends BaseRepository {
 
-  async FindAll() {
+  async FindAll(storeId) {
 
     let error = message.GET_FAILED
     let where = await this._False()
     let include = [
-      { model: Mutation, as: 'mutation', include: 
+      { model: Mutation, as: 'mutation', where: storeId ? { storeId } : {}, include: 
         [{ model: Store, as: 'fromStore'}, { model: Store, as: 'toStore' }]
       },
       { model: Variant, as: 'variant', include: [
