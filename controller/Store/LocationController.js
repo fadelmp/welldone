@@ -10,8 +10,8 @@ class LocationController {
       let provinces = await service.FindProvince()
 
       return (provinces.length === 0)
-        ? response.NotFound(res, message.PROVINCE_NOT_FOUND)
-        : response.Success(res, message.GET_PROVINCE_SUCCESS, provinces)
+        ? response.NotFound(req, res, message.PROVINCE_NOT_FOUND)
+        : response.Success(req, res, message.GET_PROVINCE_SUCCESS, provinces)
 
     } catch(error) {
       // Error Handling
@@ -26,8 +26,8 @@ class LocationController {
       let cities = await service.FindCity(provinceId)
 
       return (cities.length == 0)
-          ? response.NotFound(res, message.CITY_NOT_FOUND)
-          : response.Success(res, message.GET_CITY_SUCCESS, cities)
+          ? response.NotFound(req, res, message.CITY_NOT_FOUND)
+          : response.Success(req, res, message.GET_CITY_SUCCESS, cities)
 
     } catch (error) {
       // Error Handling

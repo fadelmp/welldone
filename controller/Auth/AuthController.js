@@ -11,7 +11,7 @@ class AuthController {
       let dto = new AuthDto(req)
       let { token, privileges } = await service.Login(dto)
 
-      return response.Login(res, message.LOGIN_SUCCESS, token, privileges)
+      return response.Login(req, res, message.LOGIN_SUCCESS, token, privileges)
     
     } catch(error) {
       // Error Handling

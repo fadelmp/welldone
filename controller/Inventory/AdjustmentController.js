@@ -12,8 +12,8 @@ class AdjustmentController {
       let adjustments = await service.FindAll(dto)
 
       return (adjustments.length === 0)
-        ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_SUCCESS, adjustments)
+        ? response.NotFound(req, res, message.NOT_FOUND)
+        : response.Success(req, res, message.GET_SUCCESS, adjustments)
 
     } catch(error) {
       // Error Handling
@@ -28,8 +28,8 @@ class AdjustmentController {
       let adjustments = await service.FindAllVariant(dto)
 
       return (adjustments.length == 0)
-          ? response.NotFound(res, message.NOT_FOUND)
-          : response.Success(res, message.GET_SUCCESS, adjustments)
+          ? response.NotFound(req, res, message.NOT_FOUND)
+          : response.Success(req, res, message.GET_SUCCESS, adjustments)
 
     } catch (error) {
       // Error Handling
@@ -44,7 +44,7 @@ class AdjustmentController {
 
       dto = await service.Create(dto)
 
-      return response.Success(res, message.ADJUSTMENT_SUCCESS, dto)
+      return response.Success(req, res, message.ADJUSTMENT_SUCCESS, dto)
     
     } catch (error) {
       // Error Handling

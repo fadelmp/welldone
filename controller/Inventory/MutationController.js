@@ -12,8 +12,8 @@ class MutationController {
       let mutations = await service.FindAll()
 
       return (mutations.length === 0)
-        ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_SUCCESS, mutations)
+        ? response.NotFound(req, res, message.NOT_FOUND)
+        : response.Success(req, res, message.GET_SUCCESS, mutations)
 
     } catch(error) {
       // Error Handling
@@ -28,8 +28,8 @@ class MutationController {
       let mutations = await service.FindAllVariant(dto)
 
       return (mutations.length == 0)
-          ? response.NotFound(res, message.NOT_FOUND)
-          : response.Success(res, message.GET_SUCCESS, mutations)
+          ? response.NotFound(req, res, message.NOT_FOUND)
+          : response.Success(req, res, message.GET_SUCCESS, mutations)
 
     } catch (error) {
       // Error Handling
@@ -44,8 +44,8 @@ class MutationController {
       let mutations = await service.FindShipment(storeId)
 
       return (mutations.length === 0)
-        ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_SHIPMENT_SUCCESS, mutations)
+        ? response.NotFound(req, res, message.NOT_FOUND)
+        : response.Success(req, res, message.GET_SHIPMENT_SUCCESS, mutations)
 
     } catch(error) {
       // Error Handling
@@ -60,8 +60,8 @@ class MutationController {
       let mutations = await service.FindApproval(storeId)
 
       return (mutations.length === 0)
-        ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_APPROVAL_SUCCESS, mutations)
+        ? response.NotFound(req, res, message.NOT_FOUND)
+        : response.Success(req, res, message.GET_APPROVAL_SUCCESS, mutations)
 
     } catch(error) {
       // Error Handling

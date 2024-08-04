@@ -12,8 +12,8 @@ class UserController {
       let users = await service.FindAll(dto)
 
       return (users.length === 0)
-        ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_SUCCESS, users)
+        ? response.NotFound(req, res, message.NOT_FOUND)
+        : response.Success(req, res, message.GET_SUCCESS, users)
 
     } catch(error) {
       // Error Handling
@@ -28,7 +28,7 @@ class UserController {
 
       let userDto = await service.Create(dto)
 
-      return response.Success(res, message.CREATE_SUCCESS, userDto)
+      return response.Success(req, res, message.CREATE_SUCCESS, userDto)
     
     } catch (error) {
       // Error Handling
@@ -43,7 +43,7 @@ class UserController {
 
       let userDto = await service.Update(dto)
 
-      return response.Success(res, message.UPDATE_SUCCESS, userDto)
+      return response.Success(req, res, message.UPDATE_SUCCESS, userDto)
 
     } catch (error) {
       // Error Handling
@@ -58,7 +58,7 @@ class UserController {
 
       await service.Delete(userDto)
       
-      return response.Success(res, message.DELETE_SUCCESS, {})
+      return response.Success(req, res, message.DELETE_SUCCESS, {})
 
     } catch (error) {
       // Error Handling
@@ -73,7 +73,7 @@ class UserController {
 
       await service.ChangePassword(userDto)
       
-      return response.Success(res, message.CHANGE_PASSWORD_SUCCESS, {})
+      return response.Success(req, res, message.CHANGE_PASSWORD_SUCCESS, {})
 
     } catch (error) {
       // Error Handling
@@ -88,7 +88,7 @@ class UserController {
 
       await service.ResetPassword(userDto)
       
-      return response.Success(res, message.RESET_PASSWORD_SUCCESS, {})
+      return response.Success(req, res, message.RESET_PASSWORD_SUCCESS, {})
 
     } catch (error) {
       // Error Handling
@@ -103,7 +103,7 @@ class UserController {
 
       await service.Unblock(userDto)
       
-      return response.Success(res, message.UNBLOCK_SUCCESS, {})
+      return response.Success(req, res, message.UNBLOCK_SUCCESS, {})
 
     } catch (error) {
       // Error Handling

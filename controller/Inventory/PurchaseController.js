@@ -12,8 +12,8 @@ class PurchaseController {
       let purchases = await service.FindAll(dto)
 
       return (purchases.length === 0)
-        ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_SUCCESS, purchases)
+        ? response.NotFound(req, res, message.NOT_FOUND)
+        : response.Success(req, res, message.GET_SUCCESS, purchases)
 
     } catch(error) {
       // Error Handling
@@ -28,8 +28,8 @@ class PurchaseController {
       let purchases = await service.FindAllVariant(dto)
 
       return (purchases.length == 0)
-          ? response.NotFound(res, message.NOT_FOUND)
-          : response.Success(res, message.GET_SUCCESS, purchases)
+          ? response.NotFound(req, res, message.NOT_FOUND)
+          : response.Success(req, res, message.GET_SUCCESS, purchases)
 
     } catch (error) {
       // Error Handling
@@ -44,7 +44,7 @@ class PurchaseController {
 
       dto = await service.Create(dto)
 
-      return response.Success(res, message.CREATE_PURCHASE_SUCCESS, dto)
+      return response.Success(req, res, message.CREATE_PURCHASE_SUCCESS, dto)
     
     } catch (error) {
       // Error Handling

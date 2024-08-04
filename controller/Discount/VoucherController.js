@@ -11,8 +11,8 @@ class VoucherController {
       let vouchers = await service.FindAll()
 
       return (vouchers.length === 0)
-        ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_SUCCESS, vouchers)
+        ? response.NotFound(req, res, message.NOT_FOUND)
+        : response.Success(req, res, message.GET_SUCCESS, vouchers)
 
     } catch(error) {
       // Error Handling
@@ -26,8 +26,8 @@ class VoucherController {
       let dropdowns = await service.FindDropdown()
 
       return (dropdowns.length == 0)
-          ? response.NotFound(res, message.NOT_FOUND)
-          : response.Success(res, message.DROPDOWN_SUCCESS, dropdowns)
+          ? response.NotFound(req, res, message.NOT_FOUND)
+          : response.Success(req, res, message.DROPDOWN_SUCCESS, dropdowns)
 
     } catch (error) {
       // Error Handling
@@ -42,7 +42,7 @@ class VoucherController {
 
       dto = await service.Create(dto)
 
-      return response.Success(res, message.CREATE_SUCCESS, dto)
+      return response.Success(req, res, message.CREATE_SUCCESS, dto)
     
     } catch (error) {
       // Error Handling
@@ -57,7 +57,7 @@ class VoucherController {
 
       dto = await service.Update(dto)
 
-      return response.Success(res, message.UPDATE_SUCCESS, dto)
+      return response.Success(req, res, message.UPDATE_SUCCESS, dto)
 
     } catch (error) {
       // Error Handling
@@ -72,7 +72,7 @@ class VoucherController {
 
       await service.Delete(dto)
       
-      return response.Success(res, message.DELETE_SUCCESS, {})
+      return response.Success(req, res, message.DELETE_SUCCESS, {})
 
     } catch (error) {
       // Error Handling

@@ -12,8 +12,8 @@ class InventoryController {
       let inventories = await service.FindAll(dto)
 
       return (inventories.length === 0)
-        ? response.NotFound(res, message.NOT_FOUND)
-        : response.Success(res, message.GET_SUCCESS, inventories)
+        ? response.NotFound(req, res, message.NOT_FOUND)
+        : response.Success(req, res, message.GET_SUCCESS, inventories)
 
     } catch(error) {
       // Error Handling
