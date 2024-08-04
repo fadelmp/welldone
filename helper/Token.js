@@ -27,6 +27,26 @@ class Token {
     return token
   }
 
+  // Method to regenerate a JWT token
+  async Regenerate(token) {
+
+    try {
+      const payload = jwt.verify(token, secretKey)
+
+      return this.Generate(
+        payload.user_id, 
+        payload.username, 
+        payload.role_id, 
+        payload.store_id, 
+        payload.store_name
+      )
+
+    } catch (error) {
+      // Error Handling
+      throw new Error('Invalid token')
+    }
+  }
+
   async Validate(token) {
 
     let error = null

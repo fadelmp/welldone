@@ -8,8 +8,8 @@ class UserController {
   async FindAll(req, res, next) {
 
     try {
-      let userDto = new UserDto(req)
-      let users = await service.FindAll(userDto)
+      let dto = new UserDto(req)
+      let users = await service.FindAll(dto)
 
       return (users.length === 0)
         ? response.NotFound(res, message.NOT_FOUND)
@@ -24,9 +24,9 @@ class UserController {
   async Create(req, res, next) {
 
     try {
-      let userDto = new UserDto(req)
+      let dto = new UserDto(req)
 
-      userDto = await service.Create(userDto)
+      let userDto = await service.Create(dto)
 
       return response.Success(res, message.CREATE_SUCCESS, userDto)
     
@@ -39,9 +39,9 @@ class UserController {
   async Update(req, res, next) {
 
     try {
-      let userDto = new UserDto(req)
+      let dto = new UserDto(req)
 
-      userDto = await service.Update(userDto)
+      let userDto = await service.Update(dto)
 
       return response.Success(res, message.UPDATE_SUCCESS, userDto)
 

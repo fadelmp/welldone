@@ -4,7 +4,7 @@ const token = ""
 
 class Response {
 
-  async Success(res, message, data) {
+  async Success(req, res, message, data) {
 
     return this.response(res, 200, message, token, data)
   }
