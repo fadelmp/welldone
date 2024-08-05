@@ -9,22 +9,22 @@ class Response {
     return this.response(res, 200, message, token, data)
   }
 
-  async Failed(res, message) {
+  async Failed(req, res, message) {
 
     return this.response(res, 500, message, token, {})
   }
 
-  async NotFound(res, message) {
+  async NotFound(req, res, message) {
 
     return this.response(res, 404, message, token, {})
   }
 
-  async BadRequest(res) {
+  async BadRequest(req, res) {
 
     return this.response(res, 400, "Bad Request", token, {})
   }
 
-  async Login(res, message, token, data) {
+  async Login(req, res, message, token, data) {
     
     return this.response(res, 200, message, token, data)
   }
