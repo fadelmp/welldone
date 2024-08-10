@@ -55,43 +55,43 @@ class Token {
     return (error == null) ? true : false
   }
 
-  async ReadUser(token) {
+  ReadUser(token) {
 
-    const decoded = await this.readToken(token)
+    const decoded = this.readToken(token)
 
     return (decoded !== "") ? decoded.user_id : ""
 
   }
 
-  async ReadUsername(token) {
+  ReadUsername(token) {
 
-    const decoded = await this.readToken(token)
+    const decoded = this.readToken(token)
 
     return (decoded !== "") ? decoded.username : ""
   }
 
-  async ReadRole(token) {
+  ReadRole(token) {
 
-    const decoded = await this.readToken(token)
+    const decoded = this.readToken(token)
 
     return (decoded !== "") ? decoded.role_id : ""
   }
 
-  async ReadStore(token) {
+  ReadStore(token) {
 
-    const decoded = await this.readToken(token)
+    const decoded = this.readToken(token)
 
     return (decoded !== "") ? decoded.store_id : ""
   }
 
-  async ReadStoreName(token) {
+  ReadStoreName(token) {
 
-    const decoded = await this.readToken(token)
+    const decoded = this.readToken(token)
 
     return (decoded !== "") ? decoded.store_name : ""
   }
 
-  async readToken(token) {
+  readToken(token) {
 
     if (token === undefined || token === null || token === "")
       return ""
