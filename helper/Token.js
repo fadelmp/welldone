@@ -55,17 +55,9 @@ class Token {
     return (error == null) ? true : false
   }
 
-  async ReadToken(token) {
-
-    if (token === undefined || token === null || token === "")
-      return ""
-
-    return jwt.verify(token, secretKey)
-  }
-
   async ReadUser(token) {
 
-    const decoded = await ReadToken(token)
+    const decoded = await this.readToken(token)
 
     return (decoded !== "") ? decoded.user_id : ""
 
@@ -73,30 +65,38 @@ class Token {
 
   async ReadUsername(token) {
 
-    const decoded = await ReadToken(token)
+    const decoded = await this.readToken(token)
 
     return (decoded !== "") ? decoded.username : ""
   }
 
   async ReadRole(token) {
 
-    const decoded = await ReadToken(token)
+    const decoded = await this.readToken(token)
 
     return (decoded !== "") ? decoded.role_id : ""
   }
 
   async ReadStore(token) {
 
-    const decoded = await ReadToken(token)
+    const decoded = await this.readToken(token)
 
     return (decoded !== "") ? decoded.store_id : ""
   }
 
   async ReadStoreName(token) {
 
-    const decoded = await ReadToken(token)
+    const decoded = await this.readToken(token)
 
     return (decoded !== "") ? decoded.store_name : ""
+  }
+
+  async readToken(token) {
+
+    if (token === undefined || token === null || token === "")
+      return ""
+
+    return jwt.verify(token, secretKey)
   }
 }
 
