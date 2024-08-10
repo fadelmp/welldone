@@ -43,8 +43,8 @@ class MutationMapper extends BaseMapper {
     return {
       id: mutation.id,
       number: mutation.number,
-      fromStoreName: mutation.fromStore.name,
-      toStoreName: mutation.toStore.name,
+      fromStoreName: (mutation.fromStore) ? mutation.fromStore.name : "",
+      toStoreName: (mutation.toStore) ? mutation.toStore.name : "",
       totalVariant: mutation.variants.map(variant => variant.toJSON()).length,
       totalStock: await this.totalStock(mutation.variants),
       status: mutation.status,

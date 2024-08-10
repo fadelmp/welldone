@@ -25,10 +25,10 @@ class VariantMapper extends BaseMapper {
 
     return {
       id: variant.id,
-      categoryId: variant.product.category.id,
-      categoryName: variant.product.category.name,
+      categoryId: (variant.product) ? (variant.product.category) ? variant.product.category.id : "" : "",
+      categoryName: (variant.product) ? (variant.product.category) ? variant.product.category.name : "" : "",
       productId: variant.productId,
-      productName: variant.product.name,
+      productName: (variant.product) ? variant.product.name : "",
       sku: variant.sku,
       size: variant.size,
       capitalPrice: variant.capitalPrice,

@@ -20,13 +20,31 @@ class InventoryMapper extends BaseMapper {
 
   async toInventoryDto(inventory) {
 
+    let productName = (inventory.variant)
+        ? (inventory.variant.product)
+            ? inventory.variant.product.name : ""
+        : ""
+
+    let productUnit = (inventory.variant)
+        ? (inventory.variant.product)
+            ? inventory.variant.product.unit : ""
+        : ""
+
+    let categoryName = (inventory.variant) 
+        ? (inventory.variant.product)
+            ? (inventory.variant.category)
+                ? inventory.variant.product.category.name : ""
+            : ""
+        : ""
+
     let track = await this.countInventoryTrack(inventory.total, inventory.tracks)
+
     return {
       id: inventory.id,
-      sku: inventory.variant.sku,
-      product_name: inventory.variant.product.name,
-      category_name: inventory.variant.product.category.name,
-      store_name: inventory.store.name,
+      sku: (inventory.variant) ? inventory.variant.sku : "",
+      product_name: productName,
+      category_name: categoryName,
+      store_name: (inventory.store) ? inventory.store.name : "",
       beginning: track.beginning,
       entry: track.entry,
       sales: track.sales,
@@ -34,7 +52,7 @@ class InventoryMapper extends BaseMapper {
       transferOut: track.out,
       adjustment: track.adjustment,
       ending: inventory.total,
-      unit: inventory.variant.product.unit
+      unit: product.unit
     }
     
   }
