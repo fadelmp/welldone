@@ -23,7 +23,7 @@ class DiscountMapper extends BaseMapper {
 
     return Promise.all(
       discounts.map(
-        discount => this.toDiscountDto(discount)))
+        discount => this.ToDiscountDto(discount)))
   }
 
   async ToDiscountStore(discountId, storeId) {
@@ -42,7 +42,7 @@ class DiscountMapper extends BaseMapper {
     }
   }
 
-  async toDiscountDto(discount) {
+  async ToDiscountDto(discount) {
 
     return {
       id: discount.id,

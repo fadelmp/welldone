@@ -13,6 +13,13 @@ class DiscountService {
     return mapper.ToDiscountDtoList(discounts)
   }
 
+  async FindById(dto) {
+
+    let discount = await comparator.CheckId(dto.id)
+
+    return mapper.ToDiscountDto(discount)
+  }
+
   async FindDropdown(productId) {
 
     let discounts = await repository.FindActivedDiscount(productId)

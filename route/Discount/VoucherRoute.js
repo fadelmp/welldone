@@ -3,8 +3,9 @@ const controller = require('../../controller/Discount/VoucherController')
 
 const router = express.Router()
 
-router.get('/', controller.FindAll)
 router.get('/dropdown', controller.FindDropdown)
+router.get('/:id', controller.FindById)
+router.get('/', controller.FindAll)
 
 router.post('/', controller.Create)
 router.put('/:id', controller.Update)

@@ -20,6 +20,22 @@ class DiscountController {
     }
   }
 
+  async FindById(req, res, next) {
+
+    try {
+      let dto = new DiscountDto(req)
+      let discount = await service.FindById(dto)
+
+      return (discount == null)
+        ? response.NotFound(req, res, message.NOT_FOUND)
+        : response.Success(req, res, message.GET_SUCCESS, discount)
+
+    } catch(error) {
+      // Error Handling
+      next(error)
+    }
+  }
+
   async FindDropdown(req, res, next) {
 
     try {

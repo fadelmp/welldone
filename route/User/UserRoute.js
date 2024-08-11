@@ -3,6 +3,7 @@ const controller = require('../../controller/User/UserController')
 
 const router = express.Router()
 
+router.get('/:id', controller.FindById)
 router.get('/', controller.FindAll)
 
 router.post('/', controller.Create)

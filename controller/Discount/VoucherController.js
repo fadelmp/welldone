@@ -20,6 +20,22 @@ class VoucherController {
     }
   }
 
+  async FindById(req, res, next) {
+
+    try {
+      let dto = new VoucherDto(req)
+      let voucher = await service.FindById(dto)
+
+      return (voucher == null)
+        ? response.NotFound(req, res, message.NOT_FOUND)
+        : response.Success(req, res, message.GET_SUCCESS, voucher)
+
+    } catch(error) {
+      // Error Handling
+      next(error)
+    }
+  }
+
   async FindDropdown(req, res, next) {
 
     try {

@@ -21,6 +21,22 @@ class UserController {
     }
   }
 
+  async FindById(req, res, next) {
+
+    try {
+      let dto = new UserDto(req)
+      let user = await service.FindById(dto)
+
+      return (user == null)
+        ? response.NotFound(req, res, message.NOT_FOUND)
+        : response.Success(req, res, message.GET_SUCCESS, user)
+
+    } catch(error) {
+      // Error Handling
+      next(error)
+    }
+  }
+
   async Create(req, res, next) {
 
     try {

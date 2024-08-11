@@ -14,6 +14,13 @@ class UserService {
     return mapper.ToUserDtoList(users)
   }
 
+  async FindById(dto) {
+
+    let user = await comparator.CheckId(dto.id)
+
+    return mapper.ToUserDto(user)
+  }
+
   async Create(dto) {
 
     await comparator.CheckUsername(dto)

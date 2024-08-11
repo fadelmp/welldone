@@ -17,10 +17,10 @@ class UserMapper extends BaseMapper {
 
     return Promise.all(
       users.map(
-        user => this.toUserDto(user)))
+        user => this.ToUserDto(user)))
   }
 
-  async toUserDto(user) {
+  async ToUserDto(user) {
 
     return {
 			id: user.id,

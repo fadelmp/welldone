@@ -13,6 +13,13 @@ class VoucherService {
     return mapper.ToDiscountDtoList(vouchers)
   }
 
+  async FindById(dto) {
+
+    let voucher = await comparator.CheckId(dto.id)
+
+    return mapper.ToDiscountDto(voucher)
+  }
+
   async FindDropdown() {
 
     let vouchers = await repository.FindActivedVoucher()
