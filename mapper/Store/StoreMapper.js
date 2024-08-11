@@ -17,10 +17,10 @@ class StoreMapper extends BaseMapper {
 
     return Promise.all(
       stores.map(
-        store => this.toStoreDto(store)))
+        store => this.ToStoreDto(store)))
   }
 
-  async toStoreDto(store) {
+  async ToStoreDto(store) {
 
     return {
 			id: store.id,

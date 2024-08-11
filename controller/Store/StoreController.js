@@ -35,6 +35,22 @@ class StoreController {
     }
   }
 
+  async FindById(req, res, next) {
+
+    try {
+      let dto = new StoreDto(req)
+      let store = await service.FindById(dto)
+
+      return (store == null)
+          ? response.NotFound(req, res, message.NOT_FOUND)
+          : response.Success(req, res, message.GET_SUCCESS, store)
+
+    } catch (error) {
+      // Error Handling
+      next(error)
+    }
+  }
+
   async Create(req, res, next) {
 
     try {

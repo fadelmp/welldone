@@ -19,6 +19,13 @@ class StoreService {
     return mapper.ToDropdownDtoList(stores)
   }
 
+  async FindById(dto) {
+
+    let store = await comparator.CheckId(dto.id)
+    
+    return mapper.ToStoreDto(store)
+  }
+
   async Create(dto) {
 
     await comparator.CheckData(dto)

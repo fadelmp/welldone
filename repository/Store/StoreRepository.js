@@ -19,7 +19,10 @@ class StoreRepository extends BaseRepository {
 
     let where = await this._False()
     where.id = id
-    let include = { model: Inventory, as: 'inventories' } 
+    let include = [
+      { model: Inventory, as: 'inventories' }, 
+      { model: City, as: 'city', include: [{ model: Province, as: 'province' }] }
+    ]
 
     return await this._FindOne(Store, where, include, getFailed)
   }
