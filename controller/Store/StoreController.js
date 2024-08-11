@@ -20,21 +20,6 @@ class StoreController {
     }
   }
 
-  async FindDropdown(req, res, next) {
-
-    try {
-      let dropdowns = await service.FindDropdown()
-
-      return (dropdowns.length == 0)
-          ? response.NotFound(req, res, message.NOT_FOUND)
-          : response.Success(req, res, message.DROPDOWN_SUCCESS, dropdowns)
-
-    } catch (error) {
-      // Error Handling
-      next(error)
-    }
-  }
-
   async FindById(req, res, next) {
 
     try {
@@ -44,6 +29,21 @@ class StoreController {
       return (store == null)
           ? response.NotFound(req, res, message.NOT_FOUND)
           : response.Success(req, res, message.GET_SUCCESS, store)
+
+    } catch (error) {
+      // Error Handling
+      next(error)
+    }
+  }
+
+  async FindDropdown(req, res, next) {
+
+    try {
+      let dropdowns = await service.FindDropdown()
+
+      return (dropdowns.length == 0)
+          ? response.NotFound(req, res, message.NOT_FOUND)
+          : response.Success(req, res, message.DROPDOWN_SUCCESS, dropdowns)
 
     } catch (error) {
       // Error Handling

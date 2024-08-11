@@ -11,6 +11,13 @@ class CategoryService {
     return mapper.ToCategoryDtoList(categories)
   }
 
+  async FindById(dto) {
+
+    let category = await comparator.CheckId(dto.id)
+
+    return mapper.ToCategoryDto(category)
+  }
+
   async FindDropdown() {
 
     let categories = await repository.FindAll()

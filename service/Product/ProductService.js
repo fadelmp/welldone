@@ -12,6 +12,13 @@ class ProductService {
     return mapper.ToProductDtoList(products)
   }
 
+  async FindById(dto) {
+
+    let product = await comparator.CheckId(dto.id)
+
+    return mapper.ToProductDto(product)
+  }
+
   async FindDropdown(categoryId) {
 
     let products = await repository.FindByCategoryId(categoryId)

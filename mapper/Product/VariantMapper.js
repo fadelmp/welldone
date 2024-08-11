@@ -18,10 +18,10 @@ class VariantMapper extends BaseMapper {
 
     return Promise.all(
       variants.map(
-        variant => this.toVariantDto(variant)))
+        variant => this.ToVariantDto(variant)))
   }
 
-  async toVariantDto(variant) {
+  async ToVariantDto(variant) {
 
     return {
       id: variant.id,

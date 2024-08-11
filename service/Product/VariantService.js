@@ -12,6 +12,13 @@ class VariantService {
     return mapper.ToVariantDtoList(variants)
   }
 
+  async FindById(dto) {
+
+    let variant = await comparator.CheckId(dto.id)
+
+    return mapper.ToVariantDto(variant)
+  }
+
   async FindDropdown(productId) {
 
     let variants = await repository.FindByProductId(productId)

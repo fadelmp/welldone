@@ -20,6 +20,22 @@ class ProductController {
     }
   }
 
+  async FindById(req, res, next) {
+
+    try {
+      let dto = new ProductDto(req)
+      let product = await service.FindById(dto)
+
+      return (product == null)
+          ? response.NotFound(req, res, message.NOT_FOUND)
+          : response.Success(req, res, message.GET_SUCCESS, product)
+    
+    } catch (error) {
+      // Error Handling
+      next()
+    } 
+  }
+
   async FindDropdown(req, res, next) {
 
     try {

@@ -15,10 +15,10 @@ class CategoryMapper extends BaseMapper {
 
     return Promise.all(
       categories.map(
-        category => this.toCategoryDto(category)))
+        category => this.ToCategoryDto(category)))
   }
 
-  async toCategoryDto(category) {
+  async ToCategoryDto(category) {
 
     return {
 			id: category.id,

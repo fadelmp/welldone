@@ -12,18 +12,18 @@ class StoreService {
     return mapper.ToStoreDtoList(stores)
   }
 
-  async FindDropdown() {
-
-    let stores = await repository.FindAll()
-
-    return mapper.ToDropdownDtoList(stores)
-  }
-
   async FindById(dto) {
 
     let store = await comparator.CheckId(dto.id)
     
     return mapper.ToStoreDto(store)
+  }
+
+  async FindDropdown() {
+
+    let stores = await repository.FindAll()
+
+    return mapper.ToDropdownDtoList(stores)
   }
 
   async Create(dto) {

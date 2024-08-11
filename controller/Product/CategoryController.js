@@ -20,6 +20,22 @@ class CategoryController {
     }
   }
 
+  async FindById(req, res, next) {
+
+    try {
+      let dto = new CategoryDto(req)
+      let category = await service.FindById(dto)
+
+      return (category == null)
+          ? response.NotFound(req, res, message.NOT_FOUND)
+          : response.Success(req, res, message.GET_SUCCESS, category)
+    
+    } catch (error) {
+      // Error Handling
+      next()
+    } 
+  }
+
   async FindDropdown(req, res, next) {
 
     try {

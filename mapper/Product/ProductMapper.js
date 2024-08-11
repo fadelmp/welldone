@@ -21,10 +21,10 @@ class ProductMapper extends BaseMapper {
 
     return Promise.all(
       products.map(
-        product => this.toProductDto(product)))
+        product => this.ToProductDto(product)))
   }
 
-  async toProductDto(product) {
+  async ToProductDto(product) {
 
     return {
 			id: product.id,

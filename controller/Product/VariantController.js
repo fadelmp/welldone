@@ -20,6 +20,22 @@ class VariantController {
     }
   }
 
+  async FindById(req, res, next) {
+
+    try {
+      let dto = new VariantDto(req)
+      let variant = await service.FindById(dto)
+
+      return (variant == null)
+          ? response.NotFound(req, res, message.NOT_FOUND)
+          : response.Success(req, res, message.GET_SUCCESS, variant)
+    
+    } catch (error) {
+      // Error Handling
+      next()
+    } 
+  }
+
   async FindDropdown(req, res, next) {
 
     try {
