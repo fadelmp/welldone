@@ -42,13 +42,13 @@ class AdjustmentMapper extends BaseMapper {
     return {
       id: adjustment.id,
       note: adjustment.note,
-      storeId: adjustment.storeId,
-      totalVariant: adjustment.variants.map(variant => variant.toJSON()).length,
-      totalStock: await this.totalStock(adjustment.variants),
-      createdAt: adjustment.createdAt,
-			createdBy: adjustment.createdBy,
-			updatedAt: adjustment.updatedAt,
-			updatedBy: adjustment.updatedBy
+      store_id: adjustment.storeId,
+      total_variant: adjustment.variants.map(variant => variant.toJSON()).length,
+      total_stock: await this.totalStock(adjustment.variants),
+      created_at: adjustment.createdAt,
+			created_by: adjustment.createdBy,
+			updated_at: adjustment.updatedAt,
+			updated_by: adjustment.updatedBy
     }
   }
 

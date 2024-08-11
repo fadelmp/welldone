@@ -30,18 +30,18 @@ class ProductMapper extends BaseMapper {
 			id: product.id,
       name: product.name,
       description: product.description,
-      categoryId: product.categoryId,
-      pathImage1: product.pathImage1,
-      pathImage2: product.pathImage2,
-      pathImage3: product.pathImage3,
+      category_id: product.categoryId,
+      path_image_1: product.pathImage1,
+      path_image_2: product.pathImage2,
+      path_image_3: product.pathImage3,
       unit: product.unit,
       tags: product.tags,
-      totalVariant: product.variants.map(variant => variant.toJSON()).length,
+      total_variant: product.variants.map(variant => variant.toJSON()).length,
       variants: await this.toVariantDtoList(product.variants),
-			createdAt: product.createdAt,
-			createdBy: product.createdBy,
-			updatedAt: product.updatedAt,
-			updatedBy: product.updatedBy
+			created_at: product.createdAt,
+			created_by: product.createdBy,
+			updated_at: product.updatedAt,
+			updated_by: product.updatedBy
     }
   }
 

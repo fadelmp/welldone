@@ -43,13 +43,13 @@ class PurchaseMapper extends BaseMapper {
       id: purchase.id,
       deliveryNote: purchase.deliveryNote,
       supplier: purchase.supplier,
-      storeId: purchase.storeId,
-      totalVariant: purchase.variants.map(variant => variant.toJSON()).length,
-      totalStock: await this.totalStock(purchase.variants),
-      createdAt: purchase.createdAt,
-			createdBy: purchase.createdBy,
-			updatedAt: purchase.updatedAt,
-			updatedBy: purchase.updatedBy
+      store_id: purchase.storeId,
+      total_variant: purchase.variants.map(variant => variant.toJSON()).length,
+      total_stock: await this.totalStock(purchase.variants),
+      created_at: purchase.createdAt,
+			created_by: purchase.createdBy,
+			updated_at: purchase.updatedAt,
+			updated_by: purchase.updatedBy
     }
   }
 
@@ -59,11 +59,11 @@ class PurchaseMapper extends BaseMapper {
       id: purchaseVariant.id,
       date: purchaseVariant.purchase.createdAt,
       sku: purchaseVariant.variant.sku,
-      storeName: purchaseVariant.purchase.store.name,
-      productName: purchaseVariant.variant.product.name,
-      categoryName: purchaseVariant.variant.product.category.name,
-      deliveryNote: purchaseVariant.purchase.deliveryNote,
-      totalStock: purchaseVariant.stock,
+      store_name: purchaseVariant.purchase.store.name,
+      product_name: purchaseVariant.variant.product.name,
+      category_name: purchaseVariant.variant.product.category.name,
+      delivery_note: purchaseVariant.purchase.deliveryNote,
+      total_stock: purchaseVariant.stock,
       unit: purchaseVariant.variant.product.unit
     }
   }

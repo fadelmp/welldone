@@ -25,19 +25,19 @@ class VariantMapper extends BaseMapper {
 
     return {
       id: variant.id,
-      categoryId: (variant.product) ? (variant.product.category) ? variant.product.category.id : "" : "",
-      categoryName: (variant.product) ? (variant.product.category) ? variant.product.category.name : "" : "",
-      productId: variant.productId,
-      productName: (variant.product) ? variant.product.name : "",
+      category_id: (variant.product) ? (variant.product.category) ? variant.product.category.id : "" : "",
+      category_name: (variant.product) ? (variant.product.category) ? variant.product.category.name : "" : "",
+      product_id: variant.productId,
+      product_name: (variant.product) ? variant.product.name : "",
       sku: variant.sku,
       size: variant.size,
-      capitalPrice: variant.capitalPrice,
-      unitPrice: variant.unitPrice,
-      totalInventory: variant.inventories.map(inventory => inventory.toJSON()).length,
-      createdAt: variant.createdAt,
-      createdBy: variant.createdBy,
-      updatedAt: variant.updatedAt,
-      updatedBy: variant.updatedBy
+      capital_price: variant.capitalPrice,
+      unit_price: variant.unitPrice,
+      total_inventory: variant.inventories.map(inventory => inventory.toJSON()).length,
+      created_at: variant.createdAt,
+      created_by: variant.createdBy,
+      updated_at: variant.updatedAt,
+      updated_by: variant.updatedBy
     }
   }
 	

@@ -27,14 +27,14 @@ class StoreMapper extends BaseMapper {
 			name: store.name,
       store: store.code,
 			address: store.address,
-      cityId: (store.city) ? store.city.id : "",
-      cityName: (store.city) ? store.city.name : "",
-      provinceId: (store.city) ? (store.city.province) ? store.city.province.id : "" : "",
-      provinceName: (store.city) ? (store.city.province) ? store.city.province.name : "" : "",
-			createdAt: store.createdAt,
-			createdBy: store.createdBy,
-			updatedAt: store.updatedAt,
-			updatedBy: store.updatedBy
+      city_id: (store.city) ? store.city.id : "",
+      city_name: (store.city) ? store.city.name : "",
+      province_id: (store.city) ? (store.city.province) ? store.city.province.id : "" : "",
+      province_name: (store.city) ? (store.city.province) ? store.city.province.name : "" : "",
+			created_at: store.createdAt,
+			created_by: store.createdBy,
+			updated_at: store.updatedAt,
+			updated_by: store.updatedBy
     }
   }
 	

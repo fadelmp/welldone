@@ -48,8 +48,8 @@ class InventoryMapper extends BaseMapper {
       beginning: track.beginning,
       entry: track.entry,
       sales: track.sales,
-      transferIn: track.in,
-      transferOut: track.out,
+      transfer_in: track.in,
+      transfer_out: track.out,
       adjustment: track.adjustment,
       ending: inventory.total,
       unit: product.unit

@@ -49,18 +49,18 @@ class DiscountMapper extends BaseMapper {
       code: discount.code,
       name: discount.name,
       description: discount.description,
-      startDate: discount.startDate,
-      endDate: discount.endDate,
-      isNominal: discount.isNominal,
+      start_date: discount.startDate,
+      end_date: discount.endDate,
+      is_nominal: discount.isNominal,
       value: discount.value,
       maximum: discount.maximum,
       minimum: discount.minimum,
       stores: discount.stores,
       products: discount.products,
-      createdAt: discount.createdAt,
-      createdBy: discount.createdBy,
-      updatedAt: discount.updatedAt,
-      updatedBy: discount.updatedBy
+      created_at: discount.createdAt,
+      created_by: discount.createdBy,
+      updated_at: discount.updatedAt,
+      updated_by: discount.updatedBy
     }
   }
 	

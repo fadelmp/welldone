@@ -26,14 +26,14 @@ class UserMapper extends BaseMapper {
 			id: user.id,
 			username: user.username,
 			fullname: user.fullname,
-      roleId: (user.role) ? user.role.id : "",
-      roleName: (user.role) ? user.role.name : "",
-      storeId: (user.store) ? user.store.id : "",
-      storeName: (user.store) ? user.store.name : "",
-			createdAt: user.createdAt,
-			createdBy: user.createdBy,
-			updatedAt: user.updatedAt,
-			updatedBy: user.updatedBy
+      role_id: (user.role) ? user.role.id : "",
+      role_name: (user.role) ? user.role.name : "",
+      store_id: (user.store) ? user.store.id : "",
+      store_name: (user.store) ? user.store.name : "",
+			created_at: user.createdAt,
+			created_by: user.createdBy,
+			updated_at: user.updatedAt,
+			updated_by: user.updatedBy
     }
   }
 	

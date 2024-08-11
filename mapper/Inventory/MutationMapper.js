@@ -43,15 +43,15 @@ class MutationMapper extends BaseMapper {
     return {
       id: mutation.id,
       number: mutation.number,
-      fromStoreName: (mutation.fromStore) ? mutation.fromStore.name : "",
-      toStoreName: (mutation.toStore) ? mutation.toStore.name : "",
-      totalVariant: mutation.variants.map(variant => variant.toJSON()).length,
-      totalStock: await this.totalStock(mutation.variants),
+      from_store_name: (mutation.fromStore) ? mutation.fromStore.name : "",
+      to_store_name: (mutation.toStore) ? mutation.toStore.name : "",
+      total_variant: mutation.variants.map(variant => variant.toJSON()).length,
+      total_stock: await this.totalStock(mutation.variants),
       status: mutation.status,
-      createdAt: mutation.createdAt,
-			createdBy: mutation.createdBy,
-			updatedAt: mutation.updatedAt,
-			updatedBy: mutation.updatedBy
+      created_at: mutation.createdAt,
+			created_by: mutation.createdBy,
+			updated_at: mutation.updatedAt,
+			updated_by: mutation.updatedBy
     }
   }
 
